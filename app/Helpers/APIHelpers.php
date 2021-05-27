@@ -8,8 +8,15 @@ class APIHelpers
     public const FAILED_RESPONSE = 'fail';
 
     /** 
-    * The basis of this function is to format all authentication API responses
-    */
+     * The basis of this function is to format all authentication API responses.
+     * 
+     * @param bool $has_error
+     * @param string $message
+     * @param array $content
+     * @param string $access_token
+
+     * @return array
+     */
     public static function createAuthResponse($has_error, $message, $content, $accessToken)
     {
         $result = [];

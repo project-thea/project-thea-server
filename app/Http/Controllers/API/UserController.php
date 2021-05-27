@@ -13,6 +13,9 @@ class UserController extends Controller
      * This register function takes in a request parameter that is validated and after validation,
      * a user is created together with the authentication access_token that will be used to log in.
      * 
+     * @param Illuminate\Http\Request $request
+     * 
+     * @return Illuminate\Http\Request
      * */
     public function register(Request $request)
     {
@@ -46,6 +49,9 @@ class UserController extends Controller
      * This login function ensures that any user created from the registration logic is 
      * is authenticated successfully based on all required fields.
      * 
+     * @param Illuminate\Http\Request $request
+     * 
+     * @return Illuminate\Http\Request
      */
     public function login(Request $request)
     {
@@ -72,6 +78,9 @@ class UserController extends Controller
      * This logout function ensures that any authenticated user from the request is logged out 
      * successfully together with revoking of their access token.
      * 
+     * @param Illuminate\Http\Request $request
+     * 
+     * @return Illuminate\Http\Request
      */
     public function logout(Request $request)
     {
