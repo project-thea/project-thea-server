@@ -24,9 +24,9 @@ class CreateDriversTable extends Migration
 			$table->string('nok_name')->nullable();
 			$table->string('nok_phone')->nullable();
 			
-			$table->timestamp('created_at')->useCurrent();
-			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-            //$table->timestamps();
+			// $table->timestamp('created_at')->useCurrent();
+			// $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->timestamps();
         });
     }
 
@@ -39,4 +39,4 @@ class CreateDriversTable extends Migration
     {
         Schema::dropIfExists('drivers');
     }
-}
+} 

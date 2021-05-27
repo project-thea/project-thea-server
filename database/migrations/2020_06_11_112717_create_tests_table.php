@@ -15,19 +15,20 @@ class CreateTestsTable extends Migration
     {
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
-            //$table->timestamps();
 			
 			$table->string('name');
 			$table->text('details');
 			
+            $table->timestamps();
+            
 			//Name of person who did the test
 			$table->text('done_by');
 			$table->unsignedBigInteger('driver_id');
 			$table->unsignedBigInteger('trip_id');
 			
 			
-			$table->timestamp('created_at')->useCurrent();
-			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+			// $table->timestamp('created_at')->useCurrent();
+			// $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
     }
 

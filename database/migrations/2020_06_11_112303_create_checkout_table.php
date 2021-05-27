@@ -20,9 +20,9 @@ class CreateCheckoutTable extends Migration
 			$table->string('contact_person')->nullable();
 			$table->string('contact_person_phone')->nullable();
 			
-            //$table->timestamps();
-			$table->timestamp('created_at')->useCurrent();
-			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->timestamps();
+			// $table->timestamp('created_at')->useCurrent();
+			// $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
     }
 

@@ -17,13 +17,13 @@ class CreateLocationsTable extends Migration
             $table->id();
 			$table->point('location');
 			
-            //$table->timestamps();
+            $table->timestamps();
 			
 			$table->unsignedBigInteger('driver_id');
 			$table->unsignedBigInteger('trip_id')->nullable();
 			
-			$table->timestamp('created_at')->useCurrent();
-			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+			// $table->timestamp('created_at')->useCurrent();
+			// $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
     }
 
