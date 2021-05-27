@@ -18,9 +18,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('nationality', 55);
             $table->date('date_of_birth');
-            $table->string('user_mobile', 12);
+            $table->string('user_mobile', 20);
             $table->string('next_of_kin', 55);
-            $table->string('next_of_kin_mobile', 12);
+            $table->string('next_of_kin_mobile', 20);
             $table->string('created_with', 5)->nullable();
             $table->string('updated_with', 5)->nullable();
             $table->rememberToken();
