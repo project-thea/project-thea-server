@@ -18,10 +18,10 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'first_name' => 'Emmanuel',
-                'middle_name' => 'Nkundwa',
-                'last_name' => 'Atungire',
-                'email' => 'patungire@gmail.com',
+                'first_name' => 'John',
+                'middle_name' => 'Someone',
+                'last_name' => 'Smith',
+                'email' => 'someone@gmail.com',
                 'password' => Hash::make('pa12345678'),
                 'nationality' => 'Ugandan',
                 'date_of_birth' => '1998-09-21',
