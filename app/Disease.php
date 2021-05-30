@@ -13,4 +13,9 @@ class Disease extends Model
         'name',
         'description',
     ];
+
+    public function tests()
+    {
+        return $this->hasMany(Test::class);
+    }
 }

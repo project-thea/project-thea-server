@@ -22,4 +22,9 @@ class Subject extends Model
         'id_number',
         'id_type',
     ];
+
+    public function tests()
+    {
+        $this->hasMany(Test::class);
+    }
 }
