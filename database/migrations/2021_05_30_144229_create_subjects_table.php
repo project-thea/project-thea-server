@@ -24,7 +24,7 @@ class CreateSubjectsTable extends Migration
             $table->string('phone', 20);
             $table->string('next_of_kin', 55);
             $table->string('next_of_kin_phone', 20);
-            $table->uuid('id');
+            $table->uuid('unique_id');
             $table->string('id_number', 40);
             $table->string('id_type', 30);
             $table->string('created_with', 5)->nullable();
