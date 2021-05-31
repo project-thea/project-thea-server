@@ -14,6 +14,9 @@ class Disease extends Model
         'description',
     ];
 
+    /**
+     * A disease consists of many tests.
+     */
     public function tests()
     {
         return $this->hasMany(Test::class);

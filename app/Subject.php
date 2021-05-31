@@ -23,6 +23,9 @@ class Subject extends Model
         'id_type',
     ];
 
+    /**
+     * A subject consists of many tests.
+     */
     public function tests()
     {
         return $this->hasMany(Test::class);
