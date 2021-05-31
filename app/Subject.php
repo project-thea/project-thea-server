@@ -25,6 +25,6 @@ class Subject extends Model
 
     public function tests()
     {
-        $this->hasMany(Test::class);
+        return $this->hasMany(Test::class);
     }
 }
