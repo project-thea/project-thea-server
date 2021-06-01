@@ -37,4 +37,35 @@ class APIHelpers
 
         return $result;
     }
+
+    /** 
+     * The basis of this function is to format all API responses.
+     * 
+     * @param bool $has_error
+     * @param string $message
+     * @param array $content
+     * @param string $access_token
+
+     * @return array
+     */
+    public static function createAPIResponse($has_error, $message, $content)
+    {
+        $result = [];
+
+        if ($has_error) {
+            $result['status'] = self::FAILED_RESPONSE;
+            $result['data'] = $content;
+            $result['message'] = $message;
+        } else {
+            $result['status'] = self::SUCCESS_RESPONSE;
+            if ($content == null) {
+                $result['message'] = $message;
+            } else {
+                $result['data'] = $content;
+                $result['message'] = $message;
+            }
+        }
+
+        return $result;
+    }
 }
