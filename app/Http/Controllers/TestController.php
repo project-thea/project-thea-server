@@ -22,7 +22,7 @@ class TestController extends Controller
             ->leftJoin('subjects', 'tests.subject_id', '=', 'subjects.id')
             ->leftJoin('diseases', 'tests.disease_id', '=', 'diseases.id')
             ->orderBy('tests.test_date', 'ASC')
-            ->get();
+            ->paginate(3);
 
         $testsCollection = TestResource::collection($test);
         $apiResponse = APIHelpers::createAPIResponse(false, 'Tests retrieved successfully', $testsCollection);
