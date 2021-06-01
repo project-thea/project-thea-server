@@ -21,6 +21,7 @@ class TestController extends Controller
         $test = Test::select('tests.*', 'subjects.first_name', 'subjects.last_name', 'diseases.name')
             ->leftJoin('subjects', 'tests.subject_id', '=', 'subjects.id')
             ->leftJoin('diseases', 'tests.disease_id', '=', 'diseases.id')
+            ->orderBy('tests.test_date', 'ASC')
             ->get();
 
         $testsCollection = TestResource::collection($test);
