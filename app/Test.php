@@ -16,7 +16,7 @@ class Test extends Model
      */
     public function disease()
     {
-        return $this->belongsTo(Disease::class);
+        return $this->belongsTo(Disease::class, 'disease_id');
     }
 
     /**
@@ -24,6 +24,6 @@ class Test extends Model
      */
     public function subject()
     {
-        return $this->belongsTo(Subject::class);
+        return $this->belongsTo(Subject::class, 'subject_id');
     }
 }
