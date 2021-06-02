@@ -19,7 +19,7 @@ class CreateTestsTable extends Migration
             $table->foreignId('subject_id')->constrained('subjects'); // foreign key column 'subject_id'
             $table->date('test_date');
             $table->string('status', 9); //unknown, negative, positive
-            $table->date('status_update_date');
+            $table->date('status_update_date')->nullable(); //At the start of making the test
             $table->string('created_with')->nullable(); // user, app
             $table->string('updated_with')->nullable(); //user. app
             $table->integer('created_by')->nullable();
