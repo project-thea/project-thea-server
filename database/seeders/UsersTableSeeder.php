@@ -45,6 +45,21 @@ class UsersTableSeeder extends Seeder
                 'next_of_kin_mobile' => '0756658904',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ],
+
+            [
+                'first_name' => 'Jacob',
+                'middle_name' => 'Twine',
+                'last_name' => 'Koko',
+                'email' => 'koko@gmail.com',
+                'password' => Hash::make('ko12345678'),
+                'nationality' => 'Ugandan',
+                'date_of_birth' => '1992-07-15',
+                'user_mobile' => '0772777567',
+                'next_of_kin' => 'Noah Rubondo',
+                'next_of_kin_mobile' => '0756658904',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]
         ]);
     }

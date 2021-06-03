@@ -2,8 +2,6 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use App\User;
 use Tests\TestCase;
 
@@ -142,7 +140,7 @@ class AuthenticationTest extends TestCase
 
     public function testSuccessfulLogin()
     {
-        factory(User::class)->create([
+        User::factory()->create([
             'email' => 'sample@test.com',
             'password' => bcrypt('sample123'),
         ]);

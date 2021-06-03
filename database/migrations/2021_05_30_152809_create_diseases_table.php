@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTripTable extends Migration
+class CreateDiseasesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,15 @@ class CreateTripTable extends Migration
      */
     public function up()
     {
-        Schema::create('trip', function (Blueprint $table) {
+        Schema::create('diseases', function (Blueprint $table) {
             $table->id();
-			$table->string('name');
-			$table->unsignedBigInteger('driver_id');
-			// $table->timestamp('created_at')->useCurrent();
-			// $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->string('name', 50);
+            $table->longText('description');
+            $table->integer('created_by')->nullable();
+            $table->integer('updated_by')->nullable();
             $table->timestamps();
+
+            $table->index('name');
         });
     }
 
@@ -30,6 +32,6 @@ class CreateTripTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trip');
+        Schema::dropIfExists('diseases');
     }
 }

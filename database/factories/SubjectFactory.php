@@ -2,18 +2,17 @@
 
 namespace Database\Factories;
 
-use App\User;
+use App\Subject;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
-class UserFactory extends Factory
+class SubjectFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = User::class;
+    protected $model = Subject::class;
 
     /**
      * Define the model's default state.
@@ -27,14 +26,14 @@ class UserFactory extends Factory
             'middle_name' => $this->faker->name(),
             'last_name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
             'nationality' => $this->faker->country,
             'date_of_birth' => $this->faker->date,
-            'user_mobile' => $this->faker->phoneNumber,
+            'phone' => $this->faker->phoneNumber,
             'next_of_kin' => $this->faker->name(),
-            'next_of_kin_mobile' => $this->faker->phoneNumber,
+            'next_of_kin_phone' => $this->faker->phoneNumber,
+            'unique_id' => $this->faker->uuid,
+            'id_number' => $this->faker->bothify(),
+            'id_type' => 'National ID',
         ];
     }
 }
