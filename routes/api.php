@@ -29,7 +29,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/tracking/subject', 'API\SubjectTrackingController@index');
     Route::post('/tracking/subject', 'API\SubjectTrackingController@store');
     Route::get('/tracking/sample', 'API\SampleTrackingController@index');
-    Route::post('/tracking/sample', 'API\SampleTrackingController@strore');
+    Route::post('/tracking/sample', 'API\SampleTrackingController@store');
 });
 
 
