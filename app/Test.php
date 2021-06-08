@@ -26,4 +26,12 @@ class Test extends Model
     {
         return $this->belongsTo(Subject::class, 'subject_id');
     }
+
+    /**
+     * A test consists of many sample test trackers.
+     */
+    public function sample_test_trackings()
+    {
+        return $this->hasMany(SampleTestTracking::class);
+    }
 }
