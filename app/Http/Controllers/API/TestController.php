@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Helpers\APIHelpers;
 use App\Http\Resources\TestResource;
 use App\Test;
@@ -15,7 +16,6 @@ class TestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
     public const RECORDS_PER_PAGE = 20;
 
     public function index()
@@ -32,17 +32,7 @@ class TestController extends Controller
     }
 
     /**
-     * Show the form for creating a new Test.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created Test in storage.
+     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -76,7 +66,7 @@ class TestController extends Controller
     /**
      * Display the specified Test.
      *
-     * @param  int  $id
+     * @param  \App\Test  $test
      * @return \Illuminate\Http\Response
      */
     public function show(Test $test)
@@ -84,17 +74,6 @@ class TestController extends Controller
         $testResource = new TestResource($test);
         $apiResponse = APIHelpers::createAPIResponse(false, 'Test retrieved successfully', $testResource);
         return response()->json($apiResponse, 200);
-    }
-
-    /**
-     * Show the form for editing the specified Test.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**

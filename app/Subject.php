@@ -30,4 +30,12 @@ class Subject extends Model
     {
         return $this->hasMany(Test::class);
     }
+
+    /**
+     * A subject consists of many subject trackers.
+     */
+    public function subject_trackings()
+    {
+        return $this->hasMany(SubjectTracking::class);
+    }
 }

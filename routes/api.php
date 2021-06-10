@@ -25,6 +25,11 @@ Route::post('/login', 'API\UserController@login');
 //Protected routes
 Route::group(['middleware' => ['auth:api']], function () {
     Route::post('/logout', 'API\UserController@logout');
+    Route::apiResource('/tests', 'API\TestController');
+    Route::get('/tracking/subject', 'API\SubjectTrackingController@index');
+    Route::post('/tracking/subject', 'API\SubjectTrackingController@store');
+    Route::get('/tracking/sample', 'API\SampleTrackingController@index');
+    Route::post('/tracking/sample', 'API\SampleTrackingController@store');
 });
 
-Route::apiResource('/tests', 'TestController')->middleware('auth:api');
+
