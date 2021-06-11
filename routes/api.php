@@ -17,19 +17,3 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-//Public routes
-Route::post('/register', 'API\UserController@register');
-Route::post('/login', 'API\UserController@login');
-
-//Protected routes
-Route::group(['middleware' => ['auth:api']], function () {
-    Route::post('/logout', 'API\UserController@logout');
-    Route::apiResource('/tests', 'API\TestController');
-    Route::get('/tracking/subject', 'API\SubjectTrackingController@index');
-    Route::post('/tracking/subject', 'API\SubjectTrackingController@store');
-    Route::get('/tracking/sample', 'API\SampleTrackingController@index');
-    Route::post('/tracking/sample', 'API\SampleTrackingController@store');
-});
-
-

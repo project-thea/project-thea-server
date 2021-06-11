@@ -1,12 +1,7 @@
 <?php
 
-use Database\Seeders\DiseasesTableSeeder;
-use Database\Seeders\SampleTestTrackingTableSeeder;
-use Database\Seeders\SampleTrackingTableSeeder;
-use Database\Seeders\SubjectsTableSeeder;
-use Database\Seeders\SubjectTrackingTableSeeder;
-use Database\Seeders\TestsTableSeeder;
-use Database\Seeders\UsersTableSeeder;
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,14 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([
-            UsersTableSeeder::class,
-            SubjectsTableSeeder::class,
-            DiseasesTableSeeder::class,
-            TestsTableSeeder::class,
-            SubjectTrackingTableSeeder::class,
-            SampleTrackingTableSeeder::class,
-            SampleTestTrackingTableSeeder::class
-        ]);
+        // \App\Models\User::factory(10)->create();
     }
 }
