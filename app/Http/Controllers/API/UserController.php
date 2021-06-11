@@ -6,7 +6,6 @@ use App\Helpers\APIHelpers;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -20,8 +19,6 @@ class UserController extends Controller
      * */
     public function register(Request $request)
     {
-        $data = $request->all();
-
         $validationRules = [
             'first_name' => 'required|string|max:55',
             'middle_name' => 'string|max:55', //Not a must to have this field required
@@ -37,15 +34,11 @@ class UserController extends Controller
             'id_type' => 'string|max:50'
         ];
 
-        $validator = Validator::make($data, $validationRules);
+        $validateData = $request->validate($validationRules);
 
-        if ($validator->fails()) {
-            return response(['error' => $validator->errors(), 'Validation Error']);
-        }
+        $validateData['password'] = bcrypt($request->password);
 
-        $data['password'] = bcrypt($request->password);
-
-        $user = User::create($data);
+        $user = User::create($validateData);
 
         $accessToken = $user->createToken('authToken')->plainTextToken;
 
