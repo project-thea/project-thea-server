@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\API\SampleTrackingController;
+use App\Http\Controllers\API\SubjectTrackingController;
 use App\Http\Controllers\API\TestController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
@@ -28,4 +30,11 @@ Route::post('/login', [UserController::class, 'login']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [UserController::class, 'logout']);
     Route::apiResource('/tests', TestController::class);
+    Route::get('/tracking/subject', [SubjectTrackingController::class, 'index']);
+    Route::post('/tracking/subject', [SubjectTrackingController::class, 'store']);
+    Route::get('/tracking/sample', [SampleTrackingController::class ,'index']);
+    Route::post('/tracking/sample', [SampleTrackingController::class ,'store']);
 });
+
+
+    
