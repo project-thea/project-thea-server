@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\TestController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,4 +27,5 @@ Route::post('/login', [UserController::class, 'login']);
 //Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [UserController::class, 'logout']);
+    Route::apiResource('/tests', TestController::class);
 });
