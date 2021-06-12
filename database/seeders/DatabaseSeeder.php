@@ -17,7 +17,10 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             SubjectsTableSeeder::class,
             DiseasesTableSeeder::class,
-            TestsTableSeeder::class
+            TestsTableSeeder::class,
+            SubjectTrackingTableSeeder::class,
+            SampleTrackingTableSeeder::class,
+            SampleTestTrackingTableSeeder::class
         ]);
     }
 }
