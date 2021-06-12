@@ -13,7 +13,7 @@ class APIHelpers
      * @param bool $hasError
      * @param string $message
      * @param array $content
-     * @param string $access_token
+     * @param string $accessToken
 
      * @return array
      */
@@ -31,6 +31,36 @@ class APIHelpers
             } else {
                 $response['data'] = $content;
                 $response['access_token'] = $accessToken;
+                $response['message'] = $message;
+            }
+        }
+
+        return $response;
+    }
+
+    /** 
+     * The basis of this function is to format all API responses.
+     * 
+     * @param bool $hasError
+     * @param string $message
+     * @param array $content
+
+     * @return array
+     */
+    public static function formatAPIResponse($hasError, $message, $content)
+    {
+        $response = [];
+
+        if ($hasError) {
+            $response['status'] = self::FAILED_RESPONSE;
+            $response['data'] = $content;
+            $response['message'] = $message;
+        } else {
+            $response['status'] = self::SUCCESS_RESPONSE;
+            if ($content == null) {
+                $response['message'] = $message;
+            } else {
+                $response['data'] = $content;
                 $response['message'] = $message;
             }
         }
