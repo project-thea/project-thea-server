@@ -14,7 +14,7 @@ class TestController extends Controller
     public const RECORDS_PER_PAGE = 20;
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of a test resource
      *
      * @return \Illuminate\Http\Response
      */
@@ -32,7 +32,7 @@ class TestController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created test resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -42,8 +42,8 @@ class TestController extends Controller
         $data = $request->all();
 
         $validateData = [
-            'disease_id' => 'exists:App\Disease,id',
-            'subject_id' => 'exists:App\Subject,id',
+            'disease_id' => 'exists:App\Models\Disease,id',
+            'subject_id' => 'exists:App\Models\Subject,id',
             'test_date' => 'required|date',
             'status' => 'required|string|max:10',
             'status_update_date' => 'date',
@@ -64,7 +64,7 @@ class TestController extends Controller
     }
 
     /**
-     * Display the specified Test.
+     * Display a specified Test.
      *
      * @param  \App\Test  $test
      * @return \Illuminate\Http\Response
@@ -77,7 +77,7 @@ class TestController extends Controller
     }
 
     /**
-     * Update the specified Test in storage.
+     * Update a specified Test in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Test  $test
@@ -98,7 +98,7 @@ class TestController extends Controller
     }
 
     /**
-     * Remove the specified Test from storage.
+     * Remove a specified Test from storage.
      *
      * @param  \App\Test  $test
      * @return \Illuminate\Http\Response
