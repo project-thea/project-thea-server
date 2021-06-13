@@ -30,7 +30,6 @@ class UserAuthenticationTest extends TestCase
                     'password' => ['The password field is required.'],
                     'nationality' => ['The nationality field is required.'],
                     'date_of_birth' => ['The date of birth field is required.'],
-                    'user_phone' => ['The user phone field is required.'],
                     'next_of_kin' => ['The next of kin field is required.'],
                     'next_of_kin_phone' => ['The next of kin phone field is required.']
                 ]
@@ -52,7 +51,6 @@ class UserAuthenticationTest extends TestCase
             "password" => "pa12345678",
             'nationality' => 'Ugandan',
             'date_of_birth' => '1998-09-21',
-            'user_phone' => '0773784676',
             'next_of_kin' => 'Andrew Rugamba',
             'next_of_kin_phone' => '0753578647',
         ];
@@ -77,20 +75,16 @@ class UserAuthenticationTest extends TestCase
     {
         $userData = [
             'first_name' => 'Emmanuel',
-            'middle_name' => 'Nkundwa',
             'last_name' => 'Atuhaire',
             'email' => 'patungire@gmail.com',
             'password' => 'pa12345678',
             'password_confirmation' => 'pa12345678',
             'nationality' => 'Ugandan',
             'date_of_birth' => '1998-09-21',
-            'user_phone' => '0773784676',
             'next_of_kin' => 'Andrew Rugamba',
             'next_of_kin_phone' => '0753578647',
             'id_number' => 'CF5y617563K7865',
-            'id_type' => 'National ID',
-            'created_with' => 'user',
-            'updated_with' => 'app'
+            'id_type' => 'National ID'
         ];
 
         $this->json('POST', 'api/register', $userData, ['Accept' => 'application/json'])
@@ -100,18 +94,17 @@ class UserAuthenticationTest extends TestCase
                 "data" => [
                     'id',
                     'first_name',
-                    'middle_name',
                     'last_name',
                     'email',
                     'nationality',
                     'date_of_birth',
-                    'user_phone',
                     'next_of_kin',
                     'next_of_kin_phone',
                     'id_number',
                     'id_type',
                     'created_at',
                     'updated_at',
+                    'profile_photo_url'
                 ],
                 "access_token",
                 "message"
@@ -159,21 +152,19 @@ class UserAuthenticationTest extends TestCase
                 'data' => [
                     'id',
                     'first_name',
-                    'middle_name',
                     'last_name',
                     'email',
                     'email_verified_at',
                     'nationality',
                     'date_of_birth',
-                    'user_phone',
                     'next_of_kin',
                     'next_of_kin_phone',
                     'id_number',
                     'id_type',
-                    'created_with',
-                    'updated_with',
                     'created_at',
                     'updated_at',
+                    'current_team_id',
+                    'profile_photo_url',
                 ],
                 'access_token',
                 'message'

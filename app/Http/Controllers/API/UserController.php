@@ -21,13 +21,11 @@ class UserController extends Controller
     {
         $validationRules = [
             'first_name' => 'required|string|max:55',
-            'middle_name' => 'string|max:55', //Not a must to have this field required
             'last_name' => 'required|string|max:55',
             'email' => 'email|required|string|unique:users',
             'password' => 'required|string|confirmed',
             'nationality' => 'required|string|max:55',
             'date_of_birth' => 'required|before:yesterday',
-            'user_phone' => 'required|string|max:12',
             'next_of_kin' => 'required|string|max:55',
             'next_of_kin_phone' => 'required|string|max:55',
             'id_number' => 'string|max:50',

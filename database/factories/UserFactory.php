@@ -2,9 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Laravel\Jetstream\Features;
 
 class UserFactory extends Factory
 {
@@ -24,7 +26,6 @@ class UserFactory extends Factory
     {
         return [
             'first_name' => $this->faker->name(),
-            'middle_name' => $this->faker->name(),
             'last_name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
@@ -32,11 +33,10 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'nationality' => $this->faker->country,
             'date_of_birth' => $this->faker->date,
-            'user_phone' => $this->faker->phoneNumber,
             'next_of_kin' => $this->faker->name(),
             'next_of_kin_phone' => $this->faker->phoneNumber,
             'id_number' => $this->faker->bothify(),
-            'id_type' => 'National ID'
+            'id_type' => 'National ID',
         ];
     }
 
@@ -52,5 +52,25 @@ class UserFactory extends Factory
                 'email_verified_at' => null,
             ];
         });
+    }
+
+    /**
+     * Indicate that the user should have a personal team.
+     *
+     * @return $this
+     */
+    public function withPersonalTeam()
+    {
+        if (!Features::hasTeamFeatures()) {
+            return $this->state([]);
+        }
+
+        return $this->has(
+            Team::factory()
+                ->state(function (array $attributes, User $user) {
+                    return ['name' => $user->name . '\'s Team', 'user_id' => $user->id, 'personal_team' => true];
+                }),
+            'ownedTeams'
+        );
     }
 }
