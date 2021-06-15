@@ -21,6 +21,24 @@
                                     Dashboard
                                 </jet-nav-link>
                             </div>
+
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <jet-nav-link :href="route('subjects')" :active="route().current('subjects')">
+                                    Subjects
+                                </jet-nav-link>
+                            </div>
+
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <jet-nav-link :href="route('tests')" :active="route().current('tests')">
+                                    Tests
+                                </jet-nav-link>
+                            </div>
+
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <jet-nav-link :href="route('diseases')" :active="route().current('diseases')">
+                                    Diseases
+                                </jet-nav-link>
+                            </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
