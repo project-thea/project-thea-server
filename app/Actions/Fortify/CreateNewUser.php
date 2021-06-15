@@ -26,12 +26,6 @@ class CreateNewUser implements CreatesNewUsers
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
-            'nationality' => ['required', 'string', 'max:255'],
-            'date_of_birth' => ['required', 'date'],
-            'next_of_kin' => ['required', 'string', 'max:255'],
-            'next_of_kin_phone' => ['required', 'string', 'max:255'],
-            'id_number' => ['required', 'string', 'max:255'],
-            'id_type' => ['required', 'string', 'max:255']
         ])->validate();
 
         return User::create([
@@ -39,12 +33,6 @@ class CreateNewUser implements CreatesNewUsers
             'last_name' => $input['last_name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
-            'nationality' => $input['nationality'],
-            'date_of_birth' => $input['date_of_birth'],
-            'next_of_kin' => $input['next_of_kin'],
-            'next_of_kin_phone' => $input['next_of_kin_phone'],
-            'id_number' => $input['id_number'],
-            'id_type' => $input['id_type'],
         ]);
     }
 }

@@ -23,16 +23,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
-            $table->string('nationality');
-            $table->date('date_of_birth');
-            $table->string('next_of_kin');
-            $table->string('next_of_kin_phone');
-            $table->string('id_number');
-            $table->string('id_type');
             $table->timestamps();
-
-            $table->index('first_name');
-            $table->index('last_name');
         });
     }
 

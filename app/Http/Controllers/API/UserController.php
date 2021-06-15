@@ -23,13 +23,7 @@ class UserController extends Controller
             'first_name' => 'required|string|max:55',
             'last_name' => 'required|string|max:55',
             'email' => 'email|required|string|unique:users',
-            'password' => 'required|string|confirmed',
-            'nationality' => 'required|string|max:55',
-            'date_of_birth' => 'required|before:yesterday',
-            'next_of_kin' => 'required|string|max:55',
-            'next_of_kin_phone' => 'required|string|max:55',
-            'id_number' => 'string|max:50',
-            'id_type' => 'string|max:50'
+            'password' => 'required|string|confirmed'
         ];
 
         $validateData = $request->validate($validationRules);

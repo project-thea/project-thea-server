@@ -30,13 +30,7 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
-            'nationality' => $this->faker->country,
-            'date_of_birth' => $this->faker->date,
-            'next_of_kin' => $this->faker->name(),
-            'next_of_kin_phone' => $this->faker->phoneNumber,
-            'id_number' => $this->faker->bothify(),
-            'id_type' => 'National ID',
+            'remember_token' => Str::random(10)
         ];
     }
 
