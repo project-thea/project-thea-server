@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Subject;
-use App\SubjectTracking;
+use App\Models\Subject;
+use App\Models\SubjectTracking;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SubjectTrackingFactory extends Factory

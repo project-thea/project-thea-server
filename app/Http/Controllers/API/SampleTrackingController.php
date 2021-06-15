@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Helpers\APIHelpers;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SampleTrackingResource;
-use App\SampleTracking;
+use App\Models\SampleTracking;
+use App\Helpers\APIHelpers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -32,7 +32,7 @@ class SampleTrackingController extends Controller
         )->get();
 
         $sampleTrackingsCollection = SampleTrackingResource::collection($sampleTrackings);
-        $apiResponse = APIHelpers::createAPIResponse(false, 'Sample trackings retrieved successfully', $sampleTrackingsCollection);
+        $apiResponse = APIHelpers::formatAPIResponse(false, 'Sample trackings retrieved successfully', $sampleTrackingsCollection);
         return response()->json($apiResponse, 200);
     }
 
@@ -61,7 +61,7 @@ class SampleTrackingController extends Controller
 
         $sampleTrackings = SampleTracking::create($data);
         $sampleTrackingsResource = new SampleTrackingResource($sampleTrackings);
-        $apiResponse = APIHelpers::createAPIResponse(false, 'Sample trackings created successfully', $sampleTrackingsResource);
+        $apiResponse = APIHelpers::formatAPIResponse(false, 'Sample trackings created successfully', $sampleTrackingsResource);
         return response()->json($apiResponse, 201);
     }
 

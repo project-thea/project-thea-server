@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\API\SampleTrackingController;
+use App\Http\Controllers\API\SubjectTrackingController;
+use App\Http\Controllers\API\TestController;
+use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,22 +18,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 //Public routes
-Route::post('/register', 'API\UserController@register');
-Route::post('/login', 'API\UserController@login');
+Route::post('/register', [UserController::class, 'register']);
+Route::post('/login', [UserController::class, 'login']);
 
 //Protected routes
-Route::group(['middleware' => ['auth:api']], function () {
-    Route::post('/logout', 'API\UserController@logout');
-    Route::apiResource('/tests', 'API\TestController');
-    Route::get('/tracking/subject', 'API\SubjectTrackingController@index');
-    Route::post('/tracking/subject', 'API\SubjectTrackingController@store');
-    Route::get('/tracking/sample', 'API\SampleTrackingController@index');
-    Route::post('/tracking/sample', 'API\SampleTrackingController@store');
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('/logout', [UserController::class, 'logout']);
+    Route::apiResource('/tests', TestController::class);
+    Route::get('/tracking/subject', [SubjectTrackingController::class, 'index']);
+    Route::post('/tracking/subject', [SubjectTrackingController::class, 'store']);
+    Route::get('/tracking/sample', [SampleTrackingController::class ,'index']);
+    Route::post('/tracking/sample', [SampleTrackingController::class ,'store']);
 });
-
-

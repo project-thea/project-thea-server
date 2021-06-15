@@ -2,22 +2,25 @@
 
 namespace Tests\Feature;
 
-use App\Subject;
-use App\SubjectTracking;
-use App\User;
+use App\Models\User;
+use App\Models\Subject;
+use App\Models\SubjectTracking;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class SubjectTrackingTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * A feature test to store a newly created subject tracking test in storage.
      *
      * @return void
      */
-    public function testSubjectTrackingCreatedSuccessfully()
+    public function test_subject_tracking_created_successfully()
     {
         $user = User::factory()->create();
-        $this->actingAs($user, 'api');
+        $this->actingAs($user);
 
         Subject::factory()->create([
             'first_name' => 'Gerald',
@@ -79,10 +82,10 @@ class SubjectTrackingTest extends TestCase
      *
      * @return void
      */
-    public function testSubjectTrackingListedSuccessfully()
+    public function test_subject_tracking_listed_successfully()
     {
         $user = User::factory()->create();
-        $this->actingAs($user, 'api');
+        $this->actingAs($user);
 
         Subject::factory()->create([
             'first_name' => 'Gerald',

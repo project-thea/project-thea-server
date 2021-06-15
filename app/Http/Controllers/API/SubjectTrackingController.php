@@ -5,13 +5,13 @@ namespace App\Http\Controllers\API;
 use App\Helpers\APIHelpers;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SubjectTrackingResource;
-use App\SubjectTracking;
+use App\Models\SubjectTracking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class SubjectTrackingController extends Controller
 {
-    /**
+     /**
      * Display a listing of the subject tracking.
      *
      * @return \Illuminate\Http\Response
@@ -27,7 +27,7 @@ class SubjectTrackingController extends Controller
         )->get();
 
         $subjectTrackingsCollection = SubjectTrackingResource::collection($subjectTrackings);
-        $apiResponse = APIHelpers::createAPIResponse(false, 'Subject trackings retrieved successfully', $subjectTrackingsCollection);
+        $apiResponse = APIHelpers::formatAPIResponse(false, 'Subject trackings retrieved successfully', $subjectTrackingsCollection);
         return response()->json($apiResponse, 200);
     }
 
@@ -42,7 +42,7 @@ class SubjectTrackingController extends Controller
         $data = $request->all();
 
         $validateData = [
-            'subject_id' => 'exists:App\Subject,id',
+            'subject_id' => 'exists:App\Models\Subject,id',
             'latitude' => 'string|min:4',
             'longitude' => 'string|min:4',
             'unique_id' => 'string',
@@ -57,7 +57,7 @@ class SubjectTrackingController extends Controller
 
         $subjectTrackings = SubjectTracking::create($data);
         $subjectTrackingsResource = new SubjectTrackingResource($subjectTrackings);
-        $apiResponse = APIHelpers::createAPIResponse(false, 'Subject trackings created successfully', $subjectTrackingsResource);
+        $apiResponse = APIHelpers::formatAPIResponse(false, 'Subject trackings created successfully', $subjectTrackingsResource);
         return response()->json($apiResponse, 201);
     }
 

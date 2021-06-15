@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\APIHelpers;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\User;
-use App\Helpers\APIHelpers;
 
 class UserController extends Controller
 {
@@ -21,15 +21,9 @@ class UserController extends Controller
     {
         $validationRules = [
             'first_name' => 'required|string|max:55',
-            'middle_name' => 'string|max:55', //Not a must to have this field required
             'last_name' => 'required|string|max:55',
             'email' => 'email|required|string|unique:users',
-            'password' => 'required|string|confirmed',
-            'nationality' => 'required|string|max:55',
-            'date_of_birth' => 'required|before:yesterday',
-            'user_mobile' => 'required|string|max:12',
-            'next_of_kin' => 'required|string|max:55',
-            'next_of_kin_mobile' => 'required|string|max:55'
+            'password' => 'required|string|confirmed'
         ];
 
         $validateData = $request->validate($validationRules);
@@ -38,10 +32,9 @@ class UserController extends Controller
 
         $user = User::create($validateData);
 
-        $accessToken = $user->createToken('authToken')->accessToken;
+        $accessToken = $user->createToken('authToken')->plainTextToken;
 
-        $message = 'Registered Successfully';
-        $apiResponse = APIHelpers::createAuthResponse(false, $message, $user, $accessToken);
+        $apiResponse = APIHelpers::formatAuthResponse(false, 'Registered Successfully', $user, $accessToken);
         return response()->json($apiResponse, 201);
     }
 
@@ -57,20 +50,19 @@ class UserController extends Controller
     {
         $loginData = $request->validate([
             'email' => 'email|required|exists:users,email',
-            'password' => 'required'
+            'password' => 'required|string'
         ]);
 
         if (!auth()->attempt($loginData)) {
-            return response(['message' => 'Invalid Login Credentials.'], 401);
+            return response()->json(['message' => 'Invalid login credentials.'], 401);
         }
 
-        //Once authenticated successfully, an accessToken is generated to identify 
-        //the currently logged in user
-        $accessToken = auth()->user()->createToken('authToken')->accessToken;
+        //check the email and get the first result
+        $user = User::where('email', $loginData['email'])->first();
 
-        $message = 'Login Successful';
-        $user = auth()->user();
-        $apiResponse = APIHelpers::createAuthResponse(false, $message, $user, $accessToken);
+        $accessToken = $user->createToken('authToken')->plainTextToken;
+
+        $apiResponse = APIHelpers::formatAuthResponse(false, 'Login Successful', $user, $accessToken);
         return response()->json($apiResponse, 200);
     }
 
@@ -82,10 +74,9 @@ class UserController extends Controller
      * 
      * @return Illuminate\Http\Request
      */
-    public function logout(Request $request)
+    public function logout()
     {
-        $authToken = $request->user()->token();
-        $authToken->revoke();
+        auth()->user()->tokens()->delete();
         return response(['message' => 'You have successfully logged out.']);
     }
 }

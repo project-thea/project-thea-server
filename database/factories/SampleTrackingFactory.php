@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\SampleTracking;
+use App\Models\SampleTracking;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SampleTrackingFactory extends Factory

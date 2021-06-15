@@ -2,24 +2,26 @@
 
 namespace Tests\Feature;
 
-use App\Disease;
-use App\Subject;
-use App\Test;
-use App\User;
-
+use App\Models\User;
+use App\Models\Test;
+use App\Models\Disease;
+use App\Models\Subject;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class CheckupTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * A feature test to store a newly created checkup test in storage.
      *
      * @return void
      */
-    public function testCheckupCreatedSuccessfully()
+    public function test_checkup_created_successfully()
     {
         $user = User::factory()->create();
-        $this->actingAs($user, 'api');
+        $this->actingAs($user);
 
         Disease::factory()->create([
             'name' => 'COVID',
@@ -80,10 +82,10 @@ class CheckupTest extends TestCase
      *
      * @return void
      */
-    public function testCheckupListedSuccessfully()
+    public function test_checkup_listed_successfully()
     {
         $user = User::factory()->create();
-        $this->actingAs($user, 'api');
+        $this->actingAs($user);
 
         Disease::factory()->create([
             'name' => 'COVID',
@@ -233,14 +235,14 @@ class CheckupTest extends TestCase
     }
 
     /**
-     * A feature test to display the specific checkup test.
+     * A feature test to display a specific checkup test.
      *
      * @return void
      */
-    public function testShowCheckupSuccessfully()
+    public function test_show_checkup_successfully()
     {
         $user = User::factory()->create();
-        $this->actingAs($user, 'api');
+        $this->actingAs($user);
 
         Disease::factory()->create([
             'name' => 'COVID',
@@ -295,15 +297,16 @@ class CheckupTest extends TestCase
             ]);
     }
 
+
     /**
-     * A feature test to update the specific test in storage.
+     * A feature test to update a specific test in storage.
      *
      * @return void
      */
-    public function testCheckupUpdatedSuccessfully()
+    public function test_checkup_updated_successfully()
     {
         $user = User::factory()->create();
-        $this->actingAs($user, 'api');
+        $this->actingAs($user);
 
         Disease::factory()->create([
             'name' => 'COVID',
@@ -369,14 +372,14 @@ class CheckupTest extends TestCase
     }
 
     /**
-     * A feature test to remove the specific test from storage.
+     * A feature test to remove a specific test from storage.
      *
      * @return void
      */
-    public function testDeleteCheckup()
+    public function test_delete_checkup()
     {
         $user = User::factory()->create();
-        $this->actingAs($user, 'api');
+        $this->actingAs($user);
 
         Disease::factory()->create([
             'name' => 'COVID',

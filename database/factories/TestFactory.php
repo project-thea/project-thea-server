@@ -2,9 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Test;
-use App\Disease;
-use App\Subject;
+use App\Models\Test;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TestFactory extends Factory

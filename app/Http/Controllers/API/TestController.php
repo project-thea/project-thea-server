@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use App\Helpers\APIHelpers;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\TestResource;
-use App\Test;
 use Illuminate\Http\Request;
+use App\Models\Test;
 use Illuminate\Support\Facades\Validator;
 
 class TestController extends Controller
 {
+    public const RECORDS_PER_PAGE = 20;
+
     /**
-     * Display a listing of the Test.
+     * Display a listing of a test resource
      *
      * @return \Illuminate\Http\Response
      */
-    public const RECORDS_PER_PAGE = 20;
-
     public function index()
     {
         $tests = Test::select('tests.*', 'subjects.first_name', 'subjects.last_name', 'diseases.name')
@@ -27,12 +27,12 @@ class TestController extends Controller
             ->paginate(self::RECORDS_PER_PAGE);
 
         $testsCollection = TestResource::collection($tests);
-        $apiResponse = APIHelpers::createAPIResponse(false, 'Tests retrieved successfully', $testsCollection);
+        $apiResponse = APIHelpers::formatAPIResponse(false, 'Tests retrieved successfully', $testsCollection);
         return response()->json($apiResponse, 200);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created test resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -42,8 +42,8 @@ class TestController extends Controller
         $data = $request->all();
 
         $validateData = [
-            'disease_id' => 'exists:App\Disease,id',
-            'subject_id' => 'exists:App\Subject,id',
+            'disease_id' => 'exists:App\Models\Disease,id',
+            'subject_id' => 'exists:App\Models\Subject,id',
             'test_date' => 'required|date',
             'status' => 'required|string|max:10',
             'status_update_date' => 'date',
@@ -59,12 +59,12 @@ class TestController extends Controller
 
         $tests = Test::create($data);
         $testsResource = new TestResource($tests);
-        $apiResponse = APIHelpers::createAPIResponse(false, 'Test created successfully', $testsResource);
+        $apiResponse = APIHelpers::formatAPIResponse(false, 'Test created successfully', $testsResource);
         return response()->json($apiResponse, 201);
     }
 
     /**
-     * Display the specified Test.
+     * Display a specified Test.
      *
      * @param  \App\Test  $test
      * @return \Illuminate\Http\Response
@@ -72,12 +72,12 @@ class TestController extends Controller
     public function show(Test $test)
     {
         $testResource = new TestResource($test);
-        $apiResponse = APIHelpers::createAPIResponse(false, 'Test retrieved successfully', $testResource);
+        $apiResponse = APIHelpers::formatAPIResponse(false, 'Test retrieved successfully', $testResource);
         return response()->json($apiResponse, 200);
     }
 
     /**
-     * Update the specified Test in storage.
+     * Update a specified Test in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Test  $test
@@ -89,16 +89,16 @@ class TestController extends Controller
         $updatedTest = new TestResource($test);
 
         if (!$updatedTest) {
-            $apiResponse = APIHelpers::createAPIResponse(true, 'Test update failed', null);
+            $apiResponse = APIHelpers::formatAPIResponse(true, 'Test update failed', null);
             return response()->json($apiResponse, 400);
         }
 
-        $apiResponse = APIHelpers::createAPIResponse(false, 'Test updated successfully', $updatedTest);
+        $apiResponse = APIHelpers::formatAPIResponse(false, 'Test updated successfully', $updatedTest);
         return response()->json($apiResponse, 200);
     }
 
     /**
-     * Remove the specified Test from storage.
+     * Remove a specified Test from storage.
      *
      * @param  \App\Test  $test
      * @return \Illuminate\Http\Response
@@ -106,7 +106,7 @@ class TestController extends Controller
     public function destroy(Test $test)
     {
         $test->delete();
-        $apiResponse = APIHelpers::createAPIResponse(false, 'Test deleted successfully', null);
+        $apiResponse = APIHelpers::formatAPIResponse(false, 'Test deleted successfully', null);
         return response()->json($apiResponse, 204);
     }
 }

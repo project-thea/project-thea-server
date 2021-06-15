@@ -2,25 +2,28 @@
 
 namespace Tests\Feature;
 
-use App\SampleTestTracking;
-use App\SampleTracking;
-use App\Test;
-use App\User;
-use App\Disease;
-use App\Subject;
+use App\Models\SampleTracking;
+use App\Models\User;
+use App\Models\Disease;
+use App\Models\Subject;
+use App\Models\Test;
+use App\Models\SampleTestTracking;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class SampleTrackingTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * A feature test to store a newly created sample tracking test in storage.
      *
      * @return void
      */
-    public function testSampleTrackingCreatedSuccessfully()
+    public function test_sample_tracking_created_successfully()
     {
         $user = User::factory()->create();
-        $this->actingAs($user, 'api');
+        $this->actingAs($user);
 
         SampleTracking::factory()->create([
             'latitude' => '2.536988',
@@ -64,10 +67,10 @@ class SampleTrackingTest extends TestCase
      *
      * @return void
      */
-    public function testSampleTrackingListedSuccessfully()
+    public function test_sample_tracking_listed_successfully()
     {
         $user = User::factory()->create();
-        $this->actingAs($user, 'api');
+        $this->actingAs($user);
 
         Disease::factory()->create([
             'name' => 'COVID',

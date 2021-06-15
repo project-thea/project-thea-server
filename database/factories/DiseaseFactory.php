@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Disease;
+use App\Models\Disease;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class DiseaseFactory extends Factory

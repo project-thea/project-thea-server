@@ -10,62 +10,61 @@ class APIHelpers
     /** 
      * The basis of this function is to format all authentication API responses.
      * 
-     * @param bool $has_error
+     * @param bool $hasError
      * @param string $message
      * @param array $content
-     * @param string $access_token
+     * @param string $accessToken
 
      * @return array
      */
-    public static function createAuthResponse($has_error, $message, $content, $accessToken)
+    public static function formatAuthResponse($hasError, $message, $content, $accessToken)
     {
-        $result = [];
+        $response = [];
 
-        if ($has_error) {
-            $result['status'] = self::FAILED_RESPONSE;
-            $result['data'] = $content;
+        if ($hasError) {
+            $response['status'] = self::FAILED_RESPONSE;
+            $response['message'] = $message;
         } else {
-            $result['status'] = self::SUCCESS_RESPONSE;
+            $response['status'] = self::SUCCESS_RESPONSE;
             if ($content == null) {
-                $result['message'] = 'The data is null.';
+                $response['message'] = 'There is no data.';
             } else {
-                $result['data'] = $content;
-                $result['access_token'] = $accessToken;
-                $result['message'] = $message;
+                $response['data'] = $content;
+                $response['access_token'] = $accessToken;
+                $response['message'] = $message;
             }
         }
 
-        return $result;
+        return $response;
     }
 
     /** 
      * The basis of this function is to format all API responses.
      * 
-     * @param bool $has_error
+     * @param bool $hasError
      * @param string $message
      * @param array $content
-     * @param string $access_token
 
      * @return array
      */
-    public static function createAPIResponse($has_error, $message, $content)
+    public static function formatAPIResponse($hasError, $message, $content)
     {
-        $result = [];
+        $response = [];
 
-        if ($has_error) {
-            $result['status'] = self::FAILED_RESPONSE;
-            $result['data'] = $content;
-            $result['message'] = $message;
+        if ($hasError) {
+            $response['status'] = self::FAILED_RESPONSE;
+            $response['data'] = $content;
+            $response['message'] = $message;
         } else {
-            $result['status'] = self::SUCCESS_RESPONSE;
+            $response['status'] = self::SUCCESS_RESPONSE;
             if ($content == null) {
-                $result['message'] = $message;
+                $response['message'] = $message;
             } else {
-                $result['data'] = $content;
-                $result['message'] = $message;
+                $response['data'] = $content;
+                $response['message'] = $message;
             }
         }
 
-        return $result;
+        return $response;
     }
 }

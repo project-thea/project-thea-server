@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
-use App\SampleTestTracking;
-use App\SampleTracking;
-use App\Test;
+use App\Models\SampleTestTracking;
+use App\Models\SampleTracking;
+use App\Models\Test;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SampleTestTrackingFactory extends Factory
