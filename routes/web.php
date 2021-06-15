@@ -39,3 +39,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/tests', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/diseases', function () {
     return Inertia::render('Diseases');
 })->name('diseases');
+
+// Route::group(['middleware' => ['auth:sanctum', 'verified']], function(){
+//     Route::get('/tests', [TestsController::class, 'index'])->name('tests');
+// });

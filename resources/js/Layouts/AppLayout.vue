@@ -15,25 +15,28 @@
                                 </inertia-link>
                             </div>
 
-                            <!-- Navigation Links -->
+                            <!-- Dashboard Link -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </jet-nav-link>
                             </div>
 
+                            <!-- Subjects Link -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <jet-nav-link :href="route('subjects')" :active="route().current('subjects')">
                                     Subjects
                                 </jet-nav-link>
                             </div>
 
+                            <!-- Tests Link -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <jet-nav-link :href="route('tests')" :active="route().current('tests')">
                                     Tests
                                 </jet-nav-link>
                             </div>
 
+                            <!-- Diseases Link -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <jet-nav-link :href="route('diseases')" :active="route().current('diseases')">
                                     Diseases
