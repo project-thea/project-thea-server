@@ -19,6 +19,7 @@ Route::get('/', function () {
     return Inertia::render('Auth/Login', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
+		'canResetPassword' => Route::has('password.request'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
@@ -39,3 +40,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/tests', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/diseases', function () {
     return Inertia::render('Diseases');
 })->name('diseases');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/tracking', function () {
+    return Inertia::render('Tracking');
+})->name('tracking');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/analysis', function () {
+    return Inertia::render('Analysis');
+})->name('analysis');
