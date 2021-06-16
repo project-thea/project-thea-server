@@ -20,17 +20,20 @@
                                 <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </jet-nav-link>
-
                                 <jet-nav-link :href="route('subjects')" :active="route().current('subjects')">
                                     Subjects
                                 </jet-nav-link>
-
                                 <jet-nav-link :href="route('tests')" :active="route().current('tests')">
                                     Tests
                                 </jet-nav-link>
-
                                 <jet-nav-link :href="route('diseases')" :active="route().current('diseases')">
                                     Diseases
+                                </jet-nav-link>
+                                <jet-nav-link :href="route('tracking')" :active="route().current('tracking')">
+                                    Tracking
+                                </jet-nav-link>
+                                <jet-nav-link :href="route('analysis')" :active="route().current('analysis')">
+                                    Analysis
                                 </jet-nav-link>
                             </div>
                         </div>

@@ -21,6 +21,10 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
+                <inertia-link :href="route('login')" class="ml-4 underline text-sm text-gray-600 hover:text-gray-900 mr-4">
+                    Log in
+                </inertia-link>
+				
                 <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Email Password Reset Link
                 </jet-button>
