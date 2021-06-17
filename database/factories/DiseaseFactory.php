@@ -22,7 +22,7 @@ class DiseaseFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
+            'disease_name' => $this->faker->name,
             'description' => $this->faker->text(),
         ];
     }
