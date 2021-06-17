@@ -24,14 +24,12 @@ class CheckupTest extends TestCase
         $this->actingAs($user);
 
         Disease::factory()->create([
-            'name' => 'COVID',
+            'disease_name' => 'COVID',
             'description' => 'A deadly disease that people will develop moderate illness',
         ]);
 
         Subject::factory()->create([
-            'first_name' => 'James',
-            'middle_name' => 'Joshua',
-            'last_name' => 'Jakuma',
+            'name' => 'James Jakuma',
             'email' => 'james@gmail.com',
             'nationality' => 'ugandan',
             'date_of_birth' => '2004-09-11',
@@ -88,14 +86,12 @@ class CheckupTest extends TestCase
         $this->actingAs($user);
 
         Disease::factory()->create([
-            'name' => 'COVID',
+            'disease_name' => 'COVID',
             'description' => 'A deadly disease that people will develop moderate illness',
         ]);
 
         Subject::factory()->create([
-            'first_name' => 'James',
-            'middle_name' => 'Joshua',
-            'last_name' => 'Jakuma',
+            'name' => 'James Jakuma',
             'email' => 'james@gmail.com',
             'nationality' => 'ugandan',
             'date_of_birth' => '2004-09-11',
@@ -108,14 +104,12 @@ class CheckupTest extends TestCase
         ]);
 
         Disease::factory()->create([
-            'name' => 'EBOLA',
+            'disease_name' => 'EBOLA',
             'description' => 'A deadly disease that people will develop moderate illness',
         ]);
 
         Subject::factory()->create([
-            'first_name' => 'Joseph',
-            'middle_name' => 'Janan',
-            'last_name' => 'Hobbs',
+            'name' => 'Joseph Hobbs',
             'email' => 'hobbs@gmail.com',
             'nationality' => 'ugandan',
             'date_of_birth' => '2004-07-13',
@@ -128,14 +122,12 @@ class CheckupTest extends TestCase
         ]);
 
         Disease::factory()->create([
-            'name' => 'YELLOW FEVER',
+            'disease_name' => 'YELLOW FEVER',
             'description' => 'A deadly disease that people will develop moderate illness',
         ]);
 
         Subject::factory()->create([
-            'first_name' => 'Sheilla',
-            'middle_name' => 'Becky',
-            'last_name' => 'Mukisa',
+            'name' => 'Sheilla Mukisa',
             'email' => 'sheny@gmail.com',
             'nationality' => 'ugandan',
             'date_of_birth' => '1995-05-11',
@@ -189,9 +181,8 @@ class CheckupTest extends TestCase
                         'updated_by',
                         'created_at',
                         'updated_at',
-                        'first_name',
-                        'last_name',
-                        'name'
+                        'name',
+                        'disease_name'
                     ],
 
                     [
@@ -207,9 +198,8 @@ class CheckupTest extends TestCase
                         'updated_by',
                         'created_at',
                         'updated_at',
-                        'first_name',
-                        'last_name',
-                        'name'
+                        'name',
+                        'disease_name'
                     ],
 
                     [
@@ -225,9 +215,8 @@ class CheckupTest extends TestCase
                         'updated_by',
                         'created_at',
                         'updated_at',
-                        'first_name',
-                        'last_name',
-                        'name'
+                        'name',
+                        'disease_name'
                     ]
                 ],
                 'message'
@@ -245,14 +234,12 @@ class CheckupTest extends TestCase
         $this->actingAs($user);
 
         Disease::factory()->create([
-            'name' => 'COVID',
+            'disease_name' => 'COVID',
             'description' => 'A deadly disease that people will develop moderate illness',
         ]);
 
         Subject::factory()->create([
-            'first_name' => 'James',
-            'middle_name' => 'Joshua',
-            'last_name' => 'Jakuma',
+            'name' => 'James Jakuma',
             'email' => 'james@gmail.com',
             'nationality' => 'ugandan',
             'date_of_birth' => '2004-09-11',
@@ -309,14 +296,12 @@ class CheckupTest extends TestCase
         $this->actingAs($user);
 
         Disease::factory()->create([
-            'name' => 'COVID',
+            'disease_name' => 'COVID',
             'description' => 'A deadly disease that people will develop moderate illness',
         ]);
 
         Subject::factory()->create([
-            'first_name' => 'James',
-            'middle_name' => 'Joshua',
-            'last_name' => 'Jakuma',
+            'name' => 'James Jakuma',
             'email' => 'james@gmail.com',
             'nationality' => 'ugandan',
             'date_of_birth' => '2004-09-11',
@@ -382,14 +367,12 @@ class CheckupTest extends TestCase
         $this->actingAs($user);
 
         Disease::factory()->create([
-            'name' => 'COVID',
+            'disease_name' => 'COVID',
             'description' => 'A deadly disease that people will develop moderate illness',
         ]);
 
         Subject::factory()->create([
-            'first_name' => 'James',
-            'middle_name' => 'Joshua',
-            'last_name' => 'Jakuma',
+            'name' => 'James Jakuma',
             'email' => 'james@gmail.com',
             'nationality' => 'ugandan',
             'date_of_birth' => '2004-09-11',

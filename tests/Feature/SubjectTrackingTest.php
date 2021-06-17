@@ -23,9 +23,7 @@ class SubjectTrackingTest extends TestCase
         $this->actingAs($user);
 
         Subject::factory()->create([
-            'first_name' => 'Gerald',
-            'middle_name' => 'Joseph',
-            'last_name' => 'Begumisa',
+            'name' => 'Gerald Begumisa',
             'email' => 'jose@gmail.com',
             'nationality' => 'ugandan',
             'date_of_birth' => '1985-08-04',
@@ -88,9 +86,7 @@ class SubjectTrackingTest extends TestCase
         $this->actingAs($user);
 
         Subject::factory()->create([
-            'first_name' => 'Gerald',
-            'middle_name' => 'Joseph',
-            'last_name' => 'Begumisa',
+            'name' => 'Gerald Begumisa',
             'email' => 'jose@gmail.com',
             'nationality' => 'ugandan',
             'date_of_birth' => '1985-08-04',
@@ -111,9 +107,7 @@ class SubjectTrackingTest extends TestCase
         ]);
 
         Subject::factory()->create([
-            'first_name' => 'Jeff',
-            'middle_name' => 'Jude',
-            'last_name' => 'Bwete',
+            'name' => 'Jeff Bwete',
             'email' => 'bwete@gmail.com',
             'nationality' => 'ugandan',
             'date_of_birth' => '1989-08-04',
@@ -134,9 +128,7 @@ class SubjectTrackingTest extends TestCase
         ]);
 
         Subject::factory()->create([
-            'first_name' => 'Raymond',
-            'middle_name' => 'Dylan',
-            'last_name' => 'Musoke',
+            'name' => 'Raymond Musoke',
             'email' => 'musoke@gmail.com',
             'nationality' => 'ugandan',
             'date_of_birth' => '1986-03-23',
