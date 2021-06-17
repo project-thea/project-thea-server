@@ -17,7 +17,7 @@ class DiseasesTableSeeder extends Seeder
     {
         DB::table('diseases')->insert([
             [
-                'name' => 'COVID-19',
+                'disease_name' => 'COVID-19',
                 'description' => 'Most infected people will develop mild to moderate illness and recover without hospitalization.',
                 'created_by' => '1',
                 'updated_by' => '3',
@@ -26,7 +26,7 @@ class DiseasesTableSeeder extends Seeder
             ],
 
             [
-                'name' => 'EBOLA',
+                'disease_name' => 'EBOLA',
                 'description' => 'Most infected people will develop mild to moderate illness and recover without hospitalization.',
                 'created_by' => '2',
                 'updated_by' => '3',
@@ -35,7 +35,7 @@ class DiseasesTableSeeder extends Seeder
             ],
 
             [
-                'name' => 'Yellow Fever',
+                'disease_name' => 'Yellow Fever',
                 'description' => 'Most infected people will develop mild to moderate illness and recover without hospitalization.',
                 'created_by' => '2',
                 'updated_by' => '1',
