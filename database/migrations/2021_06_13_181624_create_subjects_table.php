@@ -15,9 +15,7 @@ class CreateSubjectsTable extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name', 55);
-            $table->string('middle_name', 55)->nullable();
-            $table->string('last_name', 55);
+            $table->string('name', 55);
             $table->string('email')->unique();
             $table->string('nationality', 55);
             $table->date('date_of_birth');
@@ -33,8 +31,8 @@ class CreateSubjectsTable extends Migration
             $table->integer('updated_by')->nullable();
             $table->timestamps();
 
-            $table->index('first_name');
-            $table->index('last_name');
+            
+            $table->index('name');
             $table->index('phone');
         });
     }

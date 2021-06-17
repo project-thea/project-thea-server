@@ -15,13 +15,13 @@ class CreateDiseasesTable extends Migration
     {
         Schema::create('diseases', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50);
+            $table->string('disease_name', 50);
             $table->longText('description');
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();
 
-            $table->index('name');
+            $table->index('disease_name');
         });
     }
 
