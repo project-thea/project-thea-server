@@ -36,5 +36,4 @@ class Subject extends Model
     {
         return $this->hasMany(SubjectTracking::class);
     }
-
 }
