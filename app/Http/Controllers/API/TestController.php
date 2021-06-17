@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class TestController extends Controller
 {
-    public const RECORDS_PER_PAGE = 20;
+    public const NUMBER_OF_RECORDS = 20;
 
     /**
      * Display a listing of a test resource
@@ -20,11 +20,11 @@ class TestController extends Controller
      */
     public function index()
     {
-        $tests = Test::select('tests.*', 'subjects.first_name', 'subjects.last_name', 'diseases.name')
+        $tests = Test::select('tests.*', 'subjects.name', 'diseases.disease_name')
             ->leftJoin('subjects', 'tests.subject_id', '=', 'subjects.id')
             ->leftJoin('diseases', 'tests.disease_id', '=', 'diseases.id')
             ->orderBy('tests.test_date', 'ASC')
-            ->paginate(self::RECORDS_PER_PAGE);
+            ->paginate(self::NUMBER_OF_RECORDS);
 
         $testsCollection = TestResource::collection($tests);
         $apiResponse = APIHelpers::formatAPIResponse(false, 'Tests retrieved successfully', $testsCollection);
