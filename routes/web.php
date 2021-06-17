@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WEB\SubjectController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -19,7 +20,7 @@ Route::get('/', function () {
     return Inertia::render('Auth/Login', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-		'canResetPassword' => Route::has('password.request'),
+        'canResetPassword' => Route::has('password.request'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
@@ -28,10 +29,6 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/subjects', function () {
-    return Inertia::render('Subjects');
-})->name('subjects');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/tests', function () {
     return Inertia::render('Tests');
@@ -48,3 +45,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/tracking', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/analysis', function () {
     return Inertia::render('Analysis');
 })->name('analysis');
+
+Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+    Route::get('/subjects', [SubjectController::class, 'index'])->name('subjects');
+    Route::post('/subjects', [SubjectController::class, 'store']);
+    Route::patch('/subjects/{id}', [SubjectController::class, 'update']);
+    Route::delete('/subjects/{id}', [SubjectController::class, 'delete']);
+});
