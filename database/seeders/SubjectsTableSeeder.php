@@ -18,7 +18,6 @@ class SubjectsTableSeeder extends Seeder
         DB::table('subjects')->insert([
             [
                 'first_name' => 'Edgar',
-                'middle_name' => 'Jessy',
                 'last_name' => 'Salsay',
                 'email' => 'edgar@gmail.com',
                 'nationality' => 'Ugandan',
@@ -39,7 +38,6 @@ class SubjectsTableSeeder extends Seeder
 
             [
                 'first_name' => 'Rogers',
-                'middle_name' => 'Ole',
                 'last_name' => 'Douglas',
                 'email' => 'rogers@gmail.com',
                 'nationality' => 'Ugandan',
@@ -60,7 +58,6 @@ class SubjectsTableSeeder extends Seeder
 
             [
                 'first_name' => 'Cathy',
-                'middle_name' => 'Jessica',
                 'last_name' => 'Ankunda',
                 'email' => 'jessica@gmail.com',
                 'nationality' => 'Ugandan',

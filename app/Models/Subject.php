@@ -11,7 +11,6 @@ class Subject extends Model
 
     protected $fillable = [
         'first_name',
-        'middle_name',
         'last_name',
         'email',
         'nationality',
@@ -20,7 +19,7 @@ class Subject extends Model
         'next_of_kin',
         'next_of_kin_phone',
         'id_number',
-        'id_type',
+        'id_type'
     ];
 
     /**
@@ -38,5 +37,4 @@ class Subject extends Model
     {
         return $this->hasMany(SubjectTracking::class);
     }
-
 }
