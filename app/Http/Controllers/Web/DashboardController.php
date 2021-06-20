@@ -44,16 +44,15 @@ class DashboardController extends Controller
 			LEFT JOIN users t5 ON t1.the_date = DATE_FORMAT(t5.created_at,'%Y-%m-%d')
 			GROUP BY t1.the_date
 		";
-		
+
 		$summary  = DB::select($summary_query);
-		
+
 		return Inertia::render('Dashboard', [
 			'num_subjects' => Subject::count(),
 			'num_tests' => Test::count(),
 			'num_diseases' => Disease::count(),
 			'num_users' => User::count(),
 			'data' => $summary
-			
 		]);
 	}
 }
