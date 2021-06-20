@@ -1,112 +1,137 @@
 <?php
 
-namespace App\Http\Controllers\Web;
+namespace App\Http\Controllers\WEB;
 
 use App\Http\Controllers\Controller;
-use App\Models\Subject;
-use App\Models\Test;
 use App\Models\Disease;
-use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
 use \Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class DiseaseController extends Controller
 {
     /**
-     * Get list of diesease for the disease index page
+     * Display a listing of the disease resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-	public function index(Request $request)
-	{
-		$query_params = $request->all();
-		
-		$diseases = [];
-		
-		if(isset($query_params['search'])){
-			$diseases = DB::table('diseases')->where('name', 'LIKE', '%' . $query_params['search'] . '%')
-						->get();
-		}else{
-			$diseases = Disease::all();
-		}
+    public function index(Request $request)
+    {
+        $query_params = $request->all();
 
-		
-		
-		return Inertia::render('Diseases/Index', [
-			'filters' => [
-				'search' => isset($query_params['search']) ? $query_params['search'] : ''
-			],
-			'diseases' => [
-				'data' => $diseases
-			]
-		]);
-	}
-	
+        $diseases = [];
+
+        if (isset($query_params['search'])) {
+            $diseases = DB::table('diseases')->where(
+                'name',
+                'LIKE',
+                '%' . $query_params['search'] . '%'
+            )->get();
+        } else {
+            $diseases = Disease::all();
+        }
+
+        return Inertia::render('Diseases/Index', [
+            'filters' => [
+                'search' => isset($query_params['search']) ? $query_params['search'] : ''
+            ],
+            'diseases' => [
+                'data' => $diseases
+            ]
+        ]);
+    }
+
     /**
-     * Return disease details for the edit page
+     * Show the form for creating a new disease resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return Inertia::render('Diseases/Create');
+    }
+
+    /**
+     * Store a newly created disease resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $data = $request->all();
+
+        $validationRules = [
+            'name' => 'required|string|max:55',
+            'description' => 'required|string|max:250'
+        ];
+
+        $validateData = Validator::make($data, $validationRules);
+
+        if ($validateData->fails()) {
+            return Redirect::route('diseases.create')->withErrors($validateData);
+        }
+
+        Disease::create($data);
+        return Redirect::route('diseases')->with('success', 'Disease added.');
+    }
+
+    /**
+     * Show the form for editing the specified disease resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-	public function edit(int $id){
-		
-		$disease = Disease::find($id);
-		
-		return Inertia::render('Diseases/Edit', [
-			'disease' => $disease
-		]);
-	}
-	
+    public function edit($id)
+    {
+        $disease = Disease::find($id);
+
+        return Inertia::render('Diseases/Edit', [
+            'disease' => $disease
+        ]);
+    }
+
     /**
-     * Update disease information details
+     * Update the specified disease resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-	public function update(Request $request, $id){
-		$disease = Disease::find($id);
-		
-		//@TODO: Add validation
-		
-		$disease->name = $request->name;
-		$disease->description = $request->description;
-		
-		$disease->save();
-		
-		return Redirect::back()->with('success', 'Disease updated.');
-		
-	}
-	
+    public function update(Request $request, $id)
+    {
+        $data = $request->all();
+
+        $validationRules = [
+            'name' => 'required|string|max:55',
+            'description' => 'required|string|max:250'
+        ];
+
+        $validateData = Validator::make($data, $validationRules);
+
+        if ($validateData->fails()) {
+            return Redirect::route('diseases.edit')->withErrors($validateData);
+        }
+
+        $disease = Disease::find($id);
+        $disease->update($data);
+
+        return Redirect::route('diseases')->with('success', 'Disease successfully updated.');
+    }
+
     /**
-     * Add disease information
+     * Remove the specified disease resource from storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-	public function add(Request $request){
-		$data = $request->all();
-		
-		//@TODO: Add validation
-		
-		$disease = Disease::create($data);
-		
-		return Redirect::route('diseases')->with('success', 'Disease added');
-	}
-	
-    /**
-     * Trash disease
-     *
-     * @param  Disease  $disease
-     * @return \Illuminate\Http\Response
-     */
-	public function destroy(Disease $disease){
+    public function destroy($id)
+    {
+        $disease = Disease::find($id);
         $disease->delete();
 
-        return Redirect::back()->with('success', 'Disease deleted.');
-	}
-	
+        return Redirect::route('diseases')->with('success', 'Disease successfully deleted.');
+    }
 }
