@@ -26,7 +26,15 @@
         "vue-loader": "^16.1.2"
     },
     "dependencies": {
+        "@headlessui/vue": "^1.2.0",
+        "@heroicons/vue": "^1.0.1",
+        "@popperjs/core": "^2.9.2",
         "chart.js": "2.9.4",
-        "vue-chartjs": "^3.5.1"
+        "dayjs": "^1.10.5",
+        "leaflet": "^1.7.1",
+        "litepie-datepicker": "^1.0.14",
+        "luxon": "^1.27.0",
+        "vue-chartjs": "^3.5.1",
+        "vue-tailwind-picker": "^2.0.0"
     }
 }

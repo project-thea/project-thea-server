@@ -251,7 +251,7 @@
     import JetDropdownLink from '@/Jetstream/DropdownLink'
     import JetNavLink from '@/Jetstream/NavLink'
     import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink'
-
+	
     export default {
         components: {
             JetApplicationMark,
@@ -259,7 +259,7 @@
             JetDropdown,
             JetDropdownLink,
             JetNavLink,
-            JetResponsiveNavLink,
+            JetResponsiveNavLink
         },
 
         data() {

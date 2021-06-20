@@ -4,7 +4,11 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Web\DashboardController;
-
+use App\Http\Controllers\Web\TrackingController;
+use App\Http\Controllers\Web\AnalysisController;
+use App\Http\Controllers\Web\DiseaseController;
+use App\Http\Controllers\Web\SubjectController;
+use App\Http\Controllers\Web\TestController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,22 +34,40 @@ Route::middleware(['auth:sanctum', 'verified'])
 	->get('/dashboard', [DashboardController::class, 'index'])
 	->name('dashboard');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/subjects', function () {
-    return Inertia::render('Subjects');
-})->name('subjects');
+Route::middleware(['auth:sanctum', 'verified'])
+	->get('/tests', [TestController::class, 'index'])
+	->name('tests');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/tests', function () {
-    return Inertia::render('Tests');
-})->name('tests');
+Route::middleware(['auth:sanctum', 'verified'])
+	->get('/subjects', [SubjectController::class, 'index'])
+	->name('subjects');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/diseases', function () {
-    return Inertia::render('Diseases');
-})->name('diseases');
+//Route::middleware(['auth:sanctum', 'verified'])
+//	->get('/diseases', [DiseaseController::class, 'index'])
+//	->name('diseases');
+//
+//Route::middleware(['auth:sanctum', 'verified'])
+//	->get('/diseases/edit/{id}', [DiseaseController::class, 'edit'])
+//	->name('diseases.edit	');
+	
+	
+Route::middleware(['auth:sanctum', 'verified'])
+	->get('/tracking', [TrackingController::class, 'index'])
+	->name('tracking');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/tracking', function () {
-    return Inertia::render('Tracking');
-})->name('tracking');
+Route::middleware(['auth:sanctum', 'verified'])
+	->get('/analysis', [AnalysisController::class, 'index'])
+	->name('analysis');
+	
+	
+Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+    Route::get('/diseases', [DiseaseController::class, 'index'])->name('diseases');
+    Route::get('/diseases/edit/{id}', [DiseaseController::class, 'edit'])->name('diseases.edit');
+	Route::post('/diseases/update/{id}', [DiseaseController::class, 'update'])->name('diseases.update');
+	Route::post('/diseases/add', [DiseaseController::class, 'add'])->name('diseases.add');
+	Route::get('/diseases/new', function(){
+		return Inertia::render('Diseases/Add');
+	})->name('diseases.new');
+	Route::delete('diseases/trash/{disease}', [DiseaseController::class, 'destroy'])->name('diseases.destroy');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/analysis', function () {
-    return Inertia::render('Analysis');
-})->name('analysis');
+});
