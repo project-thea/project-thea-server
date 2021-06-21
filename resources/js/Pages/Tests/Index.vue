@@ -14,8 +14,7 @@
 						<div class="flex justify-between">
 							<jet-input id="filter" type="text" class="block" required autofocus placeholder="Search..." v-on:update:modelValue="handleSearchChange" :modelValue="this.filters.search"/>
 							
-							
-							<jet-button class="float-left bg-grey-400">
+							<jet-button class="float-left bg-grey-400" @click="createTest()">
 								Add Test
 							</jet-button>
 						</div>
@@ -46,93 +45,48 @@
 						  </tr>
 						</thead>
 						<tbody>
-						  <tr
-							v-for="test in tests.data"
-							:key="test.id"
-							class="hover:bg-gray-100 focus-within:bg-gray-100"
-						  >
-							<td class="border-t">
-							  <inertia-link
-								class="px-6 py-4 flex items-center focus:text-indigo-500"
-								:href="'/tests/edit/' + test.id"
-							  >
-								{{ formatDate(test.created_at) }}
-								<icon
-								  v-if="test.deleted_at"
-								  name="trash"
-								  class="flex-shrink-0 w-3 h-3 fill-gray-500 ml-2"
-								/>
-							  </inertia-link>
-							</td>
-							<td class="border-t">
-							  <inertia-link
-								class="px-6 py-4 flex items-center focus:text-indigo-500"
-								:href="'/tests/edit/' + test.id"
-							  >
-								{{ test.id }}ESDVCFGRTUI34EUI
-								<icon
-								  v-if="test.deleted_at"
-								  name="trash"
-								  class="flex-shrink-0 w-3 h-3 fill-gray-500 ml-2"
-								/>
-							  </inertia-link>
-							</td>
-							<td class="border-t">
-							  <inertia-link
-								class="px-6 py-4 flex items-center"
-								:href="'/tests/edit/' + test.id"
-								tabindex="-1"
-								aria-label="Edit"
-							  >
-								{{ test.description }} COVID-19
-							  </inertia-link>
-							</td>
-							<td class="border-t">
-							  <inertia-link
-								class="px-6 py-4 flex items-center"
-								:href="'/tests/edit/' + test.id"
-								tabindex="-1"
-								aria-label="Edit"
-							  >
-								{{ test.description }} NEGATIVE
-							  </inertia-link>
-							</td>
-							<td class="border-t">
-							  <inertia-link
-								class="px-6 py-4 flex items-center"
-								:href="'/tests/trash/' + test.id"
-								tabindex="-1"
-								aria-label="Trash"
-								title="Trash"
-							  >
-								<icon
-								  name="trash"
-								  class="block w-4 h-4 fill-gray-500"
-								/>
-							  </inertia-link>
-							</td>
-							<td class="border-t w-px">
-							  <inertia-link
-								class="px-4 flex items-center"
-								:href="'/tests/edit/' + test.id"
-								tabindex="-1"
-								aria-label="Edit"
-							  >
-								<icon
-								  name="cheveron-right"
-								  class="block w-6 h-6 fill-gray-500"
-								/>
-							  </inertia-link>
-							</td>
-						  </tr>
-						  <tr v-if="tests.data.length === 0">
-							<td
-							  class="border-t px-6 py-4"
-							  colspan="4"
-							>
-							  No test found.
-							</td>
-						  </tr>
+						  	<tr v-for="test in tests.data" :key="test.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+								<td class="border-t">
+									<inertia-link :href="'/tests/' + test.id + '/edit'" class="px-6 py-4 flex items-center focus:text-indigo-500">
+										{{ formatDate(test.created_at) }}
+										<icon v-if="test.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-500 ml-2"/>
+									</inertia-link>
+								</td>
+								
+								<td class="border-t">
+									<inertia-link :href="'/tests/' + test.id + '/edit'" class="px-6 py-4 flex items-center focus:text-indigo-500">
+										{{ test.id }}ESDVCFGRTUI34EUI
+										<icon v-if="test.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-500 ml-2"/>
+									</inertia-link>
+								</td>
+
+								<td class="border-t">
+									<inertia-link :href="'/tests/' + test.id + '/edit'" tabindex="-1" aria-label="Edit" class="px-6 py-4 flex items-center focus:text-indigo-500">
+										{{ test.description }} COVID-19
+										<icon v-if="test.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-500 ml-2"/>
+									</inertia-link>
+								</td>
+								<td class="border-t">
+									<inertia-link :href="'/tests/' + test.id + '/edit'" tabindex="-1" aria-label="Edit" class="px-6 py-4 flex items-center">
+										{{ test.description }} NEGATIVE
+									</inertia-link>
+								</td>
+								<td class="border-t">
+									<inertia-link :href="'/tests/' + test.id + '/trash'" tabindex="-1" aria-label="Trash" title="Trash" class="px-6 py-4 flex items-center">
+										<icon name="trash" class="block w-4 h-4 fill-gray-500"/>
+									</inertia-link>
+								</td>
+								<td class="border-t w-px">
+									<inertia-link :href="'/tests/' + test.id + '/edit'" tabindex="-1" aria-label="Edit" class="px-4 flex items-center">
+										<icon name="cheveron-right" class="block w-6 h-6 fill-gray-500"/>	
+									</inertia-link>
+								</td>
+						  	</tr>
+							<tr v-if="tests.data.length === 0">
+								<td class="border-t px-6 py-4" colspan="4">
+									No test found.
+								</td>
+							</tr>
 						</tbody>
 					  </table>
 					</div>
@@ -158,39 +112,42 @@ import { Inertia } from '@inertiajs/inertia'
 import { DateTime } from 'luxon';
 
 export default {
-  metaInfo: { title: 'Tests' },
-  components: {
-    Icon,
-    Pagination,
-	AppLayout,
-	JetButton,
-	JetInput
-  },
-  //layout: Layout,
-  props: {
-    tests: {
-      type: Object,
-      required: true,
-    },
-    filters: {
-      type: Object,
-      required: true
-    },
-  },
-  data() {
-    return {
-	  search: 'dd' //this.filters.search
-    }
-  },
-  watch: {
-  },
-  methods: {
-    handleSearchChange: function (value) {
-		Inertia.get('/tests?search=' + value)
+	metaInfo: { title: 'Tests' },
+	components: {
+		Icon,
+		Pagination,
+		AppLayout,
+		JetButton,
+		JetInput
 	},
-	formatDate(dateTime){
-		return DateTime.fromISO(dateTime).toFormat('yyyy-LL-dd HH:mm');
-	}
-  },
+	//layout: Layout,
+	props: {
+		tests: {
+			type: Object,
+			required: true,
+		},
+		filters: {
+			type: Object,
+			required: true
+		},
+	},
+	data() {
+		return {
+			search: 'dd' //this.filters.search
+		}
+	},
+	watch: {
+	},
+	methods: {
+		handleSearchChange: function (value) {
+			Inertia.get('/tests?search=' + value)
+		},
+		formatDate(dateTime) {
+			return DateTime.fromISO(dateTime).toFormat('yyyy-LL-dd HH:mm');
+		}, 
+		createTest() {
+			Inertia.get('/tests/create')
+		},
+	},
 }
 </script>

@@ -23,7 +23,6 @@ class SubjectFactory extends Factory
     {
         return [
             'first_name' => $this->faker->name(),
-            'middle_name' => $this->faker->name(),
             'last_name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'nationality' => $this->faker->country,

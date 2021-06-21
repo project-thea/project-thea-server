@@ -29,9 +29,9 @@
 							/>
 						</div>
 						
-							<button class="bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2" @click="">
-							  Show analysis
-							</button>
+						<button class="bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
+							Show analysis
+						</button>
 							
 					</div>
 					<!-- Filtering -->
@@ -48,7 +48,6 @@
 
 <script>
     import AppLayout from '@/Layouts/AppLayout'
-	import SelectCombo from '@/Jetstream/SelectCombo'
 	import RadioChart from '@/Jetstream/RadioChart'
 	import LitepieDatepicker from 'litepie-datepicker'
 	import { ref } from 'vue';
@@ -59,7 +58,7 @@
 			RadioChart,
 			LitepieDatepicker 
         },
-		data(){
+		data() {
 			return {
 				checkin: '',
 			}   
@@ -68,14 +67,14 @@
 			const myRef = ref(null);
 			const dateValue = ref([]);
 			const formatter = ref({
-			  date: 'DD MMM YYYY',
-			  month: 'MMM'
+				date: 'DD MMM YYYY',
+				month: 'MMM'
 			});
 
 			return {
-			  myRef,
-			  dateValue,
-			  formatter
+				myRef,
+				dateValue,
+				formatter
 			};
 		}
     }

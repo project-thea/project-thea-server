@@ -79,7 +79,6 @@ class SampleTrackingTest extends TestCase
 
         Subject::factory()->create([
             'first_name' => 'James',
-            'middle_name' => 'Joshua',
             'last_name' => 'Jakuma',
             'email' => 'james@gmail.com',
             'nationality' => 'ugandan',
@@ -99,7 +98,6 @@ class SampleTrackingTest extends TestCase
 
         Subject::factory()->create([
             'first_name' => 'Joseph',
-            'middle_name' => 'Janan',
             'last_name' => 'Hobbs',
             'email' => 'hobbs@gmail.com',
             'nationality' => 'ugandan',
@@ -119,7 +117,6 @@ class SampleTrackingTest extends TestCase
 
         Subject::factory()->create([
             'first_name' => 'Sheilla',
-            'middle_name' => 'Becky',
             'last_name' => 'Mukisa',
             'email' => 'sheny@gmail.com',
             'nationality' => 'ugandan',
