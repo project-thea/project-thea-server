@@ -72,7 +72,7 @@
 									</inertia-link>
 								</td>
 								<td class="border-t">
-									<inertia-link :href="'/tests/' + test.id + '/trash'" tabindex="-1" aria-label="Trash" title="Trash" class="px-6 py-4 flex items-center">
+									<inertia-link @click="deleteTest(test.id)" :href="'/tests/' + test.id + '/trash'" tabindex="-1" aria-label="Trash" title="Trash" class="px-6 py-4 flex items-center">
 										<icon name="trash" class="block w-4 h-4 fill-gray-500"/>
 									</inertia-link>
 								</td>
@@ -148,6 +148,9 @@ export default {
 		createTest() {
 			Inertia.get('/tests/create')
 		},
+		deleteTest(id) {
+			Inertia.delete('/tests/' + id + '/trash');
+		}
 	},
 }
 </script>

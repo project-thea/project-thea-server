@@ -43,7 +43,7 @@
 										</inertia-link>
 									</td>
 									<td class="border-t">
-										<inertia-link :href="'/diseases/' + disease.id + '/trash'" method="delete" tabindex="-1" aria-label="Trash"
+										<inertia-link @click="deleteDisease(disease.id)" :href="'/diseases/' + disease.id + '/trash'" method="delete" tabindex="-1" aria-label="Trash"
 											title="Trash" class="px-6 py-4 flex items-center">
 											<icon name="trash" class="block w-4 h-4 fill-gray-500"/>	
 										</inertia-link>
@@ -116,12 +116,15 @@ export default {
 		handleSearchChange: function (value) {
 			Inertia.get('/diseases?search=' + value)
 		},
-		createDisease(){
+		createDisease() {
 			Inertia.get('/diseases/create')
 		},
-		trackDisease(id){
+		trackDisease(id) {
 			Inertia.delete('/diseases/' + id)
 		},
+		deleteDisease(id) {
+			Inertia.delete('/diseases/' + id + '/trash');
+		}
 	},
 }
 </script>

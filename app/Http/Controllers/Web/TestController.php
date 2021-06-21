@@ -134,6 +134,7 @@ class TestController extends Controller
     public function destroy($id)
     {
         $test = Test::find($id);
+        $test->sample_test_trackings()->delete();
         $test->delete();
 
         return Redirect::route('tests')->with('success', 'Test successfully deleted.');
