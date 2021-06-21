@@ -96,7 +96,7 @@
 										</inertia-link>
 									</td>
 									<td class="border-t">
-										<inertia-link
+										<inertia-link @click="deleteSubject(subject.id)"
 											class="px-6 py-4 flex items-center"
 											:href="'/subjects/' + subject.id + '/trash'"
 											tabindex="-1"
@@ -204,6 +204,9 @@ export default {
 		createSubject() {
 			Inertia.get('/subjects/create')
 		},
+		deleteSubject(id) {
+			Inertia.delete('/subjects/' + id + '/trash');
+		}
 	},
 }
 </script>
