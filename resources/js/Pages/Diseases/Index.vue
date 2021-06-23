@@ -65,7 +65,7 @@
 					</div>
 				
 					<!--
-					<pagination :meta="organizations.meta" />
+					<pagination :meta="diseases.meta" />
 					-->
 
                 </div>
@@ -94,12 +94,12 @@
 							<tbody>
 								<tr v-for="disease in trashedDiseases.data" :key="disease.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
 									<td class="border-t">
-										<inertia-link :href="'/diseases/' + disease.id + '/edit'" class="px-6 py-4 flex items-center focus:text-indigo-500">
+										<inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500">
 											{{ disease.name }}
 										</inertia-link>
 									</td>
 									<td class="border-t">
-										<inertia-link :href="'/diseases/' + disease.id + '/edit'" tabindex="-1" aria-label="Edit"
+										<inertia-link tabindex="-1" aria-label="Edit"
 											class="px-6 py-4 flex items-center truncate">
 											{{ disease.description }}
 										</inertia-link>
@@ -108,12 +108,6 @@
 										<inertia-link @click="restoreDisease(disease.id)" :href="'/diseases/' + disease.id + '/restore'" method="restore" tabindex="-1" aria-label="Restore"
 											title="Restore" class="px-6 py-4 flex items-center">
 											<icon name="restore" class="block w-4 h-4 fill-gray-500"/>	
-										</inertia-link>
-									</td>
-									<td class="border-t w-px">
-										<inertia-link :href="'/diseases/' + disease.id + '/edit'" title="Edit" tabindex="-1"
-											aria-label="Edit" class="px-4 flex items-center"> 
-											<icon name="cheveron-right" class="block w-6 h-6 fill-gray-500"/>
 										</inertia-link>
 									</td>
 								</tr>

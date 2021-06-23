@@ -21,74 +21,74 @@
 					</div>
 				
 					<div class="bg-white rounded shadow overflow-x-auto">
-					  <table class="w-full whitespace-nowrap">
-						<thead>
-						  <tr class="text-left font-bold">
-							<th class="px-6 pt-6 pb-4">
-							  Test Date 
-							</th>
-							<th class="px-6 pt-6 pb-4">
-							  User ID
-							</th>
-							<th class="px-6 pt-6 pb-4">
-							  Disease
-							</th>
-							<th class="px-3 pt-3 pb-2">
-							  Status
-							</th>
-							<th
-							  class="px-3 pt-3 pb-2"
-							  colspan="2"
-							>
-							  Actions
-							</th>
-						  </tr>
-						</thead>
-						<tbody>
-						  	<tr v-for="test in tests.data" :key="test.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
-								<td class="border-t">
-									<inertia-link :href="'/tests/' + test.id + '/edit'" class="px-6 py-4 flex items-center focus:text-indigo-500">
-										{{ formatDate(test.created_at) }}
-										<icon v-if="test.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-500 ml-2"/>
-									</inertia-link>
-								</td>
-								
-								<td class="border-t">
-									<inertia-link :href="'/tests/' + test.id + '/edit'" class="px-6 py-4 flex items-center focus:text-indigo-500">
-										{{ test.id }}ESDVCFGRTUI34EUI
-										<icon v-if="test.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-500 ml-2"/>
-									</inertia-link>
-								</td>
+						<table class="w-full whitespace-nowrap">
+							<thead>
+								<tr class="text-left font-bold">
+									<th class="px-6 pt-6 pb-4">
+									Test Date 
+									</th>
+									<th class="px-6 pt-6 pb-4">
+									User ID
+									</th>
+									<th class="px-6 pt-6 pb-4">
+									Disease
+									</th>
+									<th class="px-3 pt-3 pb-2">
+										Status
+									</th>
+									<th
+									class="px-3 pt-3 pb-2"
+									colspan="2"
+									>
+									Actions
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="test in tests.data" :key="test.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+									<td class="border-t">
+										<inertia-link :href="'/tests/' + test.id + '/edit'" class="px-6 py-4 flex items-center focus:text-indigo-500">
+											{{ formatDate(test.created_at) }}
+											<icon v-if="test.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-500 ml-2"/>
+										</inertia-link>
+									</td>
+									
+									<td class="border-t">
+										<inertia-link :href="'/tests/' + test.id + '/edit'" class="px-6 py-4 flex items-center focus:text-indigo-500">
+											{{ test.id }}ESDVCFGRTUI34EUI
+											<icon v-if="test.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-500 ml-2"/>
+										</inertia-link>
+									</td>
 
-								<td class="border-t">
-									<inertia-link :href="'/tests/' + test.id + '/edit'" tabindex="-1" aria-label="Edit" class="px-6 py-4 flex items-center focus:text-indigo-500">
-										{{ test.description }} COVID-19
-										<icon v-if="test.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-500 ml-2"/>
-									</inertia-link>
-								</td>
-								<td class="border-t">
-									<inertia-link :href="'/tests/' + test.id + '/edit'" tabindex="-1" aria-label="Edit" class="px-6 py-4 flex items-center">
-										{{ test.description }} NEGATIVE
-									</inertia-link>
-								</td>
-								<td class="border-t">
-									<inertia-link @click="deleteTest(test.id)" :href="'/tests/' + test.id + '/trash'" tabindex="-1" aria-label="Trash" title="Trash" class="px-6 py-4 flex items-center">
-										<icon name="trash" class="block w-4 h-4 fill-gray-500"/>
-									</inertia-link>
-								</td>
-								<td class="border-t w-px">
-									<inertia-link :href="'/tests/' + test.id + '/edit'" tabindex="-1" aria-label="Edit" class="px-4 flex items-center">
-										<icon name="cheveron-right" class="block w-6 h-6 fill-gray-500"/>	
-									</inertia-link>
-								</td>
-						  	</tr>
-							<tr v-if="tests.data.length === 0">
-								<td class="border-t px-6 py-4" colspan="4">
-									No test found.
-								</td>
-							</tr>
-						</tbody>
-					  </table>
+									<td class="border-t">
+										<inertia-link :href="'/tests/' + test.id + '/edit'" tabindex="-1" aria-label="Edit" class="px-6 py-4 flex items-center focus:text-indigo-500">
+											{{ test.description }} COVID-19
+											<icon v-if="test.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-500 ml-2"/>
+										</inertia-link>
+									</td>
+									<td class="border-t">
+										<inertia-link :href="'/tests/' + test.id + '/edit'" tabindex="-1" aria-label="Edit" class="px-6 py-4 flex items-center">
+											{{ test.description }} NEGATIVE
+										</inertia-link>
+									</td>
+									<td class="border-t">
+										<inertia-link @click="deleteTest(test.id)" :href="'/tests/' + test.id + '/trash'" tabindex="-1" aria-label="Trash" title="Trash" class="px-6 py-4 flex items-center">
+											<icon name="trash" class="block w-4 h-4 fill-gray-500"/>
+										</inertia-link>
+									</td>
+									<td class="border-t w-px">
+										<inertia-link :href="'/tests/' + test.id + '/edit'" tabindex="-1" aria-label="Edit" class="px-4 flex items-center">
+											<icon name="cheveron-right" class="block w-6 h-6 fill-gray-500"/>	
+										</inertia-link>
+									</td>
+								</tr>
+								<tr v-if="tests.data.length === 0">
+									<td class="border-t px-6 py-4" colspan="4">
+										No test found.
+									</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				
 					<!--
@@ -137,35 +137,30 @@
 						<tbody>
 						  	<tr v-for="test in trashedTests.data" :key="test.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
 								<td class="border-t">
-									<inertia-link :href="'/tests/' + test.id + '/edit'" class="px-6 py-4 flex items-center focus:text-indigo-500">
+									<inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500">
 										{{ formatDate(test.created_at) }}
 									</inertia-link>
 								</td>
 								
 								<td class="border-t">
-									<inertia-link :href="'/tests/' + test.id + '/edit'" class="px-6 py-4 flex items-center focus:text-indigo-500">
+									<inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500">
 										{{ test.id }}ESDVCFGRTUI34EUI
 									</inertia-link>
 								</td>
 
 								<td class="border-t">
-									<inertia-link :href="'/tests/' + test.id + '/edit'" tabindex="-1" aria-label="Edit" class="px-6 py-4 flex items-center focus:text-indigo-500">
+									<inertia-link tabindex="-1" aria-label="Edit" class="px-6 py-4 flex items-center focus:text-indigo-500">
 										{{ test.description }}COVID-19
 									</inertia-link>
 								</td>
 								<td class="border-t">
-									<inertia-link :href="'/tests/' + test.id + '/edit'" tabindex="-1" aria-label="Edit" class="px-6 py-4 flex items-center">
+									<inertia-link tabindex="-1" aria-label="Edit" class="px-6 py-4 flex items-center">
 										{{ test.description }}NEGATIVE
 									</inertia-link>
 								</td>
 								<td class="border-t">
 									<inertia-link @click="restoreTest(test.id)" :href="'/tests/' + test.id + '/restore'" tabindex="-1" aria-label="Restore" title="Restore" class="px-6 py-4 flex items-center">
 										<icon name="restore" class="block w-4 h-4 fill-gray-500"/>
-									</inertia-link>
-								</td>
-								<td class="border-t w-px">
-									<inertia-link :href="'/tests/' + test.id + '/edit'" tabindex="-1" aria-label="Edit" class="px-4 flex items-center">
-										<icon name="cheveron-right" class="block w-6 h-6 fill-gray-500"/>	
 									</inertia-link>
 								</td>
 						  	</tr>

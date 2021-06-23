@@ -196,41 +196,31 @@
 									<td class="border-t">
 										<inertia-link
 											class="px-6 py-4 flex items-center focus:text-indigo-500"
-											:href="'/subjects/' + subject.id + '/edit'"
 										>
 											{{ subject.first_name }} {{ subject.last_name }}
 										</inertia-link>
 									</td>
 									<td class="border-t">
 										<inertia-link
-											class="px-6 py-4 flex items-center focus:text-indigo-500"
-											:href="'/subjects/' + subject.id + '/edit'"
-										>
+											class="px-6 py-4 flex items-center focus:text-indigo-500">
 											{{ subject.unique_id }}
 										</inertia-link>
 									</td>
 									<td class="border-t">
 										<inertia-link
-											class="px-6 py-4 flex items-center focus:text-indigo-500"
-											:href="'/subjects/edit/' + subject.id"
-										>
+											class="px-6 py-4 flex items-center focus:text-indigo-500">
 											{{ subject.phone }}
 										</inertia-link>
 									</td>
 									<td class="border-t">
 										<inertia-link
-											class="px-6 py-4 flex items-center"
-											:href="'/subjects/' + subject.id + '/edit'"
-											tabindex="-1"
-											aria-label="Edit"
-										>
+											class="px-6 py-4 flex items-center" tabindex="-1" aria-label="Edit">
 											{{ formatDate(subject.created_at) }}
 										</inertia-link>
 									</td>
 									<td class="border-t">
 										<inertia-link @click="restoreSubject(subject.id)"
 											class="px-6 py-4 flex items-center"
-											:href="'/subjects/' + subject.id + '/restore'"
 											tabindex="-1"
 											aria-label="Restore"
 											title="Restore"
@@ -238,20 +228,6 @@
 											<icon
 											name="restore"
 											class="block w-4 h-4 fill-gray-500"
-											/>
-										</inertia-link>
-									</td>
-									
-									<td class="border-t w-px">
-										<inertia-link
-											class="px-4 flex items-center"
-											:href="'/subjects/' + subject.id + '/edit'"
-											tabindex="-1"
-											aria-label="Edit"
-										>
-											<icon
-											name="cheveron-right"
-											class="block w-6 h-6 fill-gray-500"
 											/>
 										</inertia-link>
 									</td>
