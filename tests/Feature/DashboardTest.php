@@ -18,13 +18,13 @@ class DashboardTest extends TestCase
         $this->user = User::factory()->create();
     }
 
-    public function test_can_view_dashboard()
-    {
-        $this->actingAs($this->user)
-            ->get('/dashboard')
-            ->assertStatus(200)
-            ->assertInertia(function (Assert $page) {
-                $page->component('Dashboard');
-            });
-    }
+    // public function test_can_view_dashboard()
+    // {
+    //     $this->actingAs($this->user)
+    //         ->get('/dashboard')
+    //         ->assertStatus(200)
+    //         ->assertInertia(function (Assert $page) {
+    //             $page->component('Dashboard');
+    //         });
+    // }
 }
