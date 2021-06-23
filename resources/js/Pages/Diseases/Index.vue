@@ -71,6 +71,68 @@
                 </div>
             </div>
         </div>
+
+		<!-- Trashed Diseases -->
+		<div class="py-12">	
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
+					<div class="mb-4 w-full ">
+						<h2 class="font-semibold text-xl text-gray-800 leading-tight">
+							Disease Trash
+						</h2>
+					</div>
+				
+					<div class="bg-white rounded shadow overflow-x-auto">
+						<table class="w-full whitespace-nowrap">
+							<thead>
+								<tr class="text-left font-bold">
+									<th class="px-6 pt-6 pb-4">Name</th>
+									<th class="px-6 pt-6 pb-4">Description</th>
+									<th class="px-6 pt-6 pb-4" colspan="2">Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="disease in trashedDiseases.data" :key="disease.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+									<td class="border-t">
+										<inertia-link :href="'/diseases/' + disease.id + '/edit'" class="px-6 py-4 flex items-center focus:text-indigo-500">
+											{{ disease.name }}
+										</inertia-link>
+									</td>
+									<td class="border-t">
+										<inertia-link :href="'/diseases/' + disease.id + '/edit'" tabindex="-1" aria-label="Edit"
+											class="px-6 py-4 flex items-center truncate">
+											{{ disease.description }}
+										</inertia-link>
+									</td>
+									<td class="border-t">
+										<inertia-link @click="restoreDisease(disease.id)" :href="'/diseases/' + disease.id + '/restore'" method="restore" tabindex="-1" aria-label="Restore"
+											title="Restore" class="px-6 py-4 flex items-center">
+											<icon name="restore" class="block w-4 h-4 fill-gray-500"/>	
+										</inertia-link>
+									</td>
+									<td class="border-t w-px">
+										<inertia-link :href="'/diseases/' + disease.id + '/edit'" title="Edit" tabindex="-1"
+											aria-label="Edit" class="px-4 flex items-center"> 
+											<icon name="cheveron-right" class="block w-6 h-6 fill-gray-500"/>
+										</inertia-link>
+									</td>
+								</tr>
+								<tr v-if="trashedDiseases.data.length === 0">
+									<td class="border-t px-6 py-4" colspan="4">
+										No disease trash found.
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				
+					<!--
+					<pagination :meta="trashedDiseases.meta" />
+					-->
+
+                </div>
+            </div>
+        </div>
     </app-layout>
 </template>
 
@@ -104,6 +166,10 @@ export default {
 			type: Object,
 			required: true
 		},
+		trashedDiseases: {
+			type: Object,
+			required: true
+		}
 	},
 	data() {
 		return {
@@ -124,6 +190,9 @@ export default {
 		},
 		deleteDisease(id) {
 			Inertia.delete('/diseases/' + id + '/trash');
+		},
+		restoreDisease(id) {
+			Inertia.put('/diseases/' + id + '/restore');
 		}
 	},
 }

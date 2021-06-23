@@ -22,6 +22,7 @@ class DiseaseController extends Controller
         $query_params = $request->all();
 
         $diseases = [];
+        $trashedDiseases = Disease::onlyTrashed()->latest()->get();
 
         if (isset($query_params['search'])) {
             $diseases = DB::table('diseases')->where(
@@ -39,6 +40,9 @@ class DiseaseController extends Controller
             ],
             'diseases' => [
                 'data' => $diseases
+            ],
+            'trashedDiseases' => [
+                'data' => $trashedDiseases
             ]
         ]);
     }
@@ -134,5 +138,18 @@ class DiseaseController extends Controller
         $disease->delete();
 
         return Redirect::route('diseases')->with('success', 'Disease successfully deleted.');
+    }
+
+    /**
+     * Restore the specified disease resource from trash.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        $disease = Disease::withTrashed()->find($id);
+        $disease->restore();
+        return Redirect::route('diseases')->with('success', 'Disease successfully restored.');
     }
 }
