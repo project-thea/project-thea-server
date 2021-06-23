@@ -11,6 +11,15 @@
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 20 20"
   ><path d="M6 4H5a1 1 0 1 1 0-2h11V1a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V5a1 1 0 0 0-1-1h-7v8l-2-2-2 2V4z" /></svg>
+  <svg v-else-if="name === 'restore'"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 64 64"
+    ><circle data-name="layer2" cx="33" cy="32" r="30" fill="none" stroke="#202020" stroke-miterlimit="10"
+    stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+    </circle><path d="M32.998 49.998v-35M44 28L33 15 22 28" stroke="#202020" stroke-miterlimit="10"
+      stroke-width="2" stroke-linejoin="round"
+      stroke-linecap="round" />  
+  </svg>
   <svg
     v-else-if="name === 'cheveron-down'"
     xmlns="http://www.w3.org/2000/svg"
