@@ -47,6 +47,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 	Route::get('/subjects/{subject}/edit', [SubjectController::class, 'edit'])->name('subjects.edit');
 	Route::patch('/subjects/{subject}', [SubjectController::class, 'update'])->name('subjects.update');
 	Route::delete('/subjects/{subject}/trash', [SubjectController::class, 'destroy'])->name('subjects.destroy');
+	Route::put('/subjects/{subject}/restore', [SubjectController::class, 'restore'])->name('subjects.restore');
 
 	// Diseases
 	Route::get('/diseases', [DiseaseController::class, 'index'])->name('diseases');
@@ -55,6 +56,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 	Route::get('/diseases/{disease}/edit', [DiseaseController::class, 'edit'])->name('diseases.edit');
 	Route::patch('/diseases/{disease}', [DiseaseController::class, 'update'])->name('diseases.update');
 	Route::delete('/diseases/{disease}/trash', [DiseaseController::class, 'destroy'])->name('diseases.destroy');
+	Route::put('/diseases/{disease}/restore', [DiseaseController::class, 'restore'])->name('diseases.restore');
 
 	// Tests
 	Route::get('/tests', [TestController::class, 'index'])->name('tests');
@@ -63,4 +65,6 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 	Route::get('/tests/{test}/edit', [TestController::class, 'edit'])->name('tests.edit');
 	Route::patch('/tests/{test}', [TestController::class, 'update'])->name('tests.update');
 	Route::delete('/tests/{test}/trash', [TestController::class, 'destroy'])->name('tests.destroy');
+	Route::put('/tests/{test}/restore', [TestController::class, 'restore'])->name('tests.restore');
+
 });
