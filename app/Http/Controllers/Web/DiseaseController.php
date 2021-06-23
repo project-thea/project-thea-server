@@ -134,7 +134,6 @@ class DiseaseController extends Controller
     public function destroy($id)
     {
         $disease = Disease::find($id);
-        $disease->tests()->delete();
         $disease->delete();
 
         return Redirect::route('diseases')->with('success', 'Disease successfully deleted.');

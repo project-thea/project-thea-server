@@ -150,8 +150,6 @@ class SubjectController extends Controller
     public function destroy($id)
     {
         $subject = Subject::find($id);
-        $subject->tests()->delete();
-        $subject->subject_trackings()->delete();
         $subject->delete();
 
         return Redirect::route('subjects')->with('success', 'Subject successfully deleted.');
