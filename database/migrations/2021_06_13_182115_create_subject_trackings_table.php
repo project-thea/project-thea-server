@@ -15,18 +15,16 @@ class CreateSubjectTrackingsTable extends Migration
     {
         Schema::create('subject_trackings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('subject_id')->constrained('subjects');
-            $table->string('latitude');
-            $table->string('longitude');
-            $table->uuid('unique_id');
+            $table->foreignId('subject_id')->nullable()->constrained('subjects');
+            $table->string('latitude')->index();
+            $table->string('longitude')->index();
+            $table->uuid('unique_id')->index();
             $table->dateTime('date_time');
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();
-
-            $table->index('latitude');
-            $table->index('longitude');
-            $table->index('unique_id');
+            
+            $table->index('subject_id');
         });
     }
 
