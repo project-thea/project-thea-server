@@ -42,11 +42,11 @@ jobs:
     steps:
     - name: Deploy to demo server
       env:
-        PRIVATE_SECRET: ${{ secrets.DEMO_SERVER_SSH_PRIVATE_KEY }}
-        DEMO_SERVER: ${{ secrets.DEMO_SERVER_SSH_PRIVATE_KEY }}
+        PRIVATE_KEY: ${{ secrets.DEMO_SERVER_SSH_PRIVATE_KEY }}
+        DEMO_SERVER: ${{ secrets.DEMO_SERVER_SSH_HOST }}
       run: |
         mkdir -p ~/.ssh/
-        echo ${PRIVATE_SECRET} > ../deploy.key
+        echo ${PRIVATE_KEY} > ../deploy.key
         sudo chmod 600 ../deploy.key
         ssh-keyscan -H ${DEMO_SERVER} > ~/.ssh/known_hosts
         ssh -i ${{ github.workspace }}/../deploy.key ${DEMO_SERVER} /home/bodastage/project-thea-demo/project-thea-configs/deploy/deploy_demo.sh
