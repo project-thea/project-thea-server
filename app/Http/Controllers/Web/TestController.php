@@ -20,27 +20,31 @@ class TestController extends Controller
     public function index(Request $request)
     {
         $query_params = $request->all();
+        $trashedTests = Test::onlyTrashed()->latest()->get();
 
-		$tests = [];
+        $tests = [];
 
-		if (isset($query_params['search'])) {
-			$tests = DB::table('tests')->where(
-				'status',
-				'LIKE',
-				'%' . $query_params['search'] . '%'
-			)->get();
-		} else {
-			$tests = Test::all();
-		}
+        if (isset($query_params['search'])) {
+            $tests = DB::table('tests')->where(
+                'status',
+                'LIKE',
+                '%' . $query_params['search'] . '%'
+            )->get();
+        } else {
+            $tests = Test::all();
+        }
 
-		return Inertia::render('Tests/Index', [
-			'filters' => [
-				'search' => isset($query_params['search']) ? $query_params['search'] : ''
-			],
-			'tests' => [
-				'data' => $tests
-			]
-		]);
+        return Inertia::render('Tests/Index', [
+            'filters' => [
+                'search' => isset($query_params['search']) ? $query_params['search'] : ''
+            ],
+            'tests' => [
+                'data' => $tests
+            ],
+            'trashedTests' => [
+                'data' => $trashedTests
+            ]
+        ]);
     }
 
     /**
@@ -134,9 +138,21 @@ class TestController extends Controller
     public function destroy($id)
     {
         $test = Test::find($id);
-        $test->sample_test_trackings()->delete();
         $test->delete();
 
         return Redirect::route('tests')->with('success', 'Test successfully deleted.');
+    }
+
+    /**
+     * Restore the specified test resource from trash.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        $test = Test::withTrashed()->find($id);
+        $test->restore();
+        return Redirect::route('tests')->with('success', 'Test successfully restored.');
     }
 }

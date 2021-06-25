@@ -334,6 +334,7 @@ class CheckupTest extends TestCase
         ]);
 
         $payload = [
+            'id' => 1,
             'disease_id' => 1,
             'subject_id' => 1,
             'test_date' => '2020-08-12',
@@ -395,6 +396,7 @@ class CheckupTest extends TestCase
         ]);
 
         $test = Test::factory()->create([
+            'id' => 1,
             'disease_id' => 1,
             'subject_id' => 1,
             'test_date' => '2020-08-12',

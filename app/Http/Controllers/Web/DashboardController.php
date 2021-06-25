@@ -46,7 +46,7 @@ class DashboardController extends Controller
 		";
 
 		$summary  = DB::select($summary_query);
-
+		
 		return Inertia::render('Dashboard', [
 			'num_subjects' => Subject::count(),
 			'num_tests' => Test::count(),

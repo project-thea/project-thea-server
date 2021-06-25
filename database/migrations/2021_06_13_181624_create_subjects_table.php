@@ -15,12 +15,12 @@ class CreateSubjectsTable extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name', 55);
-            $table->string('last_name', 55);
+            $table->string('first_name', 55)->index();
+            $table->string('last_name', 55)->index();
             $table->string('email')->unique();
             $table->string('nationality', 55);
             $table->date('date_of_birth');
-            $table->string('phone', 20);
+            $table->string('phone', 20)->index();
             $table->string('next_of_kin', 55);
             $table->string('next_of_kin_phone', 20);
             $table->uuid('unique_id')->nullable();
@@ -31,10 +31,6 @@ class CreateSubjectsTable extends Migration
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();
-
-            $table->index('first_name');
-            $table->index('last_name');
-            $table->index('phone');
         });
     }
 

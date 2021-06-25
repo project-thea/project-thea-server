@@ -15,17 +15,13 @@ class CreateSampleTrackingsTable extends Migration
     {
         Schema::create('sample_trackings', function (Blueprint $table) {
             $table->id();
-            $table->string('latitude');
-            $table->string('longitude');
-            $table->uuid('unique_id');
+            $table->string('latitude')->index();
+            $table->string('longitude')->index();
+            $table->uuid('unique_id')->index();
             $table->dateTime('date_time');
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();
-
-            $table->index('latitude');
-            $table->index('longitude');
-            $table->index('unique_id');
         });
     }
 

@@ -22,6 +22,7 @@ class SubjectController extends Controller
         $query_params = $request->all();
 
         $subjects = [];
+        $trashedSubjects = Subject::onlyTrashed()->latest()->get();
 
         if (isset($query_params['search'])) {
             $subjects = DB::table('subjects')->where(
@@ -39,6 +40,9 @@ class SubjectController extends Controller
             ],
             'subjects' => [
                 'data' => $subjects
+            ],
+            'trashedSubjects' => [
+                'data' => $trashedSubjects
             ]
         ]);
     }
@@ -146,10 +150,21 @@ class SubjectController extends Controller
     public function destroy($id)
     {
         $subject = Subject::find($id);
-        $subject->tests()->delete();
-        $subject->subject_trackings()->delete();
         $subject->delete();
 
         return Redirect::route('subjects')->with('success', 'Subject successfully deleted.');
+    }
+
+    /**
+     * Restore the specified subject resource from trash.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        $subject = Subject::withTrashed()->find($id);
+        $subject->restore();
+        return Redirect::route('subjects')->with('success', 'Subject successfully restored.');
     }
 }
