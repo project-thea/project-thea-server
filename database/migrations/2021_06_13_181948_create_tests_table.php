@@ -15,8 +15,8 @@ class CreateTestsTable extends Migration
     {
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('disease_id')->nullable()->constrained('diseases'); // foreign key column 'disease_id'
-            $table->foreignId('subject_id')->nullable()->constrained('subjects'); // foreign key column 'subject_id'
+            $table->foreignId('disease_id')->constrained('diseases')->onDelete('cascade');
+            $table->foreignId('subject_id')->constrained('subjects')->onDelete('cascade');
             $table->date('test_date');
             $table->string('status', 9); //unknown, negative, positive
             $table->date('status_update_date')->nullable(); //At the start of making the test

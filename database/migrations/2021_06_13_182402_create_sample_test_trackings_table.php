@@ -15,8 +15,8 @@ class CreateSampleTestTrackingsTable extends Migration
     {
         Schema::create('sample_test_trackings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sample_tracking_id')->nullable()->constrained('sample_trackings');
-            $table->foreignId('test_id')->nullable()->constrained('tests');
+            $table->foreignId('sample_tracking_id')->constrained('sample_trackings')->onDelete('cascade');
+            $table->foreignId('test_id')->constrained('tests')->onDelete('cascade');
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();

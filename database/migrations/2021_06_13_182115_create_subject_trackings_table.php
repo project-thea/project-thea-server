@@ -15,7 +15,7 @@ class CreateSubjectTrackingsTable extends Migration
     {
         Schema::create('subject_trackings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('subject_id')->nullable()->constrained('subjects');
+            $table->foreignId('subject_id')->constrained('subjects')->onDelete('cascade');
             $table->string('latitude')->index();
             $table->string('longitude')->index();
             $table->uuid('unique_id')->index();
