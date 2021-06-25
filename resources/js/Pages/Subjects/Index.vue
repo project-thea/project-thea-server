@@ -220,6 +220,7 @@
 									</td>
 									<td class="border-t">
 										<inertia-link @click="restoreSubject(subject.id)"
+											:href="'/subjects/' + subject.id + '/restore'"
 											class="px-6 py-4 flex items-center"
 											tabindex="-1"
 											aria-label="Restore"
