@@ -10,7 +10,7 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                        <jet-button v-if="$page.props.user.can.isAdmin" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-8" @click="createUser()">
+                        <jet-button v-if="$page.props.loggedInUser.can.isAdmin" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-8" @click="createUser()">
                             Add User
                         </jet-button>
                         
@@ -52,8 +52,13 @@
                                             </span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <a @click="editUser(user.id)" :href="'/users/manage/' + user.id + '/edit'" class="mr-2 text-blue-600 hover:text-blue-900">Edit</a>
-                                            <a @click="deleteUser(user.id)" :href="'/users/manage/' + user.id + '/trash'" v-if="$page.props.user.can.isAdmin" class="text-red-600 hover:text-red-900">Delete</a>
+                                            <inertia-link @click="editUser(user.id)" :href="'/users/manage/' + user.id + '/edit'" v-if="$page.props.loggedInUser.can.isAdmin" class="mr-2 text-blue-600 hover:text-blue-900">
+                                                Edit
+                                            </inertia-link>
+                                            
+                                            <inertia-link @click="deleteUser(user.id)" :href="'/users/manage/' + user.id + '/trash'" v-if="$page.props.loggedInUser.can.isAdmin" class="text-red-600 hover:text-red-900">
+                                                Delete
+                                            </inertia-link>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -62,7 +67,7 @@
                     </div>
 
                     <!-- User Trash -->
-                    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8" v-if="$page.props.user.can.isAdmin">
+                    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8" v-if="$page.props.loggedInUser.can.isAdmin">
                         <div class="mb-4 w-full ">
                             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                                 User Trash
@@ -107,7 +112,9 @@
                                             </span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <a @click="restoreUser(user.id)" :href="'/users/manage/' + user.id + '/restore'" class="text-green-600 hover:text-green-900">Restore</a>
+                                            <inertia-link @click="restoreUser(user.id)" :href="'/users/manage/' + user.id + '/restore'" class="text-green-600 hover:text-green-900">
+                                                Restore
+                                            </inertia-link>
                                         </td>
                                     </tr>
                                     <tr v-if="trashedUsers.data.length === 0">
@@ -175,7 +182,7 @@ export default {
 			Inertia.delete('/users/manage/' + id + '/trash');
 		},
 		restoreUser(id) {
-			Inertia.put('/users/manage/' + id + '/restore');
+            Inertia.put('/users/manage/' + id + '/restore');
 		}
 	},
 }

@@ -9,6 +9,8 @@ use App\Http\Controllers\Web\AnalysisController;
 use App\Http\Controllers\Web\DiseaseController;
 use App\Http\Controllers\Web\SubjectController;
 use App\Http\Controllers\Web\TestController;
+use App\Http\Controllers\WEB\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,5 +68,14 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 	Route::patch('/tests/{test}', [TestController::class, 'update'])->name('tests.update');
 	Route::delete('/tests/{test}/trash', [TestController::class, 'destroy'])->name('tests.destroy');
 	Route::put('/tests/{test}/restore', [TestController::class, 'restore'])->name('tests.restore');
+
+	//Manager users
+	Route::get('/users/manage', [UserController::class, 'index'])->name('manage.index');
+	Route::get('/users/manage/create', [UserController::class, 'create'])->name('manage.create');
+	Route::post('/users/manage', [UserController::class, 'store'])->name('manage.store');
+	Route::get('/users/manage/{user}/edit', [UserController::class, 'edit'])->name('manage.edit');
+	Route::patch('/users/manage/{user}', [UserController::class, 'update'])->name('manage.update');
+	Route::delete('/users/manage/{user}/trash', [UserController::class, 'destroy'])->name('manage.destroy');
+	Route::put('/users/manage/{user}/restore', [UserController::class, 'restore'])->name('manage.restore');
 
 });
