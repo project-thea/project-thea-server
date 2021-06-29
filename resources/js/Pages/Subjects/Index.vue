@@ -101,7 +101,7 @@
 											:href="'/subjects/' + subject.id + '/trash'"
 											tabindex="-1"
 											aria-label="Trash"
-											title="Trash"
+											title="Trash" v-if="$page.props.user.can.isAdmin"
 										>
 											<icon
 											name="trash"
@@ -157,7 +157,7 @@
         </div>
 
 		<!-- Subject Trash -->
-		<div class="py-12">
+		<div class="py-12" v-if="$page.props.user.can.isAdmin">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
 				

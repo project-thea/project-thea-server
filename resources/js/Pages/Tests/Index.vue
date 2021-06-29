@@ -71,7 +71,7 @@
 											{{ test.description }} NEGATIVE
 										</inertia-link>
 									</td>
-									<td class="border-t">
+									<td class="border-t" v-if="$page.props.user.can.isAdmin">
 										<inertia-link @click="deleteTest(test.id)" :href="'/tests/' + test.id + '/trash'" tabindex="-1" aria-label="Trash" title="Trash" class="px-6 py-4 flex items-center">
 											<icon name="trash" class="block w-4 h-4 fill-gray-500"/>
 										</inertia-link>
@@ -100,7 +100,7 @@
         </div>
 
 		<!-- Trashed Tests -->
-		<div class="py-12">
+		<div class="py-12" v-if="$page.props.user.can.isAdmin">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
 				
