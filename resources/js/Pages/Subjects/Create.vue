@@ -67,6 +67,9 @@
                             </div>
                             
                             <div class="flex items-center justify-end mt-4">
+                                <inertia-link :href="route('subjects')" class="underline text-sm text-gray-600 hover:text-gray-900">
+                                    Back
+                                </inertia-link>
                                 <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                                     Add Subject
                                 </jet-button>
@@ -84,14 +87,11 @@ import AppLayout from '@/Layouts/AppLayout'
 import Icon from '@/Shared/Icon'
 import JetButton from '@/Jetstream/Button'
 import JetInput from '@/Jetstream/Input'
-import JetActionMessage from '@/Jetstream/ActionMessage'
 import JetFormSection from '@/Jetstream/FormSection'
 import JetInputError from '@/Jetstream/InputError'
 import JetLabel from '@/Jetstream/Label'
 import JetTextarea from '@/Jetstream/Textarea'
 import JetSectionTitle from '@/Jetstream/SectionTitle'
-
-import { Inertia } from '@inertiajs/inertia'
 
 export default {
     metaInfo: { title: 'Subjects' },

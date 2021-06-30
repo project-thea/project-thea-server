@@ -23,7 +23,8 @@ class UsersTableSeeder extends Seeder
                 'email' => 'someone@gmail.com',
                 'password' => Hash::make('pa12345678'),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'role' => 'user'
             ],
 
             [
@@ -32,7 +33,8 @@ class UsersTableSeeder extends Seeder
                 'email' => 'durant@gmail.com',
                 'password' => Hash::make('du12345678'),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'role' => 'admin'
             ],
 
             [
@@ -41,8 +43,19 @@ class UsersTableSeeder extends Seeder
                 'email' => 'koko@gmail.com',
                 'password' => Hash::make('ko12345678'),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-            ]
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'role' => 'user'
+            ], 
+
+            [
+                'first_name' => 'Arnold',
+                'last_name' => 'Kunihira',
+                'email' => 'arnold@gmail.com',
+                'password' => Hash::make('ar12345678'),
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'role' => 'admin'
+            ],
         ]);
     }
 }

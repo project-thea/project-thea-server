@@ -42,7 +42,7 @@
 											{{ disease.description }}
 										</inertia-link>
 									</td>
-									<td class="border-t">
+									<td class="border-t" v-if="$page.props.loggedInUser.can.isAdmin">
 										<inertia-link @click="deleteDisease(disease.id)" :href="'/diseases/' + disease.id + '/trash'" method="delete" tabindex="-1" aria-label="Trash"
 											title="Trash" class="px-6 py-4 flex items-center">
 											<icon name="trash" class="block w-4 h-4 fill-gray-500"/>	
@@ -73,7 +73,7 @@
         </div>
 
 		<!-- Trashed Diseases -->
-		<div class="py-12">	
+		<div class="py-12" v-if="$page.props.loggedInUser.can.isAdmin">	
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
 					<div class="mb-4 w-full ">

@@ -123,6 +123,10 @@
                                             Profile
                                         </jet-dropdown-link>
 
+                                        <jet-dropdown-link v-if="$page.props.loggedInUser.can.isAdmin" :href="route('users.index')">
+                                            Manage Users
+                                        </jet-dropdown-link>
+
                                         <jet-dropdown-link :href="route('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
                                             API Tokens
                                         </jet-dropdown-link>
