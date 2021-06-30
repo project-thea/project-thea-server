@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\WEB;
+namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
@@ -52,7 +52,7 @@ class UserController extends Controller
     {
         $validatedData = $request->validated();
         User::create($validatedData);
-        return Redirect::route('manage.index')->with('success', 'User successfully added.');
+        return Redirect::route('users.index')->with('success', 'User successfully added.');
     }
 
     /**
@@ -73,14 +73,15 @@ class UserController extends Controller
      * Update the specified user resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param   int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request, $id)
     {
         $validatedData = $request->validated();
+        $user = User::find($id);
         $user->update($validatedData);
-        return Redirect::route('manage.index')->with('success', 'User successfully updated.');
+        return Redirect::route('users.index')->with('success', 'User successfully updated.');
     }
 
     /**
@@ -93,7 +94,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        return Redirect::route('manage.index')->with('success', 'User successfully deleted.');
+        return Redirect::route('users.index')->with('success', 'User successfully deleted.');
     }
 
     /**
@@ -106,6 +107,6 @@ class UserController extends Controller
     {
         $user = User::withTrashed()->find($id);
         $user->restore();
-        return Redirect::route('manage.index')->with('success', 'User successfully restored.');
+        return Redirect::route('users.index')->with('success', 'User successfully restored.');
     }
 }
