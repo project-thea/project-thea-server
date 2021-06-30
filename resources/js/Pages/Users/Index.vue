@@ -52,11 +52,11 @@
                                             </span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <inertia-link @click="editUser(user.id)" :href="'/users/manage/' + user.id + '/edit'" v-if="$page.props.loggedInUser.can.isAdmin" class="mr-2 text-blue-600 hover:text-blue-900">
+                                            <inertia-link @click="editUser(user.id)" :href="'/users/' + user.id + '/edit'" v-if="$page.props.loggedInUser.can.isAdmin" class="mr-2 text-blue-600 hover:text-blue-900">
                                                 Edit
                                             </inertia-link>
                                             
-                                            <inertia-link @click="deleteUser(user.id)" :href="'/users/manage/' + user.id + '/trash'" v-if="$page.props.loggedInUser.can.isAdmin" class="text-red-600 hover:text-red-900">
+                                            <inertia-link @click="deleteUser(user.id)" :href="'/users/' + user.id + '/trash'" v-if="$page.props.loggedInUser.can.isAdmin" class="text-red-600 hover:text-red-900">
                                                 Delete
                                             </inertia-link>
                                         </td>
@@ -112,7 +112,7 @@
                                             </span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <inertia-link @click="restoreUser(user.id)" :href="'/users/manage/' + user.id + '/restore'" class="text-green-600 hover:text-green-900">
+                                            <inertia-link @click="restoreUser(user.id)" :href="'/users/' + user.id + '/restore'" class="text-green-600 hover:text-green-900">
                                                 Restore
                                             </inertia-link>
                                         </td>
@@ -173,16 +173,16 @@ export default {
 	},
 	methods: {
 		createUser() {
-			Inertia.get('/users/manage/create');
+			Inertia.get('/users/create');
 		},
         editUser(id) {
-            Inertia.get('/users/manage/' + id + '/edit');
+            Inertia.get('/users/' + id + '/edit');
         },
 		deleteUser(id) {
-			Inertia.delete('/users/manage/' + id + '/trash');
+			Inertia.delete('/users/' + id + '/trash');
 		},
 		restoreUser(id) {
-            Inertia.put('/users/manage/' + id + '/restore');
+            Inertia.put('/users/' + id + '/restore');
 		}
 	},
 }

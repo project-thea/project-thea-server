@@ -123,7 +123,7 @@
                                             Profile
                                         </jet-dropdown-link>
 
-                                        <jet-dropdown-link v-if="$page.props.loggedInUser.can.isAdmin" :href="route('manage.index')">
+                                        <jet-dropdown-link v-if="$page.props.loggedInUser.can.isAdmin" :href="route('users.index')">
                                             Manage Users
                                         </jet-dropdown-link>
 

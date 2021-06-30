@@ -45,7 +45,7 @@
                         </div>
 
 						<div class="flex items-center justify-end mt-4">
-                            <inertia-link :href="route('manage.index')" class="underline text-sm text-gray-600 hover:text-gray-900">
+                            <inertia-link :href="route('users.index')" class="underline text-sm text-gray-600 hover:text-gray-900">
                                 Back
                             </inertia-link>
 							<jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
@@ -99,7 +99,7 @@ export default {
 	},
 	methods: {
 		createUser() {
-			this.form.post('/users/manage', {
+			this.form.post('/users', {
 				errorBag: 'createUser',
 				preserveScroll: true,
 				onSuccess: () => this.form.reset(),
