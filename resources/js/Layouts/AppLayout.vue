@@ -241,7 +241,7 @@
             </header>
 
             <!-- Flash Message -->
-            <div class="py-1 mt-2">
+            <div class="py-1 mt-1">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div v-if="show">
                         <div v-if="$page.props.flash.success" class="mb-8 flex items-center justify-between bg-green-500 rounded text-white pl-2">
