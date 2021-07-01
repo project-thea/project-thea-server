@@ -240,6 +240,18 @@
                 </div>
             </header>
 
+            <!-- Flash Message -->
+            <div class="py-1 mt-2">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div v-if="show">
+                        <div v-if="$page.props.flash.success" class="mb-8 flex items-center justify-between bg-green-500 rounded text-white pl-2">
+                            {{ $page.props.flash.success }}
+                            <button @click="show = false" type="button" class="close pr-2" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Page Content -->
             <main>
                 <slot></slot>
@@ -269,8 +281,18 @@
         data() {
             return {
                 showingNavigationDropdown: false,
+                show: true
             }
         },
+
+        watch: {
+            '$page.props.flash': {
+                handler() {
+                    this.show = true
+                },
+                deep: true,
+            }
+	    },
 
         methods: {
             switchToTeam(team) {
