@@ -9,6 +9,12 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
+					<div v-if="show">
+						<div v-if="$page.props.flash.success" class="mb-8 flex items-center justify-between bg-green-500 rounded text-white pl-2">
+							{{ $page.props.flash.success }}
+							<button @click="show = false" type="button" class="close pr-2" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						</div>
+					</div>
 				
 					<div class="mb-4 w-full ">
 						<div class="flex justify-between">
@@ -289,10 +295,17 @@ export default {
 	},
 	data() {
 		return {
-			search: 'dd' //this.filters.search
+			search: 'dd', //this.filters.search
+			show: true
 		}
 	},
 	watch: {
+		'$page.props.flash': {
+			handler() {
+				this.show = true
+			},
+      		deep: true,
+		}
 	},
 	methods: {
 		handleSearchChange: function (value) {
