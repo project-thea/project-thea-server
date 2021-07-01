@@ -9,7 +9,6 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
-				
 					<div class="mb-4 w-full ">
 						<div class="flex justify-between">
 							<jet-input id="filter" type="text" class="block" required autofocus placeholder="Search..." v-on:update:modelValue="handleSearchChange" :modelValue="this.filters.search"/>
@@ -219,7 +218,7 @@ export default {
 	},
 	data() {
 		return {
-			search: 'dd' //this.filters.search
+			search: 'dd', //this.filters.search
 		}
 	},
 	watch: {

@@ -167,7 +167,7 @@ export default {
 	data() {
 		return {
 			search: 'dd', //this.filters.search
-		}
+        }
 	},
 	watch: {
 	},
