@@ -10,13 +10,6 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                        <div v-if="show">
-                            <div v-if="$page.props.flash.success" class="mb-8 flex items-center justify-between bg-green-500 rounded text-white pl-2">
-                                {{ $page.props.flash.success }}
-                                <button @click="show = false" type="button" class="close pr-2" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            </div>
-                        </div>
-                        
                         <jet-button v-if="$page.props.loggedInUser.can.isAdmin" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-8" @click="createUser()">
                             Add User
                         </jet-button>
@@ -174,16 +167,9 @@ export default {
 	data() {
 		return {
 			search: 'dd', //this.filters.search
-            show: true
-		}
+        }
 	},
 	watch: {
-        '$page.props.flash': {
-			handler() {
-				this.show = true
-			},
-      		deep: true,
-		}
 	},
 	methods: {
 		createUser() {
