@@ -4,6 +4,7 @@ use App\Http\Controllers\API\SampleTrackingController;
 use App\Http\Controllers\API\SubjectTrackingController;
 use App\Http\Controllers\API\TestController;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\SubjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,4 +36,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/tracking/subject', [SubjectTrackingController::class, 'store']);
     Route::get('/tracking/sample', [SampleTrackingController::class ,'index']);
     Route::post('/tracking/sample', [SampleTrackingController::class ,'store']);
+	
+	//Subjects
+	Route::apiResource('/subjects', SubjectController::class);
 });
