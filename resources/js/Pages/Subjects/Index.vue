@@ -148,10 +148,7 @@
 							</tbody>
 					  </table>
 					</div>
-				
-					<!--
-					<pagination :meta="subjects.meta" />
-					-->
+					<pagination class="mt-2" :links="subjects.links" />	
                 </div>
             </div>
         </div>
@@ -244,10 +241,7 @@
 							</tbody>
 					  </table>
 					</div>
-				
-					<!--
-					<pagination :meta="trashedSubjects.meta" />
-					-->
+					<pagination class="mt-2" :links="trashedSubjects.links" />		
                 </div>
             </div>
         </div>
@@ -258,7 +252,7 @@
 import AppLayout from '@/Layouts/AppLayout'
 
 import Icon from '@/Shared/Icon'
-import Pagination from '@/Shared/Pagination'
+import Pagination from '@/Jetstream/Pagination'
 import JetButton from '@/Jetstream/Button'
 import JetInput from '@/Jetstream/Input'
 import { Inertia } from '@inertiajs/inertia'
@@ -266,6 +260,7 @@ import { DateTime } from 'luxon';
 
 export default {
   	metaInfo: { title: 'Subjects' },
+
 	components: {
 		Icon,
 		Pagination,
@@ -273,6 +268,7 @@ export default {
 		JetButton,
 		JetInput
 	},
+
 	props: {
 		subjects: {
 			type: Object,
@@ -287,13 +283,23 @@ export default {
 			required: true,
 		},
 	},
+
 	data() {
 		return {
 			search: 'dd', //this.filters.search
 		}
 	},
+
 	watch: {
 	},
+	// computed: {
+	// 	meta() {
+	// 		return {
+	// 			links: this.subjects.links,
+	// 			links: this.trashedSubjects.links
+	// 		}
+	// 	}
+	// }, 
 	methods: {
 		handleSearchChange: function (value) {
 			Inertia.get('/subjects?search=' + value)

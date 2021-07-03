@@ -63,11 +63,7 @@
 							</tbody>
 						</table>
 					</div>
-				
-					<!--
-					<pagination :meta="diseases.meta" />
-					-->
-
+					<pagination class="mt-2" :links="diseases.links" />
                 </div>
             </div>
         </div>
@@ -119,11 +115,7 @@
 							</tbody>
 						</table>
 					</div>
-				
-					<!--
-					<pagination :meta="trashedDiseases.meta" />
-					-->
-
+					<pagination class="mt-2" :links="trashedDiseases.links" />
                 </div>
             </div>
         </div>
@@ -134,15 +126,15 @@
 import AppLayout from '@/Layouts/AppLayout'
 
 import Icon from '@/Shared/Icon'
-import Pagination from '@/Shared/Pagination'
+import Pagination from '@/Jetstream/Pagination'
 import JetButton from '@/Jetstream/Button'
 import JetInput from '@/Jetstream/Input'
 import { Inertia } from '@inertiajs/inertia'
 import JetNavLink from '@/Jetstream/NavLink';
 
-
 export default {
 	metaInfo: { title: 'Diseases' },
+
 	components: {
 		Icon,
 		Pagination,
@@ -151,6 +143,7 @@ export default {
 		JetInput,
 		JetNavLink
 	},
+
 	props: {
 		diseases: {
 			type: Object,
@@ -165,13 +158,16 @@ export default {
 			required: true
 		}
 	},
+
 	data() {
 		return {
 			search: 'dd', //this.filters.search
 		}
 	},
+
 	watch: {
 	},
+	
 	methods: {
 		handleSearchChange: function (value) {
 			Inertia.get('/diseases?search=' + value)

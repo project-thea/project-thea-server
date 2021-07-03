@@ -64,6 +64,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        <pagination class="mt-2" :links="users.links" />
                     </div>
 
                     <!-- User Trash -->
@@ -125,6 +126,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        <pagination class="mt-2" :links="trashedUsers.links" />
                     </div>
                 </div>
             </div>
@@ -136,13 +138,14 @@
 import AppLayout from '@/Layouts/AppLayout'
 
 import Icon from '@/Shared/Icon'
-import Pagination from '@/Shared/Pagination'
+import Pagination from '@/Jetstream/Pagination'
 import JetButton from '@/Jetstream/Button'
 import JetInput from '@/Jetstream/Input'
 import { Inertia } from '@inertiajs/inertia'
 
 export default {
   	metaInfo: { title: 'Users' },
+
 	components: {
 		Icon,
 		Pagination,
@@ -150,6 +153,7 @@ export default {
 		JetButton,
 		JetInput
 	},
+
 	props: {
 		users: {
 			type: Object,
@@ -164,13 +168,16 @@ export default {
 			required: true
 		}
 	},
+
 	data() {
 		return {
 			search: 'dd', //this.filters.search
         }
 	},
+
 	watch: {
 	},
+
 	methods: {
 		createUser() {
 			Inertia.get('/users/create');

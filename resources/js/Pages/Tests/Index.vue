@@ -24,13 +24,13 @@
 							<thead>
 								<tr class="text-left font-bold">
 									<th class="px-6 pt-6 pb-4">
-									Test Date 
+										Test Date 
 									</th>
 									<th class="px-6 pt-6 pb-4">
-									User ID
+										User ID
 									</th>
 									<th class="px-6 pt-6 pb-4">
-									Disease
+										Disease
 									</th>
 									<th class="px-3 pt-3 pb-2">
 										Status
@@ -61,13 +61,13 @@
 
 									<td class="border-t">
 										<inertia-link :href="'/tests/' + test.id + '/edit'" tabindex="-1" aria-label="Edit" class="px-6 py-4 flex items-center focus:text-indigo-500">
-											{{ test.description }} COVID-19
+											{{ test.name }}
 											<icon v-if="test.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-500 ml-2"/>
 										</inertia-link>
 									</td>
 									<td class="border-t">
 										<inertia-link :href="'/tests/' + test.id + '/edit'" tabindex="-1" aria-label="Edit" class="px-6 py-4 flex items-center">
-											{{ test.description }} NEGATIVE
+											{{ test.status }}
 										</inertia-link>
 									</td>
 									<td class="border-t" v-if="$page.props.loggedInUser.can.isAdmin">
@@ -89,11 +89,7 @@
 							</tbody>
 						</table>
 					</div>
-				
-					<!--
-					<pagination :meta="tests.meta" />
-					-->
-
+					<pagination class="mt-2" :links="tests.links" />
                 </div>
             </div>
         </div>
@@ -110,72 +106,68 @@
 					</div>
 				
 					<div class="bg-white rounded shadow overflow-x-auto">
-					  <table class="w-full whitespace-nowrap">
-						<thead>
-						  <tr class="text-left font-bold">
-							<th class="px-6 pt-6 pb-4">
-							  Test Date 
-							</th>
-							<th class="px-6 pt-6 pb-4">
-							  User ID
-							</th>
-							<th class="px-6 pt-6 pb-4">
-							  Disease
-							</th>
-							<th class="px-3 pt-3 pb-2">
-							  Status
-							</th>
-							<th
-							  class="px-3 pt-3 pb-2"
-							  colspan="2"
-							>
-							  Actions
-							</th>
-						  </tr>
-						</thead>
-						<tbody>
-						  	<tr v-for="test in trashedTests.data" :key="test.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
-								<td class="border-t">
-									<inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500">
-										{{ formatDate(test.created_at) }}
-									</inertia-link>
-								</td>
-								
-								<td class="border-t">
-									<inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500">
-										{{ test.id }}ESDVCFGRTUI34EUI
-									</inertia-link>
-								</td>
+						<table class="w-full whitespace-nowrap">
+							<thead>
+								<tr class="text-left font-bold">
+									<th class="px-6 pt-6 pb-4">
+										Test Date 
+									</th>
+									<th class="px-6 pt-6 pb-4">
+										User ID
+									</th>
+									<th class="px-6 pt-6 pb-4">
+										Disease
+									</th>
+									<th class="px-3 pt-3 pb-2">
+										Status
+									</th>
+									<th
+									class="px-3 pt-3 pb-2"
+									colspan="2"
+									>
+									Actions
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="test in trashedTests.data" :key="test.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+									<td class="border-t">
+										<inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500">
+											{{ formatDate(test.created_at) }}
+										</inertia-link>
+									</td>
+									
+									<td class="border-t">
+										<inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500">
+											{{ test.id }}ESDVCFGRTUI34EUI
+										</inertia-link>
+									</td>
 
-								<td class="border-t">
-									<inertia-link tabindex="-1" aria-label="Edit" class="px-6 py-4 flex items-center focus:text-indigo-500">
-										{{ test.description }}COVID-19
-									</inertia-link>
-								</td>
-								<td class="border-t">
-									<inertia-link tabindex="-1" aria-label="Edit" class="px-6 py-4 flex items-center">
-										{{ test.description }}NEGATIVE
-									</inertia-link>
-								</td>
-								<td class="border-t">
-									<inertia-link @click="restoreTest(test.id)" :href="'/tests/' + test.id + '/restore'" tabindex="-1" aria-label="Restore" title="Restore" class="px-6 py-4 flex items-center">
-										<icon name="restore" class="block w-4 h-4 fill-gray-500"/>
-									</inertia-link>
-								</td>
-						  	</tr>
-							<tr v-if="trashedTests.data.length === 0">
-								<td class="border-t px-6 py-4" colspan="4">
-									No test trash found.
-								</td>
-							</tr>
-						</tbody>
+									<td class="border-t">
+										<inertia-link tabindex="-1" aria-label="Edit" class="px-6 py-4 flex items-center focus:text-indigo-500">
+											{{ test.name }}
+										</inertia-link>
+									</td>
+									<td class="border-t">
+										<inertia-link tabindex="-1" aria-label="Edit" class="px-6 py-4 flex items-center">
+											{{ test.status }}
+										</inertia-link>
+									</td>
+									<td class="border-t">
+										<inertia-link @click="restoreTest(test.id)" :href="'/tests/' + test.id + '/restore'" tabindex="-1" aria-label="Restore" title="Restore" class="px-6 py-4 flex items-center">
+											<icon name="restore" class="block w-4 h-4 fill-gray-500"/>
+										</inertia-link>
+									</td>
+								</tr>
+								<tr v-if="trashedTests.data.length === 0">
+									<td class="border-t px-6 py-4" colspan="4">
+										No test trash found.
+									</td>
+								</tr>
+							</tbody>
 					  </table>
 					</div>
-				
-					<!--
-					<pagination :meta="trashedTests.meta" />
-					-->
-
+					<pagination class="mt-2" :links="trashedTests.links" />
                 </div>
             </div>
         </div>
@@ -186,7 +178,7 @@
 import AppLayout from '@/Layouts/AppLayout'
 
 import Icon from '@/Shared/Icon'
-import Pagination from '@/Shared/Pagination'
+import Pagination from '@/Jetstream/Pagination'
 import JetButton from '@/Jetstream/Button'
 import JetInput from '@/Jetstream/Input'
 import { Inertia } from '@inertiajs/inertia'
@@ -194,6 +186,7 @@ import { DateTime } from 'luxon';
 
 export default {
 	metaInfo: { title: 'Tests' },
+
 	components: {
 		Icon,
 		Pagination,
@@ -201,7 +194,7 @@ export default {
 		JetButton,
 		JetInput
 	},
-	//layout: Layout,
+	
 	props: {
 		tests: {
 			type: Object,
@@ -216,13 +209,16 @@ export default {
 			required: true
 		}
 	},
+
 	data() {
 		return {
 			search: 'dd', //this.filters.search
 		}
 	},
+
 	watch: {
 	},
+
 	methods: {
 		handleSearchChange: function (value) {
 			Inertia.get('/tests?search=' + value)
