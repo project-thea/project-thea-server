@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Validator;
 
 class TestController extends Controller
 {
+    public const NUMBER_OF_RECORDS = 5;
+
     /**
      * Display a listing of the test resource.
      *
@@ -20,9 +22,14 @@ class TestController extends Controller
     public function index(Request $request)
     {
         $query_params = $request->all();
-        $trashedTests = Test::onlyTrashed()->latest()->get();
 
         $tests = [];
+        $trashedTests = Test::select('tests.*', 'subjects.first_name', 'subjects.last_name', 'diseases.name')
+            ->leftJoin('subjects', 'tests.subject_id', '=', 'subjects.id')
+            ->leftJoin('diseases', 'tests.disease_id', '=', 'diseases.id')
+            ->orderBy('tests.test_date', 'asc')
+            ->onlyTrashed()
+            ->paginate(self::NUMBER_OF_RECORDS);
 
         if (isset($query_params['search'])) {
             $tests = DB::table('tests')->where(
@@ -31,19 +38,19 @@ class TestController extends Controller
                 '%' . $query_params['search'] . '%'
             )->get();
         } else {
-            $tests = Test::all();
+            $tests = Test::select('tests.*', 'subjects.first_name', 'subjects.last_name', 'diseases.name')
+                ->leftJoin('subjects', 'tests.subject_id', '=', 'subjects.id')
+                ->leftJoin('diseases', 'tests.disease_id', '=', 'diseases.id')
+                ->orderBy('tests.test_date', 'desc')
+                ->paginate(self::NUMBER_OF_RECORDS);
         }
 
         return Inertia::render('Tests/Index', [
             'filters' => [
                 'search' => isset($query_params['search']) ? $query_params['search'] : ''
             ],
-            'tests' => [
-                'data' => $tests
-            ],
-            'trashedTests' => [
-                'data' => $trashedTests
-            ]
+            'tests' => $tests,
+            'trashedTests' => $trashedTests,
         ]);
     }
 

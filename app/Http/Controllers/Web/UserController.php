@@ -11,6 +11,8 @@ use Inertia\Inertia;
 
 class UserController extends Controller
 {
+    public const NUMBER_OF_RECORDS = 5;
+
     /**
      * Display a listing of the user resource.
      *
@@ -18,17 +20,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = [];
-        $users = User::all();
-        $trashedUsers = User::onlyTrashed()->latest()->get();
+        $users = User::orderBy('id', 'desc')->paginate(self::NUMBER_OF_RECORDS);
+        $trashedUsers = User::onlyTrashed()->latest()->paginate(self::NUMBER_OF_RECORDS);
 
         return Inertia::render('Users/Index', [
-            'users' => [
-                'data' => $users
-            ],
-            'trashedUsers' => [
-                'data' => $trashedUsers
-            ]
+            'users' => $users,
+            'trashedUsers' => $trashedUsers
         ]);
     }
 
