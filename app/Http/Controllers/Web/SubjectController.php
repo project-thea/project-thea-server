@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Validator;
 
 class SubjectController extends Controller
 {
+    public const NUMBER_OF_RECORDS = 5;
+
     /**
      * Display a listing of the subject resource.
      *
@@ -22,7 +24,7 @@ class SubjectController extends Controller
         $query_params = $request->all();
 
         $subjects = [];
-        $trashedSubjects = Subject::onlyTrashed()->latest()->get();
+        $trashedSubjects = Subject::onlyTrashed()->latest()->paginate(self::NUMBER_OF_RECORDS);
 
         if (isset($query_params['search'])) {
             $subjects = DB::table('subjects')->where(
@@ -31,19 +33,15 @@ class SubjectController extends Controller
                 '%' . $query_params['search'] . '%'
             )->get();
         } else {
-            $subjects = Subject::all();
+            $subjects = Subject::orderBy('id', 'desc')->paginate(self::NUMBER_OF_RECORDS);
         }
 
         return Inertia::render('Subjects/Index', [
             'filters' => [
                 'search' => isset($query_params['search']) ? $query_params['search'] : ''
             ],
-            'subjects' => [
-                'data' => $subjects
-            ],
-            'trashedSubjects' => [
-                'data' => $trashedSubjects
-            ]
+            'subjects' => $subjects,
+            'trashedSubjects' => $trashedSubjects
         ]);
     }
 
@@ -151,7 +149,6 @@ class SubjectController extends Controller
     {
         $subject = Subject::find($id);
         $subject->delete();
-
         return Redirect::route('subjects')->with('success', 'Subject successfully deleted.');
     }
 

@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Validator;
 
 class DiseaseController extends Controller
 {
+    public const NUMBER_OF_RECORDS = 5;
+
     /**
      * Display a listing of the disease resource.
      *
@@ -22,7 +24,7 @@ class DiseaseController extends Controller
         $query_params = $request->all();
 
         $diseases = [];
-        $trashedDiseases = Disease::onlyTrashed()->latest()->get();
+        $trashedDiseases = Disease::onlyTrashed()->latest()->paginate(self::NUMBER_OF_RECORDS);
 
         if (isset($query_params['search'])) {
             $diseases = DB::table('diseases')->where(
@@ -31,19 +33,15 @@ class DiseaseController extends Controller
                 '%' . $query_params['search'] . '%'
             )->get();
         } else {
-            $diseases = Disease::all();
+            $diseases = Disease::orderBy('id', 'desc')->paginate(self::NUMBER_OF_RECORDS);
         }
 
         return Inertia::render('Diseases/Index', [
             'filters' => [
                 'search' => isset($query_params['search']) ? $query_params['search'] : ''
             ],
-            'diseases' => [
-                'data' => $diseases
-            ],
-            'trashedDiseases' => [
-                'data' => $trashedDiseases
-            ]
+            'diseases' => $diseases,
+            'trashedDiseases' => $trashedDiseases
         ]);
     }
 
@@ -135,7 +133,6 @@ class DiseaseController extends Controller
     {
         $disease = Disease::find($id);
         $disease->delete();
-
         return Redirect::route('diseases')->with('success', 'Disease successfully deleted.');
     }
 
