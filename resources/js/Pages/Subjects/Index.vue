@@ -112,7 +112,7 @@
 									<td class="border-t w-px">
 										<inertia-link
 											class="px-6 py-4 flex items-center"
-											:href="'/tracking?uniqud_ids=' + subject.unique_id"
+											:href="'/tracking?uids=' + subject.unique_id"
 											tabindex="-1"
 											aria-label="Track"
 											title="Track"
@@ -289,17 +289,6 @@ export default {
 			search: 'dd', //this.filters.search
 		}
 	},
-
-	watch: {
-	},
-	// computed: {
-	// 	meta() {
-	// 		return {
-	// 			links: this.subjects.links,
-	// 			links: this.trashedSubjects.links
-	// 		}
-	// 	}
-	// }, 
 	methods: {
 		handleSearchChange: function (value) {
 			Inertia.get('/subjects?search=' + value)

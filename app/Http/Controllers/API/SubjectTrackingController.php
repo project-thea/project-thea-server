@@ -43,8 +43,8 @@ class SubjectTrackingController extends Controller
 
         $validateData = [
             'subject_id' => 'exists:App\Models\Subject,id',
-            'latitude' => 'string|min:4',
-            'longitude' => 'string|min:4',
+            'latitude' => 'numeric',
+            'longitude' => 'numeric',
             'unique_id' => 'string',
             'date_time' => 'date_format:Y-m-d H:i:s'
         ];
@@ -94,4 +94,17 @@ class SubjectTrackingController extends Controller
     {
         //
     }
+	
+    /**
+     * Tracking anonymously
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function track_anonymously(Request $request)
+	{
+		$out = new \Symfony\Component\Console\Output\ConsoleOutput();
+		$out->writeln(print_r($request->all(), true));
+		
+		return $this->store($request);
+	}
 }

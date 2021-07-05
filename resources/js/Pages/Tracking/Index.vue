@@ -27,7 +27,7 @@
 							</button>
 						</div>
 						<div>
-							<tracking-map />
+							<tracking-map :datapoints="datapoints" :locations="locations"/>
 						</div>
 					</div>
                 </div>
@@ -48,17 +48,35 @@
 			TrackingMap,
 			LitepieDatepicker 
         },
+		props: {
+			locations: {
+				type: Object
+			},
+			uids: {
+				type: Object
+			},
+			start_date: {
+				type: String
+			},
+			end_date: {
+				type: String
+			}
+		},
 		data(){
 			return {
 				checkin: '',
-				uniqueIds: '' //$route.query.uniqud_ids || ''
+				uniqueIds: '', //$route.query.uids || '',
+				datapoints: []
 			}   
 		},
 		setup() {
+			const now =  new Date();
+			const initialDateRange = now.getFullYear() + '-' + now.getMonth().toString().padStart(2, "0") + '-' + now.getDay().toString().padStart(2, "0");
+
 			const myRef = ref(null);
-			const dateValue = ref([]);
+			const dateValue = ref([initialDateRange, initialDateRange]);
 			const formatter = ref({
-			  date: 'DD MMM YYYY',
+			  date: 'YYYY-MM-DD',
 			  month: 'MMM'
 			});
 
@@ -67,6 +85,31 @@
 			  dateValue,
 			  formatter
 			};
+			
+
+		},
+		created: function(){
+		    console.log('this.start_date:', this.start_date);
+
+			
+			if(this.uids === null) return;
+			
+			this.uniqueIds = this.uids;
+			
+			const oneUUID = this.uids.split(',')[0];
+			if(this.uids.length > 0){
+				this.datapoints = this.locations[oneUUID];
+			}
+
+			if(this.start_date === null){
+			  const now =  new Date();
+			  const initialDate = now.getFullYear() + '-' + now.getMonth().toString().padStart(2, "0") + '-' + now.getDay().toString().padStart(2, "0");
+			  this.dateValue = [initialDate, initialDate];
+			  
+			  return;
+			}
+
+			this.dateValue = [this.start_date, this.end_date];
 		},
 		methods: {
 			getLocationPoints(){
@@ -74,7 +117,7 @@
 				const data = {
 					start_date: this.dateValue[0],
 					end_date: this.dateValue[1],
-					uniqud_ids: this.uniqueIds
+					uids: this.uniqueIds
 				};
 				const options = {};
 				

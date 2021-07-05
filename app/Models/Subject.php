@@ -20,7 +20,8 @@ class Subject extends Model
         'next_of_kin',
         'next_of_kin_phone',
         'id_number',
-        'id_type'
+        'id_type',
+		'unique_id'
     ];
 
     /**
