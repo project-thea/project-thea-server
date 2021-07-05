@@ -17,7 +17,7 @@ class CreateSampleTrackingsTable extends Migration
             $table->id();
             $table->string('latitude')->index();
             $table->string('longitude')->index();
-            $table->uuid('unique_id')->index();
+            $table->string('unique_id');
             $table->dateTime('date_time');
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();

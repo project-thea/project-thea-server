@@ -109,4 +109,23 @@ class TestController extends Controller
         $apiResponse = APIHelpers::formatAPIResponse(false, 'Test deleted successfully', null);
         return response()->json($apiResponse, 204);
     }
+	
+    /**
+     * Get tests for anonymous subject
+     *
+     * @param  String  $unique_id
+     * @return \Illuminate\Http\Response
+     */
+	public function get_tests($unique_id){
+        $tests = Test::select('tests.*', 'subjects.first_name', 'subjects.last_name', 'diseases.name')
+			->where('tests.unique_id', $unique_id)
+            ->leftJoin('subjects', 'tests.subject_id', '=', 'subjects.id')
+            ->leftJoin('diseases', 'tests.disease_id', '=', 'diseases.id')
+            ->orderBy('tests.test_date', 'ASC')
+            ->paginate(self::RECORDS_PER_PAGE);
+
+        $testsCollection = TestResource::collection($tests);
+        $apiResponse = APIHelpers::formatAPIResponse(false, 'Tests retrieved successfully', $testsCollection);
+        return response()->json($apiResponse, 200);
+	}
 }

@@ -23,10 +23,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 //Public routes
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
+
+//Subject registrationg and tracking 
+Route::post('/subjects/anon', [SubjectController::class, 'create_anonymously']);
+Route::post('/tracking/subject/anon', [SubjectTrackingController::class, 'track_anonymously']);
+Route::get('/tests/subject/{unique_id}/anon', [TestsController::class, 'get_tests']);
 
 //Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {

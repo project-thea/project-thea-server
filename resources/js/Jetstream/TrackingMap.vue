@@ -36,51 +36,85 @@ export default {
       showMap: true
     };
   },
+  props: {
+	  datapoints: {
+		type: Array
+	  },
+	  locations: {
+		type: Object
+	  }
+  },
   mounted() {
 	this.map = L.map('tracking-map').setView([0.33059453805927336, 32.58156572450088], 13);
 
 	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 	}).addTo(this.map);
-
-	var latlngs = [
-		[0.38939638445105657, 32.65154929673382],
-		[0.3676553930685399, 32.75344467068635],
-		[0.3845701252220957, 32.84312720400628],
-		[0.3906124800183426, 32.979059986332196],
-		[0.400264963181451, 33.00684131541112],
-		[0.3966454149071369, 32.99717887192975],
-		[0.3942323359954215, 32.99838703496668],
-		[0.3942323359954215, 32.99838703496668],
-		[0.3966454051996274, 33.010465157543145],
-		[0.41112077176908224, 33.05277892515037],
-		[0.4075021346801109, 33.080538859774336],
-		[0.4067483734148347, 33.09765109665801],
-		[0.4094616814478257, 33.10594231208639],
-		[0.41036608283581905, 33.11950934527859],
-		[0.40674839049510086, 33.125840513743285],
-		[0.40916017600720356, 33.131568655300484],
-		[0.4145867021636947, 33.13729678887447],
-		[0.4325247898689024, 33.14920552050201],
-		[0.43388163811633335, 33.15870251160624],
-		[0.433730789930039, 33.15297415725421],
-		[0.43795213302603375, 33.17046114677486],
-		[0.44068419753141475, 33.17988263249232],
-		[0.4384673340318203, 33.18337312510742],
-		[0.4380752115321128, 33.18566990969563],
-		[0.4394476422215919, 33.191221411440125],
-		[0.6475247133304796, 34.26072703182277],
-	];
-
-	var polyline = L.polyline(latlngs, {color: 'red'}).addTo(this.map);
 	
-	this.map.fitBounds(polyline.getBounds());
+	if(this.datapoints.length === 0) return;
+	
+	const latlngs = this.datapoints.map(v => [ parseFloat(v.latitude), parseFloat(v.longitude)]);
+	this.polyline = L.polyline(latlngs, {color: 'red'}).addTo(this.map);
+	
+	this.map.fitBounds(this.polyline.getBounds());
+	
+	var locationLayer = new L.FeatureGroup();
+	var markerTemp = L.marker();
+	
+	var iconSettings = {
+		mapIconUrl: '<svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 149 178"><path fill="{mapIconColor}" stroke="#FFF" stroke-width="6" stroke-miterlimit="10" d="M126 23l-6-6A69 69 0 0 0 74 1a69 69 0 0 0-51 22A70 70 0 0 0 1 74c0 21 7 38 22 52l43 47c6 6 11 6 16 0l48-51c12-13 18-29 18-48 0-20-8-37-22-51z"/><circle fill="{mapIconColorInnerCircle}" cx="74" cy="75" r="61"/><circle fill="#FFF" cx="74" cy="75" r="{pinInnerCircleRadius}"/></svg>',
+		mapIconColor: '#cc756b',
+		mapIconColorInnerCircle: '#fff',
+		pinInnerCircleRadius:48
+	};
+	
+	
+	var divIcon = L.divIcon({
+		className: "leaflet-data-marker",
+	  html: L.Util.template(iconSettings.mapIconUrl, iconSettings), 
+	  iconAnchor  : [12, 32],
+	  iconSize    : [25, 30],
+	  popupAnchor : [0, -28]
+	});
+	
+	// icon active state
+	var divIconActive = L.divIcon({
+		className: "leaflet-data-marker",
+	  html: L.Util.template(iconSettings.mapIconUrl, iconSettings), //.replace('#','%23'),
+	  iconAnchor  : [18, 42],
+	  iconSize    : [36, 42],
+	  popupAnchor : [0, -30]
+	});
 
-	//L.marker([51.5, -0.09]).addTo(map)
-	//	.bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-	//	.openPopup();
-  },
-  created(){
+	var coords = [[53, 13],[49, 10],[46, 12],[51, 16]];
+	var markerArray = [];
+	var iMarker = -1;
+	
+	function setActiveIcon(marker) {
+	  marker.setIcon(divIconActive);
+	};
+	
+	 var marker = L.marker(latlngs[0], {
+	  icon: divIcon,
+	  id: 0
+	 }).bindPopup('Start point')
+	   .openPopup();
+
+	  locationLayer.addLayer(marker);
+
+	  marker.on('mouseover', function(e){
+		if (iMarker == i) return;
+		setTimeout(setActiveIcon, 10, this);
+		if (iMarker >= 0) markerArray[iMarker].setIcon(divIcon);
+		iMarker = 0;
+	  });
+	  
+	  marker.on('mouseout', function(e){
+		this.setIcon(divIcon);
+		iMarker = -1;
+	  });
+	  
+	  locationLayer.addTo(this.map);
 
   },
 	components: { 
@@ -95,6 +129,12 @@ export default {
 		centerUpdate(center) {
 			this.currentCenter = center;
 		},
+	},
+	watch: {
+
+	},
+	computed: {
+
 	}
 }
 </script>
