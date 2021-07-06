@@ -50,7 +50,10 @@
                         </div>
                         <div class="mt-3">
                             <jet-label for="id_type" value="ID Type" />
-                            <jet-input id="id_type" type="text" class="mt-1 block w-full" v-model="form.id_type" required autofocus autocomplete="id_type" />
+                            <select name="id_type" v-model="form.id_type" required autofocus autocomplete="id_type" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
+                                <option value="National ID">National ID</option>
+                                <option value="Drivers License">Drivers License</option>
+                            </select>
                         </div>
                         <div class="mt-3">
                             <jet-label for="nationality" value="Nationality" />
