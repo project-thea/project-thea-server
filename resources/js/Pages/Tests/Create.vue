@@ -23,7 +23,11 @@
 
                             <div class="mt-2">
                                 <jet-label for="status" value="Test Status" />
-                                <jet-input id="status" type="text" class="mt-1 block w-full" v-model="form.status" required autofocus autocomplete="status" />
+                                <select name="status" v-model="form.status" required autofocus autocomplete="status" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
+                                    <option value="Negative">Negative</option>
+                                    <option value="Positive">Positive</option>
+                                    <option value="Unknown">Unknown</option>
+                                </select>
                             </div>
                             
                             <div class="flex items-center justify-end mt-4">
