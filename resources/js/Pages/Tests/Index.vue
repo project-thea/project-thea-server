@@ -12,10 +12,6 @@
 					<div class="mb-4 w-full ">
 						<div class="flex justify-between">
 							<jet-input id="filter" type="text" class="block" required autofocus placeholder="Search..." v-on:update:modelValue="handleSearchChange" :modelValue="this.filters.search"/>
-							
-							<jet-button class="float-left bg-grey-400" @click="createTest()">
-								Add Test
-							</jet-button>
 						</div>
 					</div>
 				
@@ -225,9 +221,6 @@ export default {
 		},
 		formatDate(dateTime) {
 			return DateTime.fromISO(dateTime).toFormat('yyyy-LL-dd HH:mm');
-		}, 
-		createTest() {
-			Inertia.get('/tests/create')
 		},
 		deleteTest(id) {
 			Inertia.delete('/tests/' + id + '/trash');
