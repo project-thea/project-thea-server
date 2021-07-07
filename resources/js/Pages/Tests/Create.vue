@@ -16,28 +16,35 @@
                     </jet-section-title>
 	
                     <form @submit.prevent="createTest">
-                            <div class="mt-2">
-                                <jet-label for="test_date" value="Test Date" />
-                                <jet-input id="test_date" type="text" class="mt-1 block w-full" v-model="form.test_date" required autofocus autocomplete="test_date" />
-                            </div>
+                        <div class="mt-2">
+                            <jet-label for="disease_id" value="Disease" />
+                            <select name="disease_id" v-model="form.disease_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
+                                <option v-for="disease in diseases" :key="disease.id" :value="disease.id">{{ disease.name }}</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mt-2">
+                            <jet-label for="test_date" value="Test Date" />
+                            <jet-input id="test_date" type="text" class="mt-1 block w-full" v-model="form.test_date" required autofocus autocomplete="test_date" />
+                        </div>
 
-                            <div class="mt-2">
-                                <jet-label for="status" value="Test Status" />
-                                <select name="status" v-model="form.status" required autofocus autocomplete="status" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
-                                    <option value="Negative">Negative</option>
-                                    <option value="Positive">Positive</option>
-                                    <option value="Unknown">Unknown</option>
-                                </select>
-                            </div>
-                            
-                            <div class="flex items-center justify-end mt-4">
-                                <inertia-link :href="route('tests')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                                    Back
-                                </inertia-link>
-                                <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                                    Add Test
-                                </jet-button>
-                            </div>
+                        <div class="mt-2">
+                            <jet-label for="status" value="Test Status" />
+                            <select name="status" v-model="form.status" required autofocus autocomplete="status" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
+                                <option value="Negative">Negative</option>
+                                <option value="Positive">Positive</option>
+                                <option value="Unknown">Unknown</option>
+                            </select>
+                        </div>
+
+                        <div class="flex items-center justify-end mt-4">
+                            <inertia-link :href="route('subjects')" class="underline text-sm text-gray-600 hover:text-gray-900">
+                                Back
+                            </inertia-link>
+                            <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                                Add Test
+                            </jet-button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -59,6 +66,7 @@ import JetSectionTitle from '@/Jetstream/SectionTitle'
 
 export default {
     metaInfo: { title: 'Subjects' },
+
     components: {
         Icon,
         AppLayout,
@@ -70,16 +78,26 @@ export default {
         JetTextarea,
         JetSectionTitle
     },
+
+    props: {
+        diseases: {type: Array},
+        subject_id: {type: Number}
+    },
+
     data() {
         return {
             form: this.$inertia.form({
+                subject_id: this.subject_id,
+                disease_id: '',
                 test_date:  '',
                 status:  ''
             }),
         }
     },
+
     watch: {
     },
+
     methods: {
         createTest() {
             this.form.post('/tests', {
@@ -87,6 +105,11 @@ export default {
                 preserveScroll: true,
                 onSuccess: () => this.form.reset(),
                 onError: () => {
+                    if (this.form.errors.disease_id) {
+                        this.form.reset('disease_id')
+                        this.$refs.disease_id.focus()
+                    }
+
                     if (this.form.errors.test_date) {
                         this.form.reset('test_date')
                         this.$refs.test_date.focus()
