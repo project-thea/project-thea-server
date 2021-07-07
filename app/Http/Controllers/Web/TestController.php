@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Disease;
+use App\Models\Subject;
 use App\Models\Test;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
@@ -59,9 +61,14 @@ class TestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Subject $subject)
     {
-        return Inertia::render('Tests/Create');
+        $diseases = Disease::all();
+
+        return Inertia::render('Tests/Create', [
+            'diseases' => $diseases,
+            'subject_id' => $subject->id
+        ]);
     }
 
     /**
@@ -100,9 +107,13 @@ class TestController extends Controller
     public function edit($id)
     {
         $test = Test::find($id);
+        $diseases = Disease::all();
+        $subjects = Subject::all();
 
         return Inertia::render('Tests/Edit', [
-            'test' => $test
+            'test' => $test,
+            'diseases' => $diseases,
+            'subjects' => $subjects
         ]);
     }
 
@@ -146,7 +157,6 @@ class TestController extends Controller
     {
         $test = Test::find($id);
         $test->delete();
-
         return Redirect::route('tests')->with('success', 'Test successfully deleted.');
     }
 
