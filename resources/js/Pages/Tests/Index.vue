@@ -12,10 +12,6 @@
 					<div class="mb-4 w-full ">
 						<div class="flex justify-between">
 							<jet-input id="filter" type="text" class="block" required autofocus placeholder="Search..." v-on:update:modelValue="handleSearchChange" :modelValue="this.filters.search"/>
-							
-							<jet-button class="float-left bg-grey-400" @click="createTest()">
-								Add Test
-							</jet-button>
 						</div>
 					</div>
 				
@@ -27,7 +23,7 @@
 										Test Date 
 									</th>
 									<th class="px-6 pt-6 pb-4">
-										User ID
+										Unique ID
 									</th>
 									<th class="px-6 pt-6 pb-4">
 										Disease
@@ -54,7 +50,7 @@
 									
 									<td class="border-t">
 										<inertia-link :href="'/tests/' + test.id + '/edit'" class="px-6 py-4 flex items-center focus:text-indigo-500">
-											{{ test.id }}ESDVCFGRTUI34EUI
+											{{ test.unique_id }}
 											<icon v-if="test.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-500 ml-2"/>
 										</inertia-link>
 									</td>
@@ -113,7 +109,7 @@
 										Test Date 
 									</th>
 									<th class="px-6 pt-6 pb-4">
-										User ID
+										Unique ID
 									</th>
 									<th class="px-6 pt-6 pb-4">
 										Disease
@@ -139,7 +135,7 @@
 									
 									<td class="border-t">
 										<inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500">
-											{{ test.id }}ESDVCFGRTUI34EUI
+											{{ test.unique_id }}
 										</inertia-link>
 									</td>
 
@@ -225,9 +221,6 @@ export default {
 		},
 		formatDate(dateTime) {
 			return DateTime.fromISO(dateTime).toFormat('yyyy-LL-dd HH:mm');
-		}, 
-		createTest() {
-			Inertia.get('/tests/create')
 		},
 		deleteTest(id) {
 			Inertia.delete('/tests/' + id + '/trash');

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Disease;
+use App\Models\Subject;
 use App\Models\Test;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +26,7 @@ class TestController extends Controller
         $query_params = $request->all();
 
         $tests = [];
-        $trashedTests = Test::select('tests.*', 'subjects.first_name', 'subjects.last_name', 'diseases.name')
+        $trashedTests = Test::select('tests.*', 'subjects.first_name', 'subjects.last_name', 'diseases.name', 'subjects.unique_id')
             ->leftJoin('subjects', 'tests.subject_id', '=', 'subjects.id')
             ->leftJoin('diseases', 'tests.disease_id', '=', 'diseases.id')
             ->orderBy('tests.test_date', 'asc')
@@ -38,7 +40,7 @@ class TestController extends Controller
                 '%' . $query_params['search'] . '%'
             )->get();
         } else {
-            $tests = Test::select('tests.*', 'subjects.first_name', 'subjects.last_name', 'diseases.name')
+            $tests = Test::select('tests.*', 'subjects.first_name', 'subjects.last_name', 'diseases.name', 'subjects.unique_id')
                 ->leftJoin('subjects', 'tests.subject_id', '=', 'subjects.id')
                 ->leftJoin('diseases', 'tests.disease_id', '=', 'diseases.id')
                 ->orderBy('tests.test_date', 'desc')
@@ -59,9 +61,16 @@ class TestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Subject $subject)
     {
-        return Inertia::render('Tests/Create');
+        $diseases = Disease::all();
+        $subjects = Subject::all();
+
+        return Inertia::render('Tests/Create', [
+            'diseases' => $diseases,
+            'subject_id' => $subject->id,
+            'subjects' => $subjects
+        ]);
     }
 
     /**
@@ -100,9 +109,13 @@ class TestController extends Controller
     public function edit($id)
     {
         $test = Test::find($id);
+        $diseases = Disease::all();
+        $subjects = Subject::all();
 
         return Inertia::render('Tests/Edit', [
-            'test' => $test
+            'test' => $test,
+            'diseases' => $diseases,
+            'subjects' => $subjects
         ]);
     }
 
@@ -146,7 +159,6 @@ class TestController extends Controller
     {
         $test = Test::find($id);
         $test->delete();
-
         return Redirect::route('tests')->with('success', 'Test successfully deleted.');
     }
 

@@ -62,7 +62,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
 	// Tests
 	Route::get('/tests', [TestController::class, 'index'])->name('tests');
-	Route::get('/tests/create', [TestController::class, 'create'])->name('tests.create');
+	Route::get('/tests/{subject}/create', [TestController::class, 'create'])->name('tests.create');
 	Route::post('/tests', [TestController::class, 'store'])->name('tests.store');
 	Route::get('/tests/{test}/edit', [TestController::class, 'edit'])->name('tests.edit');
 	Route::patch('/tests/{test}', [TestController::class, 'update'])->name('tests.update');

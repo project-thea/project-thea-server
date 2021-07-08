@@ -75,7 +75,7 @@
 									<td class="border-t">
 										<inertia-link
 											class="px-6 py-4 flex items-center focus:text-indigo-500"
-											:href="'/subjects/edit/' + subject.id"
+											:href="'/subjects/' + subject.id + '/edit'"
 										>
 											{{ subject.phone }}
 											<icon
@@ -107,6 +107,12 @@
 											name="trash"
 											class="block w-4 h-4 fill-gray-500"
 											/>
+										</inertia-link>
+									</td>
+
+									<td class="border-t">
+										<inertia-link @click="createTest(subject.id)" :href="'/tests/' + subject.id + '/create'" tabindex="-1" aria-label="Add" title="Add Test" class="px-6 py-4 flex items-center">
+											<icon name="add-test" class="block w-4 h-4 fill-gray-500"/>
 										</inertia-link>
 									</td>
 									<td class="border-t w-px">
@@ -304,6 +310,9 @@ export default {
 		},
 		restoreSubject(id) {
 			Inertia.put('/subjects/' + id + '/restore');
+		}, 
+		createTest(id) {
+			Inertia.get('/tests/' + id + '/create')
 		}
 	},
 }

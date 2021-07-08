@@ -17,10 +17,27 @@
 	
                     <form @submit.prevent="updateTest">
                         <div class="mt-2">
+                            <jet-label for="subject_id" value="Subject Name" />
+                            <select name="subject_id" v-model="form.subject_id" :disabled=isDisabled class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
+                                <option v-for="subject in subjects" :key="subject.id" :value="subject.id">{{ subject.first_name }} {{ subject.last_name }}</option>
+                            </select>
+                        </div>
+                        <div class="mt-2">
+                            <jet-label for="subject_id" value="Unique ID" />
+                            <select name="subject_id" v-model="form.subject_id" :disabled=isDisabled class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
+                                <option v-for="subject in subjects" :key="subject.id" :value="subject.id">{{ subject.unique_id }}</option>
+                            </select>
+                        </div>
+                        <div class="mt-2">
+                            <jet-label for="disease_id" value="Disease" />
+                            <select name="disease_id" v-model="form.disease_id" :disabled=isDisabled class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
+                                <option v-for="disease in diseases" :key="disease.id" :value="disease.id">{{ disease.name }}</option>
+                            </select>
+                        </div>
+                        <div class="mt-2">
                             <jet-label for="test_date" value="Test Date" />
                             <jet-input id="test_date" type="text" class="mt-1 block w-full" v-model="form.test_date" required autofocus autocomplete="test_date" />
                         </div>
-
                         <div class="mt-2">
                             <jet-label for="status" value="Test Status" />
                             <select name="status" v-model="form.status" required autofocus autocomplete="status" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
@@ -32,7 +49,7 @@
 
                         <div class="flex items-center justify-end mt-4">
                             <inertia-link :href="route('tests')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                                    Back
+                                Back
                             </inertia-link>
                             <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                                 Edit Test
@@ -59,6 +76,7 @@ import JetSectionTitle from '@/Jetstream/SectionTitle'
 
 export default {
     metaInfo: { title: 'Tests' },
+
     components: {
         Icon,
         AppLayout,
@@ -70,22 +88,43 @@ export default {
         JetTextarea,
         JetSectionTitle
     },
+
     props: {
         test: {
             type: Object,
             required: true,
         },
+
+        diseases: {
+            type: Array
+        },
+
+        subjects:{
+            type: Object,
+            required: true
+        }
     },
+
     data() {
         return {
             form: this.$inertia.form({
+                subject_id: this.test.subject_id,
+                disease_id: this.test.disease_id,
                 test_date:  this.test.test_date,
                 status:  this.test.status,
             }),
         }
     },
+
     watch: {
     },
+
+    computed: {
+        isDisabled() {
+            return true;
+        }
+    },
+
     methods: {
         updateTest() {
             this.form.patch('/tests/' + this.test.id, {
@@ -93,6 +132,16 @@ export default {
                 preserveScroll: true,
                 //onSuccess: () => this.form.reset(),
                 onError: () => {
+                    if (this.form.errors.subject_id) {
+                        this.form.reset('subject_id', this.test.subject_id)
+                        this.$refs.subject_id.focus()
+                    }
+
+                    if (this.form.errors.disease_id) {
+                        this.form.reset('disease_id', this.test.disease_id)
+                        this.$refs.disease_id.focus()
+                    }
+
                     if (this.form.errors.test_date) {
                         this.form.reset('test_date', this.test.test_date)
                         this.$refs.test_date.focus()
