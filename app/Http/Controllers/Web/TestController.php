@@ -64,10 +64,12 @@ class TestController extends Controller
     public function create(Subject $subject)
     {
         $diseases = Disease::all();
+        $subjects = Subject::all();
 
         return Inertia::render('Tests/Create', [
             'diseases' => $diseases,
-            'subject_id' => $subject->id
+            'subject_id' => $subject->id,
+            'subjects' => $subjects
         ]);
     }
 

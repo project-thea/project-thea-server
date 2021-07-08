@@ -30,7 +30,7 @@
                         </div>
                         <div class="mt-2">
                             <jet-label for="disease_id" value="Disease" />
-                            <select name="disease_id" v-model="form.disease_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
+                            <select name="disease_id" v-model="form.disease_id" :disabled=isDisabled class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
                                 <option v-for="disease in diseases" :key="disease.id" :value="disease.id">{{ disease.name }}</option>
                             </select>
                         </div>

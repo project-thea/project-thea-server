@@ -17,6 +17,20 @@
 	
                     <form @submit.prevent="createTest">
                         <div class="mt-2">
+                            <jet-label for="subject_id" value="Subject Name" />
+                            <select name="subject_id" v-model="form.subject_id" :disabled=isDisabled class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
+                                <option v-for="subject in subjects" :key="subject.id" :value="subject.id">{{ subject.first_name }} {{ subject.last_name }}</option>
+                            </select>
+                        </div>
+
+                        <div class="mt-2">
+                            <jet-label for="subject_id" value="Unique ID" />
+                            <select name="subject_id" v-model="form.subject_id" :disabled=isDisabled class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
+                                <option v-for="subject in subjects" :key="subject.id" :value="subject.id">{{ subject.unique_id }}</option>
+                            </select>
+                        </div>
+
+                        <div class="mt-2">
                             <jet-label for="disease_id" value="Disease" />
                             <select name="disease_id" v-model="form.disease_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
                                 <option v-for="disease in diseases" :key="disease.id" :value="disease.id">{{ disease.name }}</option>
@@ -65,7 +79,7 @@ import JetTextarea from '@/Jetstream/Textarea'
 import JetSectionTitle from '@/Jetstream/SectionTitle'
 
 export default {
-    metaInfo: { title: 'Subjects' },
+    metaInfo: { title: 'Tests' },
 
     components: {
         Icon,
@@ -81,7 +95,11 @@ export default {
 
     props: {
         diseases: {type: Array},
-        subject_id: {type: Number}
+        subject_id: {type: Number},
+        subjects: {
+            type: Object,
+            required: true
+        }
     },
 
     data() {
@@ -96,6 +114,12 @@ export default {
     },
 
     watch: {
+    },
+
+    computed: {
+        isDisabled() {
+            return true;
+        }
     },
 
     methods: {
