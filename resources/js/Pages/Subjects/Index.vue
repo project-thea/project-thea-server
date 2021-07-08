@@ -75,7 +75,7 @@
 									<td class="border-t">
 										<inertia-link
 											class="px-6 py-4 flex items-center focus:text-indigo-500"
-											:href="'/subjects/edit/' + subject.id"
+											:href="'/subjects/' + subject.id + '/edit'"
 										>
 											{{ subject.phone }}
 											<icon
