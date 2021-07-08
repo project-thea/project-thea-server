@@ -18,13 +18,13 @@
                     <form @submit.prevent="updateTest">
                         <div class="mt-2">
                             <jet-label for="subject_id" value="Subject Name" />
-                            <select name="subject_id" v-model="form.subject_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
+                            <select name="subject_id" v-model="form.subject_id" :disabled=isDisabled class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
                                 <option v-for="subject in subjects" :key="subject.id" :value="subject.id">{{ subject.first_name }} {{ subject.last_name }}</option>
                             </select>
                         </div>
                         <div class="mt-2">
                             <jet-label for="subject_id" value="Unique ID" />
-                            <select name="subject_id" v-model="form.subject_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
+                            <select name="subject_id" v-model="form.subject_id" :disabled=isDisabled class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
                                 <option v-for="subject in subjects" :key="subject.id" :value="subject.id">{{ subject.unique_id }}</option>
                             </select>
                         </div>
@@ -117,6 +117,12 @@ export default {
     },
 
     watch: {
+    },
+
+    computed: {
+        isDisabled() {
+            return true;
+        }
     },
 
     methods: {
