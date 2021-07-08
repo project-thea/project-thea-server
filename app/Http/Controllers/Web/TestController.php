@@ -26,7 +26,7 @@ class TestController extends Controller
         $query_params = $request->all();
 
         $tests = [];
-        $trashedTests = Test::select('tests.*', 'subjects.first_name', 'subjects.last_name', 'diseases.name')
+        $trashedTests = Test::select('tests.*', 'subjects.first_name', 'subjects.last_name', 'diseases.name', 'subjects.unique_id')
             ->leftJoin('subjects', 'tests.subject_id', '=', 'subjects.id')
             ->leftJoin('diseases', 'tests.disease_id', '=', 'diseases.id')
             ->orderBy('tests.test_date', 'asc')
@@ -40,7 +40,7 @@ class TestController extends Controller
                 '%' . $query_params['search'] . '%'
             )->get();
         } else {
-            $tests = Test::select('tests.*', 'subjects.first_name', 'subjects.last_name', 'diseases.name')
+            $tests = Test::select('tests.*', 'subjects.first_name', 'subjects.last_name', 'diseases.name', 'subjects.unique_id')
                 ->leftJoin('subjects', 'tests.subject_id', '=', 'subjects.id')
                 ->leftJoin('diseases', 'tests.disease_id', '=', 'diseases.id')
                 ->orderBy('tests.test_date', 'desc')
