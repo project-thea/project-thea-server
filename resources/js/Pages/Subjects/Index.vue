@@ -292,7 +292,7 @@ export default {
 
 	data() {
 		return {
-			search: this.filters.search
+			search: this.filters.search,
 		}
 	},
 	methods: {
