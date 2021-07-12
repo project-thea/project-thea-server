@@ -27,11 +27,9 @@ class DiseaseController extends Controller
         $trashedDiseases = Disease::onlyTrashed()->latest()->paginate(self::NUMBER_OF_RECORDS);
 
         if (isset($query_params['search'])) {
-            $diseases = DB::table('diseases')->where(
-                'name',
-                'LIKE',
-                '%' . $query_params['search'] . '%'
-            )->get();
+            $diseases = Disease::query()
+                ->where('name', 'LIKE', '%' . $query_params['search'] . '%')
+                ->paginate(self::NUMBER_OF_RECORDS);
         } else {
             $diseases = Disease::orderBy('id', 'desc')->paginate(self::NUMBER_OF_RECORDS);
         }
