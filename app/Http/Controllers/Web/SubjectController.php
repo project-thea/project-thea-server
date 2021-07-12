@@ -27,6 +27,7 @@ class SubjectController extends Controller
             $subjects = Subject::query()
                 ->where('first_name', 'LIKE', '%' . $query_params['search'] . '%')
                 ->orWhere('last_name', 'LIKE', '%' . $query_params['search'] . '%')
+                ->orWhere('phone', 'LIKE', '%' . $query_params['search'] . '%')
                 ->paginate(self::NUMBER_OF_RECORDS);
         } else {
             $subjects = Subject::orderBy('id', 'desc')->paginate(self::NUMBER_OF_RECORDS);
