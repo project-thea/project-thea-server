@@ -32,7 +32,7 @@ Route::get('/', function () {
 	]);
 });
 
-Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+Route::group(['middleware' => ['auth:sanctum', 'verified', 'throttle:web']], function () {
 	// Analysis
 	Route::get('/analysis', [AnalysisController::class, 'index'])->name('analysis');
 
