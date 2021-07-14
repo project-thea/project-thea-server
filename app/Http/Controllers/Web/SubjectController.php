@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\Subject;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\DB;
 use \Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -22,16 +21,15 @@ class SubjectController extends Controller
     public function index(Request $request)
     {
         $query_params = $request->all();
-
-        $subjects = [];
         $trashedSubjects = Subject::onlyTrashed()->latest()->paginate(self::NUMBER_OF_RECORDS);
 
         if (isset($query_params['search'])) {
-            $subjects = DB::table('subjects')->where(
-                'first_name',
-                'LIKE',
-                '%' . $query_params['search'] . '%'
-            )->get();
+            $subjects = Subject::query()
+                ->where('first_name', 'LIKE', '%' . $query_params['search'] . '%')
+                ->orWhere('last_name', 'LIKE', '%' . $query_params['search'] . '%')
+                ->orWhere('phone', 'LIKE', '%' . $query_params['search'] . '%')
+                ->orWhere('unique_id', 'LIKE', '%' . $query_params['search'] . '%')
+                ->paginate(self::NUMBER_OF_RECORDS);
         } else {
             $subjects = Subject::orderBy('id', 'desc')->paginate(self::NUMBER_OF_RECORDS);
         }

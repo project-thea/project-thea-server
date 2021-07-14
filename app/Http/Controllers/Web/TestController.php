@@ -7,7 +7,6 @@ use App\Models\Disease;
 use App\Models\Subject;
 use App\Models\Test;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\DB;
 use \Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -25,7 +24,6 @@ class TestController extends Controller
     {
         $query_params = $request->all();
 
-        $tests = [];
         $trashedTests = Test::select('tests.*', 'subjects.first_name', 'subjects.last_name', 'diseases.name', 'subjects.unique_id')
             ->leftJoin('subjects', 'tests.subject_id', '=', 'subjects.id')
             ->leftJoin('diseases', 'tests.disease_id', '=', 'diseases.id')
@@ -34,11 +32,14 @@ class TestController extends Controller
             ->paginate(self::NUMBER_OF_RECORDS);
 
         if (isset($query_params['search'])) {
-            $tests = DB::table('tests')->where(
-                'status',
-                'LIKE',
-                '%' . $query_params['search'] . '%'
-            )->get();
+            $tests = Test::select('tests.*', 'subjects.first_name', 'subjects.last_name', 'diseases.name', 'subjects.unique_id')
+                ->leftJoin('subjects', 'tests.subject_id', '=', 'subjects.id')
+                ->leftJoin('diseases', 'tests.disease_id', '=', 'diseases.id')
+                ->orderBy('tests.test_date', 'desc')
+                ->where('diseases.name', 'LIKE', '%' . $query_params['search'] . '%')
+                ->orWhere('subjects.unique_id', 'LIKE', '%' . $query_params['search'] . '%')
+                ->orWhere('tests.status', 'LIKE', '%' . $query_params['search'] . '%')
+                ->paginate(self::NUMBER_OF_RECORDS);
         } else {
             $tests = Test::select('tests.*', 'subjects.first_name', 'subjects.last_name', 'diseases.name', 'subjects.unique_id')
                 ->leftJoin('subjects', 'tests.subject_id', '=', 'subjects.id')
