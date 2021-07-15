@@ -1,4 +1,4 @@
-# Project THEA API
+# Project THEA Server
 
 A tracking haulage application in East Africa to control COVID-19.
 
