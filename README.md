@@ -89,6 +89,3 @@ php artisan db:seed
 ```sh
 php artisan serve
 ```
-
-## Credits
-- Original work by [Bodastage Solutions](https://www.bodastage.com) and contributors.
