@@ -43,7 +43,27 @@ prerequisites. These steps are checked by [Bodastage Solutions](https://www.boda
 
 ### Setting up your development environment
 
-If you plan to contribute code changes, review the [README.md](https://github.com/project-thea/project-thea-server/blob/master/README.md) file for how to set up your environment.
+If you plan to contribute code changes to the project, follow the guidelines below for how to set up your environment.
+
+```sh
+1. Fork the git repo from github https://github.com/project-thea/project-thea-api
+2. Clone repo locally on your laptop 
+  - git clone the "forked_repo"
+3. Change directory into cloned repo
+  - cd forked_repo
+4. Add remote link to the original repo (upstream) 
+  - git remote add upstream https://github.com/project-thea/project-thea-api
+5. Check the origin and upstream endpoints 
+  - git remote -v
+6. Create feature branch
+  - git checkout -b feature_branch
+7. Make changes, update index and commit 
+  - git add . 
+  - git commit -m "commit message"
+8. Push to your forked repo
+  - git push -u origin forked_repo
+9. Create a PR (Pull Request)
+```
 
 ### Style and Convention
 
