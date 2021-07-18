@@ -84,7 +84,7 @@ php artisan migrate
 php artisan db:seed
 ```
 
-### Run artisan server:
+### Run development server:
 
 ```sh
 php artisan serve
