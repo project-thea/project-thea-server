@@ -49,7 +49,8 @@ class HandleInertiaRequests extends Middleware
                     'email' => $user->email,
                     'role' => $user->role,
                     'can' => [
-                        'isAdmin' => $user->can('isAdmin')
+                        'isAdmin' => $user->can('isAdmin'),
+                        'isLabTechnician' => $user->can('isLabTechnician'),
                     ]
                 ] : null;
             },
