@@ -8,6 +8,7 @@ use App\Models\Subject;
 use App\Models\Test;
 use Inertia\Inertia;
 use \Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
@@ -64,6 +65,10 @@ class TestController extends Controller
      */
     public function create(Subject $subject)
     {
+        if (!(Gate::allows('isAdmin') || Gate::allows('isLabTechnician'))) {
+            abort(403, 'this action is unauthorized.');
+        }
+
         $diseases = Disease::all();
         $subjects = Subject::all();
 
@@ -82,6 +87,10 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
+        if (!(Gate::allows('isAdmin') || Gate::allows('isLabTechnician'))) {
+            abort(403, 'this action is unauthorized.');
+        }
+
         $data = $request->all();
 
         $validationRules = [
@@ -109,6 +118,10 @@ class TestController extends Controller
      */
     public function edit($id)
     {
+        if (!(Gate::allows('isAdmin') || Gate::allows('isLabTechnician'))) {
+            abort(403, 'this action is unauthorized.');
+        }
+
         $test = Test::find($id);
         $diseases = Disease::all();
         $subjects = Subject::all();
@@ -129,6 +142,10 @@ class TestController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!(Gate::allows('isAdmin') || Gate::allows('isLabTechnician'))) {
+            abort(403, 'this action is unauthorized.');
+        }
+
         $data = $request->all();
 
         $validationRules = [
@@ -158,6 +175,8 @@ class TestController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('isAdmin');
+
         $test = Test::find($id);
         $test->delete();
         return Redirect::route('tests')->with('success', 'Test successfully deleted.');
@@ -171,6 +190,8 @@ class TestController extends Controller
      */
     public function restore($id)
     {
+        $this->authorize('isAdmin');
+
         $test = Test::withTrashed()->find($id);
         $test->restore();
         return Redirect::route('tests')->with('success', 'Test successfully restored.');
