@@ -33,10 +33,9 @@
 						</div>
 
                         <div class="mt-4">
-                            <jet-label for="role" value="Role" />
-                            <select name="role" v-model="form.role" required autofocus autocomplete="role" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
-                                <option value="1">User</option>
-                                <option value="2">Admin</option>
+                            <jet-label for="role_id" value="Role" />
+                            <select name="role_id" v-model="form.role_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
+                                <option v-for="role in roles" :key="role.id" :value="role.id">{{ role.name }}</option>
                             </select>
                         </div>
 
@@ -86,6 +85,10 @@ export default {
 			type: Object,
 			required: true,
 		},
+
+		roles: {
+			type: Array
+		}
 	},
 	data() {
 		return {
@@ -93,12 +96,14 @@ export default {
 				first_name:  this.user.first_name,
 				last_name:  this.user.last_name,
 				email:  this.user.email,
-				role: this.user.role
+				role_id: this.user.role_id
 			}),
 		}
 	},
+
 	watch: {
 	},
+
 	methods: {
 		updateUser() {
 			this.form.patch('/users/' + this.user.id, {
@@ -121,9 +126,9 @@ export default {
 						this.$refs.email.focus()
                     }
 
-					if (this.form.errors.role) {
-						this.form.reset('role', this.user.role)
-						this.$refs.role.focus()
+					if (this.form.errors.role_id) {
+						this.form.reset('role_id', this.user.role_id)
+						this.$refs.role_id.focus()
 					}
 				}
 			});
