@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -20,8 +21,18 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('id', 'desc')->paginate(self::NUMBER_OF_RECORDS);
-        $trashedUsers = User::onlyTrashed()->latest()->paginate(self::NUMBER_OF_RECORDS);
+        $this->authorize('isAdmin');
+
+        $users = User::select('users.*', 'roles.name')
+            ->leftJoin('roles', 'users.role_id', '=', 'roles.id')
+            ->orderBy('users.id', 'asc')
+            ->paginate(self::NUMBER_OF_RECORDS);
+
+        $trashedUsers = User::select('users.*', 'roles.name')
+            ->leftJoin('roles', 'users.role_id', '=', 'roles.id')
+            ->orderBy('users.deleted_at', 'desc')
+            ->onlyTrashed()
+            ->paginate(self::NUMBER_OF_RECORDS);
 
         return Inertia::render('Users/Index', [
             'users' => $users,
@@ -36,7 +47,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Users/Create');
+        $this->authorize('isAdmin');
+
+        $roles = Role::all();
+        return Inertia::render('Users/Create', ['roles' => $roles]);
     }
 
     /**
@@ -47,6 +61,8 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
+        $this->authorize('isAdmin');
+
         $validatedData = $request->validated();
         User::create($validatedData);
         return Redirect::route('users.index')->with('success', 'User successfully added.');
@@ -60,9 +76,13 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('isAdmin');
+
         $user = User::find($id);
+        $roles = Role::all();
         return Inertia::render('Users/Edit', [
-            'user' => $user
+            'user' => $user,
+            'roles' => $roles
         ]);
     }
 
@@ -75,6 +95,8 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, $id)
     {
+        $this->authorize('isAdmin');
+
         $validatedData = $request->validated();
         $user = User::find($id);
         $user->update($validatedData);
@@ -89,6 +111,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('isAdmin');
+
         $user = User::find($id);
         $user->delete();
         return Redirect::route('users.index')->with('success', 'User successfully deleted.');
@@ -102,6 +126,8 @@ class UserController extends Controller
      */
     public function restore($id)
     {
+        $this->authorize('isAdmin');
+
         $user = User::withTrashed()->find($id);
         $user->restore();
         return Redirect::route('users.index')->with('success', 'User successfully restored.');
