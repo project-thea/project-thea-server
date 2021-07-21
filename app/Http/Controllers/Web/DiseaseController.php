@@ -47,6 +47,7 @@ class DiseaseController extends Controller
      */
     public function create()
     {
+        $this->authorize('isAdmin');
         return Inertia::render('Diseases/Create');
     }
 
@@ -58,6 +59,8 @@ class DiseaseController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('isAdmin');
+
         $data = $request->all();
 
         $validationRules = [
@@ -83,6 +86,8 @@ class DiseaseController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('isAdmin');
+
         $disease = Disease::find($id);
 
         return Inertia::render('Diseases/Edit', [
@@ -99,6 +104,8 @@ class DiseaseController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('isAdmin');
+
         $data = $request->all();
 
         $validationRules = [
@@ -126,6 +133,8 @@ class DiseaseController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('isAdmin');
+
         $disease = Disease::find($id);
         $disease->delete();
         return Redirect::route('diseases')->with('success', 'Disease successfully deleted.');
@@ -139,6 +148,8 @@ class DiseaseController extends Controller
      */
     public function restore($id)
     {
+        $this->authorize('isAdmin');
+        
         $disease = Disease::withTrashed()->find($id);
         $disease->restore();
         return Redirect::route('diseases')->with('success', 'Disease successfully restored.');

@@ -50,6 +50,7 @@ class SubjectController extends Controller
      */
     public function create()
     {
+        $this->authorize('isAdmin');
         return Inertia::render('Subjects/Create');
     }
 
@@ -61,6 +62,8 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('isAdmin');
+
         $data = $request->all();
 
         $validationRules = [
@@ -94,6 +97,8 @@ class SubjectController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('isAdmin');
+
         $subject = Subject::find($id);
 
         return Inertia::render('Subjects/Edit', [
@@ -110,6 +115,8 @@ class SubjectController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('isAdmin');
+
         $data = $request->all();
 
         $validationRules = [
@@ -145,6 +152,8 @@ class SubjectController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('isAdmin');
+
         $subject = Subject::find($id);
         $subject->delete();
         return Redirect::route('subjects')->with('success', 'Subject successfully deleted.');
@@ -158,6 +167,8 @@ class SubjectController extends Controller
      */
     public function restore($id)
     {
+        $this->authorize('isAdmin');
+        
         $subject = Subject::withTrashed()->find($id);
         $subject->restore();
         return Redirect::route('subjects')->with('success', 'Subject successfully restored.');
