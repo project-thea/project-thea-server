@@ -9,27 +9,36 @@
         <form @submit.prevent="submit">
             <div>
                 <jet-label for="first_name" value="First Name" />
-                <jet-input id="first_name" type="text" class="mt-1 block w-full" v-model="form.first_name" required autofocus autocomplete="first_name" />
+                <jet-input id="first_name" type="text" class="mt-1 block w-full" v-model="form.first_name" autofocus autocomplete="first_name" />
             </div>
 
             <div class="mt-4">
                 <jet-label for="last_name" value="Last Name" />
-                <jet-input id="last_name" type="text" class="mt-1 block w-full" v-model="form.last_name" required autofocus autocomplete="last_name" />
+                <jet-input id="last_name" type="text" class="mt-1 block w-full" v-model="form.last_name" autofocus autocomplete="last_name" />
             </div>
 
             <div class="mt-4">
                 <jet-label for="email" value="Email" />
-                <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required />
+                <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" />
             </div>
 
             <div class="mt-4">
                 <jet-label for="password" value="Password" />
-                <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
+                <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" autocomplete="new-password" />
             </div>
 
             <div class="mt-4">
                 <jet-label for="password_confirmation" value="Confirm Password" />
-                <jet-input id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
+                <jet-input id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" autocomplete="new-password" />
+            </div>
+
+            <div class="mt-4">
+                <jet-label for="role_id" value="Register as:" />
+                <select name="role_id" v-model="form.role_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
+                    <option value="1" >User</option>
+                    <option value="2">Admin</option>
+                    <option value="3">Lab-Technician</option>
+                </select>
             </div>
 
             <div class="mt-4" v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature">
@@ -85,6 +94,7 @@
                     email: '',
                     password: '',
                     password_confirmation: '',
+                    role_id: '',
                     terms: false,
                 })
             }
