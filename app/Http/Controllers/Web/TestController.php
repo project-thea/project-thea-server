@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Disease;
+use App\Models\Status;
 use App\Models\Subject;
 use App\Models\Test;
 use Inertia\Inertia;
@@ -25,26 +26,29 @@ class TestController extends Controller
     {
         $query_params = $request->all();
 
-        $trashedTests = Test::select('tests.*', 'subjects.first_name', 'subjects.last_name', 'diseases.name', 'subjects.unique_id')
+        $trashedTests = Test::select('tests.*', 'subjects.first_name', 'subjects.last_name', 'diseases.name', 'subjects.unique_id', 'statuses.title')
             ->leftJoin('subjects', 'tests.subject_id', '=', 'subjects.id')
             ->leftJoin('diseases', 'tests.disease_id', '=', 'diseases.id')
+            ->leftJoin('statuses', 'tests.status_id', '=', 'statuses.id')
             ->orderBy('tests.test_date', 'asc')
             ->onlyTrashed()
             ->paginate(self::NUMBER_OF_RECORDS);
 
         if (isset($query_params['search'])) {
-            $tests = Test::select('tests.*', 'subjects.first_name', 'subjects.last_name', 'diseases.name', 'subjects.unique_id')
+            $tests = Test::select('tests.*', 'subjects.first_name', 'subjects.last_name', 'diseases.name', 'subjects.unique_id', 'statuses.title')
                 ->leftJoin('subjects', 'tests.subject_id', '=', 'subjects.id')
                 ->leftJoin('diseases', 'tests.disease_id', '=', 'diseases.id')
+                ->leftJoin('statuses', 'tests.status_id', '=', 'statuses.id')
                 ->orderBy('tests.test_date', 'desc')
                 ->where('diseases.name', 'LIKE', '%' . $query_params['search'] . '%')
                 ->orWhere('subjects.unique_id', 'LIKE', '%' . $query_params['search'] . '%')
                 ->orWhere('tests.status', 'LIKE', '%' . $query_params['search'] . '%')
                 ->paginate(self::NUMBER_OF_RECORDS);
         } else {
-            $tests = Test::select('tests.*', 'subjects.first_name', 'subjects.last_name', 'diseases.name', 'subjects.unique_id')
+            $tests = Test::select('tests.*', 'subjects.first_name', 'subjects.last_name', 'diseases.name', 'subjects.unique_id', 'statuses.title')
                 ->leftJoin('subjects', 'tests.subject_id', '=', 'subjects.id')
                 ->leftJoin('diseases', 'tests.disease_id', '=', 'diseases.id')
+                ->leftJoin('statuses', 'tests.status_id', '=', 'statuses.id')
                 ->orderBy('tests.test_date', 'desc')
                 ->paginate(self::NUMBER_OF_RECORDS);
         }
@@ -71,11 +75,13 @@ class TestController extends Controller
 
         $diseases = Disease::all();
         $subjects = Subject::all();
+        $statuses = Status::all();
 
         return Inertia::render('Tests/Create', [
             'diseases' => $diseases,
             'subject_id' => $subject->id,
-            'subjects' => $subjects
+            'subjects' => $subjects,
+            'statuses' => $statuses
         ]);
     }
 
@@ -125,11 +131,13 @@ class TestController extends Controller
         $test = Test::find($id);
         $diseases = Disease::all();
         $subjects = Subject::all();
+        $statuses = Status::all();
 
         return Inertia::render('Tests/Edit', [
             'test' => $test,
             'diseases' => $diseases,
-            'subjects' => $subjects
+            'subjects' => $subjects,
+            'statuses' => $statuses
         ]);
     }
 
