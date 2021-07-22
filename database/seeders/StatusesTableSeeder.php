@@ -27,21 +27,21 @@ class StatusesTableSeeder extends Seeder
         $statuses = [
             [
                 'id' => self::NEGATIVE_ID,
-                'name' => self::STATUS_NEGATIVE,
+                'title' => self::STATUS_NEGATIVE,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
 
             [
                 'id' => self::POSITIVE_ID,
-                'name' => self::STATUS_POSITIVE,
+                'title' => self::STATUS_POSITIVE,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
 
             [
                 'id' => self::UNKNOWN_ID,
-                'name' => self::STATUS_UNKNOWN,
+                'title' => self::STATUS_UNKNOWN,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
