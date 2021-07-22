@@ -63,7 +63,7 @@
 									</td>
 									<td class="border-t">
 										<inertia-link :href="'/tests/' + test.id + '/edit'" tabindex="-1" aria-label="Edit" class="px-6 py-4 flex items-center">
-											{{ test.status }}
+											{{ test.title }}
 										</inertia-link>
 									</td>
 									<td class="border-t" v-if="$page.props.loggedInUser.can.isAdmin">
@@ -146,7 +146,7 @@
 									</td>
 									<td class="border-t">
 										<inertia-link tabindex="-1" aria-label="Edit" class="px-6 py-4 flex items-center">
-											{{ test.status }}
+											{{ test.title }}
 										</inertia-link>
 									</td>
 									<td class="border-t">
@@ -202,6 +202,10 @@ export default {
 		},
 		trashedTests: {
 			type: Object,
+			required: true
+		}, 
+		statuses: {
+			type: Array,
 			required: true
 		}
 	},
