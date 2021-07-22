@@ -12,7 +12,7 @@ class Status extends Model
     protected $table = 'statuses';
 
     protected $fillable = [
-        'name'
+        'title'
     ];
 
     public function tests()
