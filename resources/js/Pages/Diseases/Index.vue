@@ -13,7 +13,7 @@
 						<div class="flex justify-between">
 							<jet-input id="filter" type="text" class="block" required autofocus placeholder="Search..." v-on:update:modelValue="handleSearchChange" :modelValue="this.filters.search"/>
 							
-							<jet-button class="float-left bg-grey-400" @click="createDisease()">
+							<jet-button v-if="$page.props.loggedInUser.can.isAdmin" class="float-left bg-grey-400" @click="createDisease()">
 								Add Disease
 							</jet-button>
 						</div>
