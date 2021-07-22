@@ -93,6 +93,6 @@ php artisan serve
 CONTRIBUTION
 ------------
 
-The [Contributor Guide](https://github.com/project-thea/project-thea-server/tree/master/contribution/guide) provides detailed instruction on how to get your ideas and bug fixes seen and accepted, including:
+The [Contributor Guide](https://github.com/project-thea/project-thea-server/tree/master/contribution/guide) provides detailed instructions on how to get your ideas and bug fixes seen and accepted, including:
 
 1. How to [open a pull request](https://github.com/project-thea/project-thea-server/tree/master/contribution/guide#setting-up-your-development-environment)
