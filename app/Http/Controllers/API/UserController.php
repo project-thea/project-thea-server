@@ -23,8 +23,7 @@ class UserController extends Controller
             'first_name' => 'required|string|max:55',
             'last_name' => 'required|string|max:55',
             'email' => 'email|required|string|unique:users',
-            'password' => 'required|string|confirmed',
-            'role_id' => 'required'
+            'password' => 'required|string|confirmed'
         ];
 
         $validateData = $request->validate($validationRules);
