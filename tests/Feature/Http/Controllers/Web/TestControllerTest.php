@@ -9,6 +9,7 @@ use Laravel\Sanctum\Sanctum;
 use App\Models\Test;
 use App\Models\User;
 use App\Models\Disease;
+use App\Models\Status;
 use Inertia\Testing\Assert;
 
 class TestControllerTest extends TestCase
@@ -33,15 +34,18 @@ class TestControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = Sanctum::actingAs(User::factory()->create());
+        $user = Sanctum::actingAs(User::factory()->create([
+            'role_id' => '2'
+        ]));
 
         $subject = Subject::factory()->create();
         $disease = Disease::factory()->create();
+        $status = Status::factory()->create();
 
         $expected = [
             'subject_id' => $subject->id,
             'disease_id' => $disease->id,
-            'status' => 'Negative',
+            'status_id' => $status->id,
             'test_date' => date('Y-m-d')
         ];
 
@@ -53,25 +57,22 @@ class TestControllerTest extends TestCase
                 $page->component('Tests/Index');
             });
 
-        $test = Test::where('subject_id', $expected['subject_id'])
-            ->where('disease_id', $expected['disease_id'])
-            ->where('test_date', $expected['test_date'])->get();
-
-        $this->assertIsObject($test);
+        $this->assertDatabaseHas('tests', $expected);
     }
-
 
     public function test_a_test_can_be_updated()
     {
-        $user = Sanctum::actingAs(User::factory()->create());
+        $this->withoutExceptionHandling();
+
+        $user = Sanctum::actingAs(User::factory()->create([
+            'role_id' => '2'
+        ]));
 
         $test = Test::factory()->create();
-
-        $test->status = 'Unknown';
-        $test->update();
+        $status = Status::factory()->create();
 
         $testData = [
-            'status' => 'Negative',
+            'status_id' => $status->id,
             'subject_id' => $test->subject_id,
             'disease_id' => $test->disease_id,
             'test_date' => $test->test_date,
@@ -90,20 +91,50 @@ class TestControllerTest extends TestCase
                     });
             });
 
-        $updatedTest = Test::find($test->id);
-        $this->assertIsObject($updatedTest);
+        $testData['id'] = $test->id;
+        $this->assertDatabaseHas('tests', $testData);
+    }
 
-        $this->assertEquals($updatedTest->status, $testData['status']);
+    public function test_failed_validation_fields()
+    {
+        $this->withoutExceptionHandling();
+
+        $user = Sanctum::actingAs(User::factory()->create([
+            'role_id' => '2'
+        ]));
+
+        $subject = Subject::factory()->create();
+        $disease = Disease::factory()->create();
+
+        $expected = [
+            'subject_id' => $subject->id,
+            'disease_id' => $disease->id,
+            'status_id' => 1000,
+            'test_date' => date('Y-m-d')
+        ];
+
+        $this->actingAs($user)
+            ->followingRedirects()
+            ->post('/tests', $expected)
+            ->assertStatus(200)
+            ->assertInertia(function (Assert $page) {
+                $page->component('Tests/Create');
+            });
+
+        $this->assertDatabaseMissing('tests', $expected);
     }
 
     public function test_a_test_can_be_deleted()
     {
         $this->withoutExceptionHandling();
 
-        $user = Sanctum::actingAs(User::factory()->create());
+        $user = Sanctum::actingAs(User::factory()->create([
+            'role_id' => '2'
+        ]));
+
         $test = Test::factory()->create();
 
-        $this->actingAs($user)
+        $response = $this->actingAs($user)
             ->followingRedirects()
             ->delete('/tests/' . $test->id . '/trash')
             ->assertStatus(200)
@@ -116,17 +147,20 @@ class TestControllerTest extends TestCase
                     });
             });
 
-        $this->assertCount(0, Test::all());
+        $response->assertSuccessful();
     }
 
     public function test_a_test_can_be_restored()
     {
         $this->withoutExceptionHandling();
 
-        $user = Sanctum::actingAs(User::factory()->create());
+        $user = Sanctum::actingAs(User::factory()->create([
+            'role_id' => '2'
+        ]));
+
         $test = Test::factory()->create();
 
-        $this->actingAs($user)
+        $response = $this->actingAs($user)
             ->followingRedirects()
             ->put('/tests/' . $test->id . '/restore')
             ->assertStatus(200)
@@ -139,6 +173,6 @@ class TestControllerTest extends TestCase
                     });
             });
 
-        $this->assertCount(1, Test::all());
+        $response->assertSuccessful();
     }
 }

@@ -36,7 +36,10 @@ class DiseaseControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = Sanctum::actingAs(User::factory()->create());
+        $user = Sanctum::actingAs(User::factory()->create([
+            'role_id' => '2'
+        ]));
+
         $this->actingAs($user);
 
         $diseasesData = [
@@ -53,7 +56,10 @@ class DiseaseControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = Sanctum::actingAs(User::factory()->create());
+        $user = Sanctum::actingAs(User::factory()->create([
+            'role_id' => '2'
+        ]));
+
         $this->actingAs($user);
 
         $diseasesData = [
@@ -70,10 +76,12 @@ class DiseaseControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = Sanctum::actingAs(User::factory()->create());
+        $user = Sanctum::actingAs(User::factory()->create([
+            'role_id' => '2'
+        ]));
 
         $expected = [
-            'name' => 'COVID-19',
+            'name' => 'Ebola',
             'description' => 'This is a deadly disease'
         ];
 
@@ -90,24 +98,21 @@ class DiseaseControllerTest extends TestCase
                     });
             });
 
-        $disease = Disease::where('name', $expected['name'])->get();
-
-        $this->assertIsObject($disease);
+        $this->assertDatabaseHas('diseases', $expected);
     }
 
     public function test_a_disease_can_be_updated()
     {
         $this->withoutExceptionHandling();
 
-        $user = Sanctum::actingAs(User::factory()->create());
+        $user = Sanctum::actingAs(User::factory()->create([
+            'role_id' => '2'
+        ]));
+
         $disease = Disease::factory()->create();
 
-        $disease->name = 'COVID-21';
-        $disease->description = 'This consists of many variants';
-        $disease->update();
-
         $diseaseData = [
-            'name' => 'COVID-19',
+            'name' => 'Covid',
             'description' => 'This is a very deadly disease',
         ];
 
@@ -124,21 +129,21 @@ class DiseaseControllerTest extends TestCase
                     });
             });
 
-        $updatedDisease = Disease::find($disease->id);
-        $this->assertIsObject($updatedDisease);
-
-        $this->assertEquals($updatedDisease->name, $diseaseData['name']);
-        $this->assertEquals($updatedDisease->description, $diseaseData['description']);
+        $diseaseData['id'] = $disease->id;    
+        $this->assertDatabaseHas('diseases', $diseaseData);
     }
 
     public function test_a_disease_can_be_deleted()
     {
         $this->withoutExceptionHandling();
 
-        $user = Sanctum::actingAs(User::factory()->create());
+        $user = Sanctum::actingAs(User::factory()->create([
+            'role_id' => '2'
+        ]));
+
         $disease = Disease::factory()->create();
 
-        $this->actingAs($user)
+        $response = $this->actingAs($user)
             ->followingRedirects()
             ->delete('/diseases/' . $disease->id . '/trash')
             ->assertStatus(200)
@@ -151,17 +156,20 @@ class DiseaseControllerTest extends TestCase
                     });
             });
 
-        $this->assertCount(0, Disease::all());
+        $response->assertSuccessful();
     }
 
     public function test_a_disease_can_be_restored()
     {
         $this->withoutExceptionHandling();
 
-        $user = Sanctum::actingAs(User::factory()->create());
+        $user = Sanctum::actingAs(User::factory()->create([
+            'role_id' => '2'
+        ]));
+
         $disease = Disease::factory()->create();
 
-        $this->actingAs($user)
+        $response = $this->actingAs($user)
             ->followingRedirects()
             ->put('/diseases/' . $disease->id . '/restore')
             ->assertStatus(200)
@@ -174,6 +182,6 @@ class DiseaseControllerTest extends TestCase
                     });
             });
 
-        $this->assertCount(1, Disease::all());
+        $response->assertSuccessful();
     }
 }
