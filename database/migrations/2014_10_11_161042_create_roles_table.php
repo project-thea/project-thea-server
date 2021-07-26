@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddStatusIdToTestsTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddStatusIdToTestsTable extends Migration
      */
     public function up()
     {
-        Schema::table('tests', function (Blueprint $table) {
-            $table->foreignId('status_id')->nullable()->constrained('statuses')->onDelete('cascade');
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -25,8 +28,6 @@ class AddStatusIdToTestsTable extends Migration
      */
     public function down()
     {
-        Schema::table('tests', function (Blueprint $table) {
-            $table->dropColumn('status_id');
-        });
+        Schema::dropIfExists('roles');
     }
 }
