@@ -37,7 +37,10 @@ class SubjectControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = Sanctum::actingAs(User::factory()->create());
+        $user = Sanctum::actingAs(User::factory()->create([
+            'role_id' => '2'
+        ]));
+
         $this->actingAs($user);
 
         $subjectData = [
@@ -63,7 +66,10 @@ class SubjectControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = Sanctum::actingAs(User::factory()->create());
+        $user = Sanctum::actingAs(User::factory()->create([
+            'role_id' => '2'
+        ]));
+
         $this->actingAs($user);
 
         $subjectData = [
@@ -89,7 +95,10 @@ class SubjectControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = Sanctum::actingAs(User::factory()->create());
+        $user = Sanctum::actingAs(User::factory()->create([
+            'role_id' => '2'
+        ]));
+
         $this->actingAs($user);
 
         $subjectData = [
@@ -115,7 +124,10 @@ class SubjectControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = Sanctum::actingAs(User::factory()->create());
+        $user = Sanctum::actingAs(User::factory()->create([
+            'role_id' => '2'
+        ]));
+
         $this->actingAs($user);
 
         $subjectData = [
@@ -139,13 +151,13 @@ class SubjectControllerTest extends TestCase
         $response->assertSessionHasErrors('phone');
     }
 
-
-
     public function test_a_subject_can_be_stored()
     {
         $this->withoutExceptionHandling();
 
-        $user = Sanctum::actingAs(User::factory()->create());
+        $user = Sanctum::actingAs(User::factory()->create([
+            'role_id' => '2'
+        ]));
 
         $expected = [
             'first_name' => 'Andrew',
@@ -174,29 +186,18 @@ class SubjectControllerTest extends TestCase
                     });
             });
 
-        $subject = Subject::where('email', $expected['email'])->get();
-
-        $this->assertIsObject($subject);
+        $this->assertDatabaseHas('subjects', $expected);
     }
 
     public function test_a_subject_can_be_updated()
     {
         $this->withoutExceptionHandling();
 
-        $user = Sanctum::actingAs(User::factory()->create());
-        $subject = Subject::factory()->create();
+        $user = Sanctum::actingAs(User::factory()->create([
+            'role_id' => '2'
+        ]));
 
-        $subject->first_name = 'Jerome';
-        $subject->last_name = 'Brogani';
-        $subject->email = 'gani@gmail.com';
-        $subject->nationality = 'Ugandan';
-        $subject->date_of_birth = '2000-06-12';
-        $subject->phone = '0782444844';
-        $subject->next_of_kin = 'Vanessa Hayes';
-        $subject->next_of_kin_phone = '0773285731';
-        $subject->id_number = 'CM929F45HY2315D';
-        $subject->id_type = 'Drivers license';
-        $subject->update();
+        $subject = Subject::factory()->create();
 
         $subjectData = [
             'first_name' => 'Andrew',
@@ -225,29 +226,21 @@ class SubjectControllerTest extends TestCase
                     });
             });
 
-        $updatedSubject = Subject::find($subject->id);
-        $this->assertIsObject($updatedSubject);
-
-        $this->assertEquals($updatedSubject->first_name, $subjectData['first_name']);
-        $this->assertEquals($updatedSubject->last_name, $subjectData['last_name']);
-        $this->assertEquals($updatedSubject->email, $subjectData['email']);
-        $this->assertEquals($updatedSubject->nationality, $subjectData['nationality']);
-        $this->assertEquals($updatedSubject->date_of_birth, $subjectData['date_of_birth']);
-        $this->assertEquals($updatedSubject->phone, $subjectData['phone']);
-        $this->assertEquals($updatedSubject->next_of_kin, $subjectData['next_of_kin']);
-        $this->assertEquals($updatedSubject->next_of_kin_phone, $subjectData['next_of_kin_phone']);
-        $this->assertEquals($updatedSubject->id_number, $subjectData['id_number']);
-        $this->assertEquals($updatedSubject->id_type, $subjectData['id_type']);
+        $subjectData['id'] = $subject->id;
+        $this->assertDatabaseHas('subjects', $subjectData);
     }
 
     public function test_a_subject_can_be_deleted()
     {
         $this->withoutExceptionHandling();
 
-        $user = Sanctum::actingAs(User::factory()->create());
+        $user = Sanctum::actingAs(User::factory()->create([
+            'role_id' => '2'
+        ]));
+
         $subject = Subject::factory()->create();
 
-        $this->actingAs($user)
+        $response = $this->actingAs($user)
             ->followingRedirects()
             ->delete('/subjects/' . $subject->id . '/trash')
             ->assertStatus(200)
@@ -259,18 +252,21 @@ class SubjectControllerTest extends TestCase
                         $page->has('search');
                     });
             });
-
-        $this->assertCount(0, Subject::all());
+        
+        $response->assertSuccessful();
     }
 
     public function test_a_subject_can_be_restored()
     {
         $this->withoutExceptionHandling();
 
-        $user = Sanctum::actingAs(User::factory()->create());
+        $user = Sanctum::actingAs(User::factory()->create([
+            'role_id' => '2'
+        ]));
+
         $subject = Subject::factory()->create();
 
-        $this->actingAs($user)
+        $response = $this->actingAs($user)
             ->followingRedirects()
             ->put('/subjects/' . $subject->id . '/restore')
             ->assertStatus(200)
@@ -283,6 +279,6 @@ class SubjectControllerTest extends TestCase
                     });
             });
 
-        $this->assertCount(1, Subject::all());
+        $response->assertSuccessful();
     }
 }

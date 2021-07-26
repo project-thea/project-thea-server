@@ -92,7 +92,7 @@ class SampleTrackingTest extends TestCase
         ]);
 
         Disease::factory()->create([
-            'name' => 'EBOLA',
+            'name' => 'Ebola',
             'description' => 'A deadly disease that people will develop moderate illness',
         ]);
 
@@ -130,34 +130,30 @@ class SampleTrackingTest extends TestCase
         ]);
 
         Test::factory()->create([
-            'id' => 1,
             'disease_id' => 1,
             'subject_id' => 1,
             'test_date' => '2020-08-12',
-            'status' => 'positive',
+            'status_id' => 2,
             'status_update_date' => '2020-08-16'
         ]);
 
         Test::factory()->create([
-            'id' => 2,
             'disease_id' => 2,
             'subject_id' => 2,
             'test_date' => '2020-07-18',
-            'status' => 'negative',
+            'status_id' => 1,
             'status_update_date' => '2020-07-23'
         ]);
 
         Test::factory()->create([
-            'id' => 3,
             'disease_id' => 3,
             'subject_id' => 3,
             'test_date' => '2021-03-18',
-            'status' => 'unknown',
+            'status_id' => 3,
             'status_update_date' => '2021-03-24'
         ]);
 
         SampleTracking::factory()->create([
-            'id' => 1,
             'latitude' => '2.536988',
             'longitude' => '33.603586',
             'unique_id' => '7e57d004-2b97-0e7a-D45f',
@@ -167,7 +163,6 @@ class SampleTrackingTest extends TestCase
         ]);
 
         SampleTracking::factory()->create([
-            'id' => 2,
             'latitude' => '2.545988',
             'longitude' => '31.606786',
             'unique_id' => '7e57db54-2b97-0e7a-D45f',
@@ -177,7 +172,6 @@ class SampleTrackingTest extends TestCase
         ]);
 
         SampleTracking::factory()->create([
-            'id' => 3,
             'latitude' => '2.587988',
             'longitude' => '34.603286',
             'unique_id' => '7e57d004-2b97-0f4a-D45f',
@@ -187,19 +181,16 @@ class SampleTrackingTest extends TestCase
         ]);
 
         SampleTestTracking::factory()->create([
-            'id' => 1,
             'sample_tracking_id' => 1,
             'test_id' => 1
         ]);
 
         SampleTestTracking::factory()->create([
-            'id' => 2,
             'sample_tracking_id' => 2,
             'test_id' => 2
         ]);
 
         SampleTestTracking::factory()->create([
-            'id' => 3,
             'sample_tracking_id' => 3,
             'test_id' => 3
         ]);

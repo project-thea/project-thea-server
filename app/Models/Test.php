@@ -35,4 +35,12 @@ class Test extends Model
     {
         return $this->hasMany(SampleTestTracking::class);
     }
+
+    /**
+     * Get a test that belongs to a status.
+     */
+    public function status()
+    {
+        return $this->belongsTo(Status::class, 'status_id');
+    }
 }

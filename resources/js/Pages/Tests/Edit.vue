@@ -40,10 +40,8 @@
                         </div>
                         <div class="mt-2">
                             <jet-label for="status" value="Test Status" />
-                            <select name="status" v-model="form.status" required autofocus autocomplete="status" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
-                                <option value="Negative">Negative</option>
-                                <option value="Positive">Positive</option>
-                                <option value="Unknown">Unknown</option>
+                            <select name="status_id" v-model="form.status_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
+                                <option v-for="status in statuses" :key="status.id" :value="status.id">{{ status.title }}</option>
                             </select>
                         </div>
 
@@ -102,6 +100,10 @@ export default {
         subjects:{
             type: Object,
             required: true
+        },
+        
+        statuses: {
+            type: Array
         }
     },
 
@@ -111,7 +113,7 @@ export default {
                 subject_id: this.test.subject_id,
                 disease_id: this.test.disease_id,
                 test_date:  this.test.test_date,
-                status:  this.test.status,
+                status_id:  this.test.status_id,
             }),
         }
     },
@@ -147,9 +149,9 @@ export default {
                         this.$refs.test_date.focus()
                     }
 
-                    if (this.form.errors.status) {
-                        this.form.reset('status', this.test.status)
-                        this.$refs.status.focus()
+                    if (this.form.errors.status_id) {
+                        this.form.reset('status_id', this.test.status_id)
+                        this.$refs.status_id.focus()
                     }
                 }
             });

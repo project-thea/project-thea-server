@@ -2,14 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Role;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
-    public const IS_ADMIN = 'admin';
-    public const IS_USER = 'user';
-
     /**
      * The policy mappings for the application.
      *
@@ -28,14 +26,19 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        // Admin role
-        Gate::define('isAdmin', function ($user) {
-            return $user->role == self::IS_ADMIN;
-        });
-
         // User role
         Gate::define('isUser', function ($user) {
-            return $user->role == self::IS_USER;
+            return $user->role_id == Role::IS_USER;
+        });
+
+        // Admin role
+        Gate::define('isAdmin', function ($user) {
+            return $user->role_id == Role::IS_ADMIN;
+        });
+
+        // Lab-technician role
+        Gate::define('isLabTechnician', function ($user) {
+            return $user->role_id == Role::IS_LAB_TECHNICIAN;
         });
     }
 }

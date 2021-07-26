@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Test;
 use App\Models\Disease;
+use App\Models\Status;
 use App\Models\Subject;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -30,8 +31,10 @@ class TestFactory extends Factory
             'subject_id' => function () {
                 return Subject::factory()->create()->id;
             },
+            'status_id' => function () {
+                return Status::factory()->create()->id;
+            },
             'test_date' => $this->faker->date(),
-            'status' => 'positive',
             'status_update_date' => $this->faker->date(),
             'created_with' => 'user',
             'updated_with' => 'app'

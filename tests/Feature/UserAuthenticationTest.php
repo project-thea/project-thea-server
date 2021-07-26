@@ -44,7 +44,7 @@ class UserAuthenticationTest extends TestCase
             "first_name" => "Emmanuel",
             "last_name" => "Atuhaire",
             "email" => "patuhaire@gmail.com",
-            "password" => "pa12345678"
+            "password" => "pa12345678",
         ];
 
         $this->json('POST', 'api/register', $userData, ['Accept' => 'application/json'])
@@ -70,7 +70,7 @@ class UserAuthenticationTest extends TestCase
             'last_name' => 'Atuhaire',
             'email' => 'patungire@gmail.com',
             'password' => 'pa12345678',
-            'password_confirmation' => 'pa12345678'
+            'password_confirmation' => 'pa12345678',
         ];
 
         $this->json('POST', 'api/register', $userData, ['Accept' => 'application/json'])
@@ -84,7 +84,7 @@ class UserAuthenticationTest extends TestCase
                     'email',
                     'created_at',
                     'updated_at',
-                    'profile_photo_url'
+                    'profile_photo_url', 
                 ],
                 "access_token",
                 "message"
@@ -140,6 +140,8 @@ class UserAuthenticationTest extends TestCase
                     'current_team_id',
                     'profile_photo_url',
                     'profile_photo_path',
+                    'role_id',
+                    'deleted_at'
                 ],
                 'access_token',
                 'message'

@@ -43,11 +43,9 @@
                         </div>
 
                         <div class="mt-2">
-                            <jet-label for="status" value="Test Status" />
-                            <select name="status" v-model="form.status" required autofocus autocomplete="status" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
-                                <option value="Negative">Negative</option>
-                                <option value="Positive">Positive</option>
-                                <option value="Unknown">Unknown</option>
+                            <jet-label for="status_id" value="Test Status" />
+                            <select name="status_id" v-model="form.status_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
+                                <option v-for="status in statuses" :key="status.id" :value="status.id">{{ status.title }}</option>
                             </select>
                         </div>
 
@@ -99,6 +97,9 @@ export default {
         subjects: {
             type: Object,
             required: true
+        },
+        statuses: {
+            type: Array
         }
     },
 
@@ -108,7 +109,7 @@ export default {
                 subject_id: this.subject_id,
                 disease_id: '',
                 test_date:  '',
-                status:  ''
+                status_id:  ''
             }),
         }
     },
@@ -139,9 +140,9 @@ export default {
                         this.$refs.test_date.focus()
                     }
 
-                    if (this.form.errors.status) {
-                        this.form.reset('status')
-                        this.$refs.status.focus()
+                    if (this.form.errors.status_id) {
+                        this.form.reset('status_id')
+                        this.$refs.status_id.focus()
                     }
                 }
             });

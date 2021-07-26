@@ -18,7 +18,6 @@ class CreateTestsTable extends Migration
             $table->foreignId('disease_id')->constrained('diseases')->onDelete('cascade');
             $table->foreignId('subject_id')->constrained('subjects')->onDelete('cascade');
             $table->date('test_date');
-            $table->string('status', 9); //unknown, negative, positive
             $table->date('status_update_date')->nullable(); //At the start of making the test
             $table->string('created_with')->nullable(); // user, app
             $table->string('updated_with')->nullable(); //user. app
@@ -28,7 +27,6 @@ class CreateTestsTable extends Migration
 
             $table->index('disease_id');
             $table->index('subject_id');
-            $table->index('status');
             $table->index('test_date');
             $table->index('status_update_date');
         });

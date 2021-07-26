@@ -37,10 +37,9 @@
                         </div>
 
                         <div class="mt-4">
-                            <jet-label for="role" value="Role" />
-                            <select name="role" v-model="form.role" required autofocus autocomplete="role" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
-                                <option value="1">User</option>
-                                <option value="2">Admin</option>
+                            <jet-label for="role_id" value="Role" />
+							<select name="role_id" v-model="form.role_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
+                                <option v-for="role in roles" :key="role.id" :value="role.id">{{ role.name }}</option>
                             </select>
                         </div>
 
@@ -84,6 +83,13 @@ export default {
 		JetTextarea,
 		JetSectionTitle
 	},
+
+	props: {
+        roles: {
+			type: Array
+		},
+    },
+
 	data() {
 		return {
 			form: this.$inertia.form({
@@ -91,12 +97,14 @@ export default {
 				last_name:  '',
 				email:  '',
                 password: '',
-                role: '',
+                role_id: '',
 			}),
 		}
 	},
+
 	watch: {
 	},
+
 	methods: {
 		createUser() {
 			this.form.post('/users', {
@@ -124,9 +132,9 @@ export default {
 						this.$refs.password.focus()
 					}
 
-                    if (this.form.errors.role) {
-						this.form.reset('role')
-						this.$refs.role.focus()
+                    if (this.form.errors.role_id) {
+						this.form.reset('role_id')
+						this.$refs.role_id.focus()
 					}
 				}
 			});

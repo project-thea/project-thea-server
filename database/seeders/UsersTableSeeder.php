@@ -24,7 +24,7 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('pa12345678'),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'role' => 'user'
+                'role_id' => '1'
             ],
 
             [
@@ -34,7 +34,7 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('du12345678'),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'role' => 'admin'
+                'role_id' => '3'
             ],
 
             [
@@ -44,7 +44,7 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('ko12345678'),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'role' => 'user'
+                'role_id' => '1'
             ],
 
             [
@@ -54,7 +54,7 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('ar12345678'),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'role' => 'admin'
+                'role_id' => '2'
             ],
 
             [
@@ -64,7 +64,7 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('ba12345678'),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'role' => 'user'
+                'role_id' => '1'
             ],
 
             [
@@ -74,7 +74,7 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('mu12345678'),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'role' => 'user'
+                'role_id' => '1'
             ],
 
             [
@@ -84,7 +84,7 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('do12345678'),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'role' => 'admin'
+                'role_id' => '2'
             ],
 
             [
@@ -94,7 +94,7 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('ed12345678'),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'role' => 'user'
+                'role_id' => '3'
             ],
 
             [
@@ -104,7 +104,7 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('os12345678'),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'role' => 'user'
+                'role_id' => '1'
             ],
 
             [
@@ -114,7 +114,7 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('tz12345678'),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'role' => 'user'
+                'role_id' => '1'
             ],
 
             [
@@ -124,7 +124,7 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('max12345678'),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'role' => 'user'
+                'role_id' => '1'
             ],
         ]);
     }
