@@ -32,15 +32,6 @@
                 <jet-input id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" autocomplete="new-password" />
             </div>
 
-            <div class="mt-4">
-                <jet-label for="role_id" value="Register as:" />
-                <select name="role_id" v-model="form.role_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
-                    <option value="1" >User</option>
-                    <option value="2">Admin</option>
-                    <option value="3">Lab-Technician</option>
-                </select>
-            </div>
-
             <div class="mt-4" v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature">
                 <jet-label for="terms">
                     <div class="flex items-center">
@@ -94,7 +85,6 @@
                     email: '',
                     password: '',
                     password_confirmation: '',
-                    role_id: '',
                     terms: false,
                 })
             }
