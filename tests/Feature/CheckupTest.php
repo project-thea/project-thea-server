@@ -46,7 +46,7 @@ class CheckupTest extends TestCase
             'disease_id' => 1,
             'subject_id' => 1,
             'test_date' => '2020-08-12',
-            'status' => 'positive',
+            'status_id' => 2,
             'status_update_date' => '2020-08-16'
         ]);
 
@@ -54,7 +54,7 @@ class CheckupTest extends TestCase
             'disease_id' => 1,
             'subject_id' => 1,
             'test_date' => '2020-08-12',
-            'status' => 'positive',
+            'status_id' => 2,
             'status_update_date' => '2020-08-16',
         ];
 
@@ -67,7 +67,7 @@ class CheckupTest extends TestCase
                     'disease_id',
                     'subject_id',
                     'test_date',
-                    'status',
+                    'status_id',
                     'status_update_date',
                     'created_at',
                     'updated_at',
@@ -106,7 +106,7 @@ class CheckupTest extends TestCase
         ]);
 
         Disease::factory()->create([
-            'name' => 'EBOLA',
+            'name' => 'Ebola',
             'description' => 'A deadly disease that people will develop moderate illness',
         ]);
 
@@ -147,7 +147,7 @@ class CheckupTest extends TestCase
             'disease_id' => 1,
             'subject_id' => 1,
             'test_date' => '2020-08-12',
-            'status' => 'positive',
+            'status_id' => 2,
             'status_update_date' => '2020-08-16'
         ]);
 
@@ -155,7 +155,7 @@ class CheckupTest extends TestCase
             'disease_id' => 2,
             'subject_id' => 2,
             'test_date' => '2020-07-18',
-            'status' => 'negative',
+            'status_id' => 1,
             'status_update_date' => '2020-07-23'
         ]);
 
@@ -163,7 +163,7 @@ class CheckupTest extends TestCase
             'disease_id' => 3,
             'subject_id' => 3,
             'test_date' => '2021-03-18',
-            'status' => 'unknown',
+            'status_id' => 3,
             'status_update_date' => '2021-03-24'
         ]);
 
@@ -177,7 +177,7 @@ class CheckupTest extends TestCase
                         'disease_id',
                         'subject_id',
                         'test_date',
-                        'status',
+                        'status_id',
                         'status_update_date',
                         'created_with',
                         'updated_with',
@@ -195,7 +195,7 @@ class CheckupTest extends TestCase
                         'disease_id',
                         'subject_id',
                         'test_date',
-                        'status',
+                        'status_id',
                         'status_update_date',
                         'created_with',
                         'updated_with',
@@ -213,7 +213,7 @@ class CheckupTest extends TestCase
                         'disease_id',
                         'subject_id',
                         'test_date',
-                        'status',
+                        'status_id',
                         'status_update_date',
                         'created_with',
                         'updated_with',
@@ -260,11 +260,10 @@ class CheckupTest extends TestCase
         ]);
 
         $test = Test::factory()->create([
-            'id' => 1,
             'disease_id' => 1,
             'subject_id' => 1,
             'test_date' => '2020-08-12',
-            'status' => 'positive',
+            'status_id' => 2,
             'status_update_date' => '2020-08-16',
             'created_with' => 'user',
             'updated_with' => 'app',
@@ -279,7 +278,7 @@ class CheckupTest extends TestCase
                     'disease_id',
                     'subject_id',
                     'test_date',
-                    'status',
+                    'status_id',
                     'status_update_date',
                     'created_with',
                     'updated_with',
@@ -323,22 +322,20 @@ class CheckupTest extends TestCase
         ]);
 
         $test = Test::factory()->create([
-            'id' => 1,
             'disease_id' => 1,
             'subject_id' => 1,
             'test_date' => '2020-08-12',
-            'status' => 'positive',
+            'status_id' => 2,
             'status_update_date' => '2020-08-16',
             'created_with' => 'user',
             'updated_with' => 'app',
         ]);
 
         $payload = [
-            'id' => 1,
             'disease_id' => 1,
             'subject_id' => 1,
             'test_date' => '2020-08-12',
-            'status' => 'positive',
+            'status_id' => 2,
             'status_update_date' => '2020-08-16',
             'created_with' => 'user',
             'updated_with' => 'app',
@@ -353,7 +350,7 @@ class CheckupTest extends TestCase
                     'disease_id',
                     'subject_id',
                     'test_date',
-                    'status',
+                    'status_id',
                     'status_update_date',
                     'created_with',
                     'updated_with',
@@ -396,11 +393,10 @@ class CheckupTest extends TestCase
         ]);
 
         $test = Test::factory()->create([
-            'id' => 1,
             'disease_id' => 1,
             'subject_id' => 1,
             'test_date' => '2020-08-12',
-            'status' => 'positive',
+            'status_id' => 2,
             'status_update_date' => '2020-08-16',
             'created_with' => 'user',
             'updated_with' => 'app',
