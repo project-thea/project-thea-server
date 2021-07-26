@@ -44,8 +44,8 @@ class TestController extends Controller
         $validateData = [
             'disease_id' => 'exists:App\Models\Disease,id',
             'subject_id' => 'exists:App\Models\Subject,id',
+            'status_id' => 'exists:App\Models\Status,id',
             'test_date' => 'required|date',
-            'status' => 'required|string|max:10',
             'status_update_date' => 'date',
             'created_with' => 'string|max:4',
             'updated_with' => 'string|max:4',

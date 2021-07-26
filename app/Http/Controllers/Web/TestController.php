@@ -102,14 +102,14 @@ class TestController extends Controller
         $validationRules = [
             'disease_id' => 'exists:App\Models\Disease,id',
             'subject_id' => 'exists:App\Models\Subject,id',
+            'status_id' => 'exists:App\Models\Status,id',
             'test_date' => 'required|date',
-            'status' => 'required|string|max:20'
         ];
 
         $validateData = Validator::make($data, $validationRules);
 
         if ($validateData->fails()) {
-            return Redirect::route('tests.create')->withErrors($validateData);
+            return Redirect::route('tests.create', ['subject' => $data['subject_id']])->withErrors($validateData);
         }
 
         Test::create($data);
@@ -159,14 +159,14 @@ class TestController extends Controller
         $validationRules = [
             'disease_id' => 'exists:App\Models\Disease,id',
             'subject_id' => 'exists:App\Models\Subject,id',
+            'status_id' => 'exists:App\Models\Status,id',
             'test_date' => 'required|date',
-            'status' => 'required|string|max:20'
         ];
 
         $validateData = Validator::make($data, $validationRules);
 
         if ($validateData->fails()) {
-            return Redirect::route('tests.edit')->withErrors($validateData);
+            return Redirect::route('tests.edit', ['test' => $id])->withErrors($validateData);
         }
 
         $tests = Test::find($id);
