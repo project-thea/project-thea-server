@@ -202,6 +202,6 @@ class TestController extends Controller
 
         $test = Test::withTrashed()->find($id);
         $test->restore();
-        return Redirect::route('tests')->with('success', 'Test successfully restored.');
+        return Redirect::route('tests.index')->with('success', 'Test successfully restored.');
     }
 }
