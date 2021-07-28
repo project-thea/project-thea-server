@@ -43,7 +43,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified', 'throttle:web']], fun
 	Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 	//	Subjects
-	Route::get('/subjects', [SubjectController::class, 'index'])->name('subjects');
+	Route::get('/subjects', [SubjectController::class, 'index'])->name('subjects.index');
 	Route::get('/subjects/create', [SubjectController::class, 'create'])->name('subjects.create');
 	Route::post('/subjects', [SubjectController::class, 'store'])->name('subjects.store');
 	Route::get('/subjects/{subject}/edit', [SubjectController::class, 'edit'])->name('subjects.edit');
@@ -52,7 +52,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified', 'throttle:web']], fun
 	Route::put('/subjects/{subject}/restore', [SubjectController::class, 'restore'])->name('subjects.restore');
 
 	// Diseases
-	Route::get('/diseases', [DiseaseController::class, 'index'])->name('diseases');
+	Route::get('/diseases', [DiseaseController::class, 'index'])->name('diseases.index');
 	Route::get('/diseases/create', [DiseaseController::class, 'create'])->name('diseases.create');
 	Route::post('/diseases', [DiseaseController::class, 'store'])->name('diseases.store');
 	Route::get('/diseases/{disease}/edit', [DiseaseController::class, 'edit'])->name('diseases.edit');
@@ -61,7 +61,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified', 'throttle:web']], fun
 	Route::put('/diseases/{disease}/restore', [DiseaseController::class, 'restore'])->name('diseases.restore');
 
 	// Tests
-	Route::get('/tests', [TestController::class, 'index'])->name('tests');
+	Route::get('/tests', [TestController::class, 'index'])->name('tests.index');
 	Route::get('/tests/{subject}/create', [TestController::class, 'create'])->name('tests.create');
 	Route::post('/tests', [TestController::class, 'store'])->name('tests.store');
 	Route::get('/tests/{test}/edit', [TestController::class, 'edit'])->name('tests.edit');
