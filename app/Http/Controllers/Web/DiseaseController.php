@@ -65,7 +65,7 @@ class DiseaseController extends Controller
 
         $validationRules = [
             'name' => 'required|string|max:55',
-            'description' => 'required|string|max:250'
+            'description' => 'required|string|max:250',
         ];
 
         $validateData = Validator::make($data, $validationRules);
@@ -75,7 +75,7 @@ class DiseaseController extends Controller
         }
 
         Disease::create($data);
-        return Redirect::route('diseases')->with('success', 'Disease added.');
+        return Redirect::route('diseases.index')->with('success', 'Disease successfully added.');
     }
 
     /**
@@ -122,7 +122,7 @@ class DiseaseController extends Controller
         $disease = Disease::find($id);
         $disease->update($data);
 
-        return Redirect::route('diseases')->with('success', 'Disease successfully updated.');
+        return Redirect::route('diseases.index')->with('success', 'Disease successfully updated.');
     }
 
     /**
@@ -137,7 +137,7 @@ class DiseaseController extends Controller
 
         $disease = Disease::find($id);
         $disease->delete();
-        return Redirect::route('diseases')->with('success', 'Disease successfully deleted.');
+        return Redirect::route('diseases.index')->with('success', 'Disease successfully deleted.');
     }
 
     /**
@@ -149,9 +149,9 @@ class DiseaseController extends Controller
     public function restore($id)
     {
         $this->authorize('isAdmin');
-        
+
         $disease = Disease::withTrashed()->find($id);
         $disease->restore();
-        return Redirect::route('diseases')->with('success', 'Disease successfully restored.');
+        return Redirect::route('diseases.index')->with('success', 'Disease successfully restored.');
     }
 }

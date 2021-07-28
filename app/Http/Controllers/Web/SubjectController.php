@@ -86,7 +86,7 @@ class SubjectController extends Controller
         }
 
         Subject::create($data);
-        return Redirect::route('subjects')->with('success', 'Subject successfully added.');
+        return Redirect::route('subjects.index')->with('success', 'Subject successfully added.');
     }
 
     /**
@@ -141,7 +141,7 @@ class SubjectController extends Controller
         $subject = Subject::find($id);
         $subject->update($data);
 
-        return Redirect::route('subjects')->with('success', 'Subject successfully updated.');
+        return Redirect::route('subjects.index')->with('success', 'Subject successfully updated.');
     }
 
     /**
@@ -156,7 +156,7 @@ class SubjectController extends Controller
 
         $subject = Subject::find($id);
         $subject->delete();
-        return Redirect::route('subjects')->with('success', 'Subject successfully deleted.');
+        return Redirect::route('subjects.index')->with('success', 'Subject successfully deleted.');
     }
 
     /**
@@ -168,9 +168,9 @@ class SubjectController extends Controller
     public function restore($id)
     {
         $this->authorize('isAdmin');
-        
+
         $subject = Subject::withTrashed()->find($id);
         $subject->restore();
-        return Redirect::route('subjects')->with('success', 'Subject successfully restored.');
+        return Redirect::route('subjects.index')->with('success', 'Subject successfully restored.');
     }
 }

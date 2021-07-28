@@ -28,7 +28,7 @@
 						</div>
 
 						<div class="flex items-center justify-end mt-4">
-							<inertia-link :href="route('diseases')" class="underline text-sm text-gray-600 hover:text-gray-900">
+							<inertia-link :href="route('diseases.index')" class="underline text-sm text-gray-600 hover:text-gray-900">
                                 Back
                             </inertia-link>
 							<jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">

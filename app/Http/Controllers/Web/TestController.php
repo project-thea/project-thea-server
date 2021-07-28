@@ -113,7 +113,7 @@ class TestController extends Controller
         }
 
         Test::create($data);
-        return Redirect::route('tests')->with('success', 'Test successfully added.');
+        return Redirect::route('tests.index')->with('success', 'Test successfully added.');
     }
 
     /**
@@ -172,7 +172,7 @@ class TestController extends Controller
         $tests = Test::find($id);
         $tests->update($data);
 
-        return Redirect::route('tests')->with('success', 'Test successfully updated.');
+        return Redirect::route('tests.index')->with('success', 'Test successfully updated.');
     }
 
     /**
@@ -187,7 +187,7 @@ class TestController extends Controller
 
         $test = Test::find($id);
         $test->delete();
-        return Redirect::route('tests')->with('success', 'Test successfully deleted.');
+        return Redirect::route('tests.index')->with('success', 'Test successfully deleted.');
     }
 
     /**
@@ -202,6 +202,6 @@ class TestController extends Controller
 
         $test = Test::withTrashed()->find($id);
         $test->restore();
-        return Redirect::route('tests')->with('success', 'Test successfully restored.');
+        return Redirect::route('tests.index')->with('success', 'Test successfully restored.');
     }
 }
