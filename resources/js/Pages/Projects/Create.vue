@@ -2,21 +2,20 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Diseases
+                Projects
             </h2>
         </template>
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
-				
 					<jet-section-title>
 						<template #title>
-							<strong>Edit Disease</strong>
+							<strong>Add Project</strong>
 						</template>
 					</jet-section-title>
 	
-					<form @submit.prevent="updateDisease">
+					<form @submit.prevent="createProject">
 						<div class="mt-3">
 							<jet-label for="name" value="Name" />
 							<jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus autocomplete="name" />
@@ -28,15 +27,14 @@
 						</div>
 
 						<div class="flex items-center justify-end mt-4">
-							<inertia-link :href="route('diseases.index')" class="underline text-sm text-gray-600 hover:text-gray-900">
+							<inertia-link :href="route('projects.index')" class="underline text-sm text-gray-600 hover:text-gray-900">
                                 Back
                             </inertia-link>
 							<jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-								Edit Disease
+								Add Project
 							</jet-button>
 						</div>
 					</form>
-
                 </div>
             </div>
         </div>
@@ -56,7 +54,7 @@ import JetTextarea from '@/Jetstream/Textarea'
 import JetSectionTitle from '@/Jetstream/SectionTitle'
 
 export default {
-	metaInfo: { title: 'Diseases' },
+	metaInfo: { title: 'Projects' },
 	components: {
 		Icon,
 		AppLayout,
@@ -68,36 +66,30 @@ export default {
 		JetTextarea,
 		JetSectionTitle
 	},
-	props: {
-		disease: {
-			type: Object,
-			required: true,
-		},
-	},
 	data() {
 		return {
 			form: this.$inertia.form({
-				name:  this.disease.name,
-				description: this.disease.description
+				name:  '',
+				description: ''
 			}),
 		}
 	},
 	watch: {
 	},
 	methods: {
-		updateDisease() {
-			this.form.patch('/diseases/' + this.disease.id, {
-				errorBag: 'updateDisease',
+		createProject() {
+			this.form.post('/projects', {
+				errorBag: 'createProject',
 				preserveScroll: true,
-				//onSuccess: () => this.form.reset(),
+				onSuccess: () => this.form.reset(),
 				onError: () => {
 					if (this.form.errors.name) {
-						this.form.reset('name', this.disease.name)
+						this.form.reset('name')
 						this.$refs.name.focus()
 					}
 
 					if (this.form.errors.description) {
-						this.form.reset('description', this.disease.description)
+						this.form.reset('description')
 						this.$refs.description.focus()
 					}
 				}

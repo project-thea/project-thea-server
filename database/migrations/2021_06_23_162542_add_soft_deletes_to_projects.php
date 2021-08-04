@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSoftDeletesToDiseases extends Migration
+class AddSoftDeletesToProjects extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddSoftDeletesToDiseases extends Migration
      */
     public function up()
     {
-        Schema::table('diseases', function (Blueprint $table) {
+        Schema::table('projects', function (Blueprint $table) {
             $table->softDeletes();
         });
     }
@@ -25,7 +25,7 @@ class AddSoftDeletesToDiseases extends Migration
      */
     public function down()
     {
-        Schema::table('diseases', function (Blueprint $table) {
+        Schema::table('projects', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
     }

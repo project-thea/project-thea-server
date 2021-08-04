@@ -26,8 +26,8 @@
                                 <jet-nav-link :href="route('tests.index')" :active="route().current('tests')">
                                     Tests
                                 </jet-nav-link>
-                                <jet-nav-link :href="route('diseases.index')" :active="route().current('diseases')">
-                                    Diseases
+                                <jet-nav-link :href="route('projects.index')" :active="route().current('projects')">
+                                    Projects
                                 </jet-nav-link>
                                 <jet-nav-link :href="route('tracking')" :active="route().current('tracking')">
                                     Tracking

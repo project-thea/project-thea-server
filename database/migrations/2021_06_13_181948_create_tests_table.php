@@ -15,7 +15,7 @@ class CreateTestsTable extends Migration
     {
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('disease_id')->constrained('diseases')->onDelete('cascade');
+            $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');
             $table->foreignId('subject_id')->constrained('subjects')->onDelete('cascade');
             $table->date('test_date');
             $table->date('status_update_date')->nullable(); //At the start of making the test
@@ -25,7 +25,7 @@ class CreateTestsTable extends Migration
             $table->integer('updated_by')->nullable();
             $table->timestamps();
 
-            $table->index('disease_id');
+            $table->index('project_id');
             $table->index('subject_id');
             $table->index('test_date');
             $table->index('status_update_date');

@@ -5,34 +5,34 @@ namespace Tests\Feature\Http\Controllers\Web;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Laravel\Sanctum\Sanctum;
-use App\Models\Disease;
+use App\Models\Project;
 use App\Models\User;
 use Inertia\Testing\Assert;
 
-class DiseaseControllerTest extends TestCase
+class ProjectControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_a_diseases_index_page_is_rendered()
+    public function test_a_projects_index_page_is_rendered()
     {
         $this->withoutExceptionHandling();
 
         $user = Sanctum::actingAs(User::factory()->create());
 
         $this->actingAs($user)
-            ->get('/diseases')
+            ->get('/projects')
             ->assertStatus(200)
             ->assertInertia(function (Assert $page) {
-                $page->component('Diseases/Index')
-                    ->has('diseases')
-                    ->has('trashedDiseases')
+                $page->component('Projects/Index')
+                    ->has('projects')
+                    ->has('trashedProjects')
                     ->has('filters', function (Assert $page) {
                         $page->has('search');
                     });
             });
     }
 
-    public function test_a_disease_name_is_required()
+    public function test_a_project_name_is_required()
     {
         $this->withoutExceptionHandling();
 
@@ -42,17 +42,17 @@ class DiseaseControllerTest extends TestCase
 
         $this->actingAs($user);
 
-        $diseasesData = [
+        $projectsData = [
             'name' => '',
             'description' => 'Very deadly disease',
         ];
 
-        $response = $this->post('/diseases', $diseasesData);
+        $response = $this->post('/projects', $projectsData);
 
         $response->assertSessionHasErrors('name');
     }
 
-    public function test_a_disease_description_is_required()
+    public function test_a_project_description_is_required()
     {
         $this->withoutExceptionHandling();
 
@@ -62,17 +62,17 @@ class DiseaseControllerTest extends TestCase
 
         $this->actingAs($user);
 
-        $diseasesData = [
+        $projectsData = [
             'name' => 'COVID-19',
             'description' => '',
         ];
 
-        $response = $this->post('/diseases', $diseasesData);
+        $response = $this->post('/projects', $projectsData);
 
         $response->assertSessionHasErrors('description');
     }
 
-    public function test_a_disease_can_be_stored()
+    public function test_a_project_can_be_stored()
     {
         $this->withoutExceptionHandling();
 
@@ -87,21 +87,21 @@ class DiseaseControllerTest extends TestCase
 
         $this->actingAs($user)
             ->followingRedirects()
-            ->post('/diseases', $expected)
+            ->post('/projects', $expected)
             ->assertStatus(200)
             ->assertInertia(function (Assert $page) {
-                $page->component('Diseases/Index')
-                    ->has('diseases')
-                    ->has('trashedDiseases')
+                $page->component('Projects/Index')
+                    ->has('projects')
+                    ->has('trashedProjects')
                     ->has('filters', function (Assert $page) {
                         $page->has('search');
                     });
             });
 
-        $this->assertDatabaseHas('diseases', $expected);
+        $this->assertDatabaseHas('projects', $expected);
     }
 
-    public function test_a_disease_can_be_updated()
+    public function test_a_project_can_be_updated()
     {
         $this->withoutExceptionHandling();
 
@@ -109,31 +109,31 @@ class DiseaseControllerTest extends TestCase
             'role_id' => '2'
         ]));
 
-        $disease = Disease::factory()->create();
+        $project = Project::factory()->create();
 
-        $diseaseData = [
+        $projectData = [
             'name' => 'Covid',
             'description' => 'This is a very deadly disease',
         ];
 
         $this->actingAs($user)
             ->followingRedirects()
-            ->patch('/diseases/' . $disease->id, $diseaseData)
+            ->patch('/projects/' . $project->id, $projectData)
             ->assertStatus(200)
             ->assertInertia(function (Assert $page) {
-                $page->component('Diseases/Index')
-                    ->has('diseases')
-                    ->has('trashedDiseases')
+                $page->component('Projects/Index')
+                    ->has('projects')
+                    ->has('trashedProjects')
                     ->has('filters', function (Assert $page) {
                         $page->has('search');
                     });
             });
 
-        $diseaseData['id'] = $disease->id;    
-        $this->assertDatabaseHas('diseases', $diseaseData);
+        $projectData['id'] = $project->id;    
+        $this->assertDatabaseHas('projects', $projectData);
     }
 
-    public function test_a_disease_can_be_deleted()
+    public function test_a_project_can_be_deleted()
     {
         $this->withoutExceptionHandling();
 
@@ -141,16 +141,16 @@ class DiseaseControllerTest extends TestCase
             'role_id' => '2'
         ]));
 
-        $disease = Disease::factory()->create();
+        $project = Project::factory()->create();
 
         $response = $this->actingAs($user)
             ->followingRedirects()
-            ->delete('/diseases/' . $disease->id . '/trash')
+            ->delete('/projects/' . $project->id . '/trash')
             ->assertStatus(200)
             ->assertInertia(function (Assert $page) {
-                $page->component('Diseases/Index')
-                    ->has('diseases')
-                    ->has('trashedDiseases')
+                $page->component('Projects/Index')
+                    ->has('projects')
+                    ->has('trashedProjects')
                     ->has('filters', function (Assert $page) {
                         $page->has('search');
                     });
@@ -159,7 +159,7 @@ class DiseaseControllerTest extends TestCase
         $response->assertSuccessful();
     }
 
-    public function test_a_disease_can_be_restored()
+    public function test_a_project_can_be_restored()
     {
         $this->withoutExceptionHandling();
 
@@ -167,16 +167,16 @@ class DiseaseControllerTest extends TestCase
             'role_id' => '2'
         ]));
 
-        $disease = Disease::factory()->create();
+        $project = Project::factory()->create();
 
         $response = $this->actingAs($user)
             ->followingRedirects()
-            ->put('/diseases/' . $disease->id . '/restore')
+            ->put('/projects/' . $project->id . '/restore')
             ->assertStatus(200)
             ->assertInertia(function (Assert $page) {
-                $page->component('Diseases/Index')
-                    ->has('diseases')
-                    ->has('trashedDiseases')
+                $page->component('Projects/Index')
+                    ->has('projects')
+                    ->has('trashedProjects')
                     ->has('filters', function (Assert $page) {
                         $page->has('search');
                     });

@@ -90,8 +90,8 @@
 			</svg>
             </div>
             <div class="text-right">
-              <p class="text-2xl">{{ num_diseases }}</p>
-              <p>Diseases</p>
+              <p class="text-2xl">{{ num_projects }}</p>
+              <p>Projects</p>
             </div>
           </div>
           <div class="dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-gray-600 dark:border-gray-600 font-medium group">
@@ -168,24 +168,24 @@
 		props: {
 			num_subjects: Number,
 			num_tests: Number,
-			num_diseases: Number,
+			num_projects: Number,
 			num_users: Number,
 			data: Array
 	   },
-	   created() {
+	    created() {
 			this.chartData = {
 				'subjects': this.data.map(v => v.num_subjects),
 				'tests' : this.data.map(v => v.num_tests),
-				'diseases' : this.data.map(v => v.num_diseases),
+				'projects' : this.data.map(v => v.num_projects),
 				'dates': this.data.map(v => v.the_date)
 			};
-	  },
+	  	},
     }
 </script>
 
 <style>
-  .small {
-    max-width: 600px;
-    margin:  150px auto;
-  }
+	.small {
+		max-width: 600px;
+		margin:  150px auto;
+	}
 </style>

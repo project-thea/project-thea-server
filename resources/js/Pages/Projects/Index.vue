@@ -2,7 +2,7 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Diseases
+                Projects
             </h2>
         </template>
 
@@ -13,8 +13,8 @@
 						<div class="flex justify-between">
 							<jet-input id="filter" type="text" class="block" required autofocus placeholder="Search..." v-on:update:modelValue="handleSearchChange" :modelValue="this.filters.search"/>
 							
-							<jet-button v-if="$page.props.loggedInUser.can.isAdmin" class="float-left bg-grey-400" @click="createDisease()">
-								Add Disease
+							<jet-button v-if="$page.props.loggedInUser.can.isAdmin" class="float-left bg-grey-400" @click="createProject()">
+								Add Project
 							</jet-button>
 						</div>
 					</div>
@@ -29,52 +29,52 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="disease in diseases.data" :key="disease.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+								<tr v-for="project in projects.data" :key="project.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
 									<td class="border-t">
-										<inertia-link :href="'/diseases/' + disease.id + '/edit'" class="px-6 py-4 flex items-center focus:text-indigo-500">
-											{{ disease.name }}
-											<icon v-if="disease.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-500 ml-2"/>	
+										<inertia-link :href="'/projects/' + project.id + '/edit'" class="px-6 py-4 flex items-center focus:text-indigo-500">
+											{{ project.name }}
+											<icon v-if="project.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-500 ml-2"/>	
 										</inertia-link>
 									</td>
 									<td class="border-t">
-										<inertia-link :href="'/diseases/' + disease.id + '/edit'" tabindex="-1" aria-label="Edit"
+										<inertia-link :href="'/projects/' + project.id + '/edit'" tabindex="-1" aria-label="Edit"
 											class="px-6 py-4 flex items-center truncate">
-											{{ disease.description }}
+											{{ project.description }}
 										</inertia-link>
 									</td>
 									<td class="border-t" v-if="$page.props.loggedInUser.can.isAdmin">
-										<inertia-link @click="deleteDisease(disease.id)" :href="'/diseases/' + disease.id + '/trash'" method="delete" tabindex="-1" aria-label="Trash"
+										<inertia-link @click="deleteProject(project.id)" :href="'/projects/' + project.id + '/trash'" method="delete" tabindex="-1" aria-label="Trash"
 											title="Trash" class="px-6 py-4 flex items-center">
 											<icon name="trash" class="block w-4 h-4 fill-gray-500"/>	
 										</inertia-link>
 									</td>
 									<td class="border-t w-px">
-										<inertia-link :href="'/diseases/' + disease.id + '/edit'" title="Edit" tabindex="-1"
+										<inertia-link :href="'/projects/' + project.id + '/edit'" title="Edit" tabindex="-1"
 											aria-label="Edit" class="px-4 flex items-center"> 
 											<icon name="cheveron-right" class="block w-6 h-6 fill-gray-500"/>
 										</inertia-link>
 									</td>
 								</tr>
-								<tr v-if="diseases.data.length === 0">
+								<tr v-if="projects.data.length === 0">
 									<td class="border-t px-6 py-4" colspan="4">
-										No disease found.
+										No project found.
 									</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
-					<pagination class="mt-2" :links="diseases.links" />
+					<pagination class="mt-2" :links="projects.links" />
                 </div>
             </div>
         </div>
 
-		<!-- Trashed Diseases -->
+		<!-- Trashed Projects -->
 		<div class="py-12" v-if="$page.props.loggedInUser.can.isAdmin">	
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
 					<div class="mb-4 w-full ">
 						<h2 class="font-semibold text-xl text-gray-800 leading-tight">
-							Disease Trash
+							Project Trash
 						</h2>
 					</div>
 				
@@ -88,34 +88,34 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="disease in trashedDiseases.data" :key="disease.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+								<tr v-for="project in trashedProjects.data" :key="project.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
 									<td class="border-t">
 										<inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500">
-											{{ disease.name }}
+											{{ project.name }}
 										</inertia-link>
 									</td>
 									<td class="border-t">
 										<inertia-link tabindex="-1" aria-label="Edit"
 											class="px-6 py-4 flex items-center truncate">
-											{{ disease.description }}
+											{{ project.description }}
 										</inertia-link>
 									</td>
 									<td class="border-t">
-										<inertia-link @click="restoreDisease(disease.id)" :href="'/diseases/' + disease.id + '/restore'" method="restore" tabindex="-1" aria-label="Restore"
+										<inertia-link @click="restoreProject(project.id)" :href="'/projects/' + project.id + '/restore'" method="restore" tabindex="-1" aria-label="Restore"
 											title="Restore" class="px-6 py-4 flex items-center">
 											<icon name="restore" class="block w-4 h-4 fill-gray-500"/>	
 										</inertia-link>
 									</td>
 								</tr>
-								<tr v-if="trashedDiseases.data.length === 0">
+								<tr v-if="trashedProjects.data.length === 0">
 									<td class="border-t px-6 py-4" colspan="4">
-										No disease trash found.
+										No project trash found.
 									</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
-					<pagination class="mt-2" :links="trashedDiseases.links" />
+					<pagination class="mt-2" :links="trashedProjects.links" />
                 </div>
             </div>
         </div>
@@ -133,7 +133,7 @@ import { Inertia } from '@inertiajs/inertia'
 import JetNavLink from '@/Jetstream/NavLink';
 
 export default {
-	metaInfo: { title: 'Diseases' },
+	metaInfo: { title: 'Projects' },
 
 	components: {
 		Icon,
@@ -145,7 +145,7 @@ export default {
 	},
 
 	props: {
-		diseases: {
+		projects: {
 			type: Object,
 			required: true,
 		},
@@ -153,7 +153,7 @@ export default {
 			type: Object,
 			required: true
 		},
-		trashedDiseases: {
+		trashedProjects: {
 			type: Object,
 			required: true
 		}
@@ -170,19 +170,19 @@ export default {
 	
 	methods: {
 		handleSearchChange: function (value) {
-			Inertia.get('/diseases?search=' + value)
+			Inertia.get('/projects?search=' + value)
 		},
-		createDisease() {
-			Inertia.get('/diseases/create')
+		createProject() {
+			Inertia.get('/projects/create')
 		},
-		trackDisease(id) {
-			Inertia.delete('/diseases/' + id)
+		trackProject(id) {
+			Inertia.delete('/projects/' + id)
 		},
-		deleteDisease(id) {
-			Inertia.delete('/diseases/' + id + '/trash');
+		deleteProject(id) {
+			Inertia.delete('/projects/' + id + '/trash');
 		},
-		restoreDisease(id) {
-			Inertia.put('/diseases/' + id + '/restore');
+		restoreProject(id) {
+			Inertia.put('/projects/' + id + '/restore');
 		}
 	},
 }

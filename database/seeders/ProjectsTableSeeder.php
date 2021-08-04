@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class DiseasesTableSeeder extends Seeder
+class ProjectsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,7 @@ class DiseasesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('diseases')->insert([
+        DB::table('projects')->insert([
             [
                 'name' => 'COVID-19',
                 'description' => 'Most infected people will develop mild to moderate illness and recover without hospitalization.',

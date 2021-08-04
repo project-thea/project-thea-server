@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Test;
-use App\Models\Disease;
+use App\Models\Project;
 use App\Models\Status;
 use App\Models\Subject;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -25,8 +25,8 @@ class TestFactory extends Factory
     public function definition()
     {
         return [
-            'disease_id' => function () {
-                return Disease::factory()->create()->id;
+            'project_id' => function () {
+                return Project::factory()->create()->id;
             },
             'subject_id' => function () {
                 return Subject::factory()->create()->id;

@@ -6,7 +6,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\TrackingController;
 use App\Http\Controllers\Web\AnalysisController;
-use App\Http\Controllers\Web\DiseaseController;
+use App\Http\Controllers\Web\ProjectController;
 use App\Http\Controllers\Web\SubjectController;
 use App\Http\Controllers\Web\TestController;
 use App\Http\Controllers\Web\UserController;
@@ -51,14 +51,14 @@ Route::group(['middleware' => ['auth:sanctum', 'verified', 'throttle:web']], fun
 	Route::delete('/subjects/{subject}/trash', [SubjectController::class, 'destroy'])->name('subjects.destroy');
 	Route::put('/subjects/{subject}/restore', [SubjectController::class, 'restore'])->name('subjects.restore');
 
-	// Diseases
-	Route::get('/diseases', [DiseaseController::class, 'index'])->name('diseases.index');
-	Route::get('/diseases/create', [DiseaseController::class, 'create'])->name('diseases.create');
-	Route::post('/diseases', [DiseaseController::class, 'store'])->name('diseases.store');
-	Route::get('/diseases/{disease}/edit', [DiseaseController::class, 'edit'])->name('diseases.edit');
-	Route::patch('/diseases/{disease}', [DiseaseController::class, 'update'])->name('diseases.update');
-	Route::delete('/diseases/{disease}/trash', [DiseaseController::class, 'destroy'])->name('diseases.destroy');
-	Route::put('/diseases/{disease}/restore', [DiseaseController::class, 'restore'])->name('diseases.restore');
+	// Projects
+	Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+	Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
+	Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
+	Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
+	Route::patch('/projects/{project}', [ProjectController::class, 'update'])->name('projects.update');
+	Route::delete('/projects/{project}/trash', [ProjectController::class, 'destroy'])->name('projects.destroy');
+	Route::put('/projects/{project}/restore', [ProjectController::class, 'restore'])->name('projects.restore');
 
 	// Tests
 	Route::get('/tests', [TestController::class, 'index'])->name('tests.index');
