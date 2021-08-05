@@ -4,7 +4,8 @@ namespace Tests\Feature;
 
 use App\Models\SampleTracking;
 use App\Models\User;
-use App\Models\Disease;
+use App\Models\Project;
+use App\Models\Questionnaire;
 use App\Models\Subject;
 use App\Models\Test;
 use App\Models\SampleTestTracking;
@@ -72,7 +73,7 @@ class SampleTrackingTest extends TestCase
         $user = User::factory()->create();
         $this->actingAs($user);
 
-        Disease::factory()->create([
+        Project::factory()->create([
             'name' => 'COVID',
             'description' => 'A deadly disease that people will develop moderate illness',
         ]);
@@ -91,7 +92,7 @@ class SampleTrackingTest extends TestCase
             'id_type' => 'National ID',
         ]);
 
-        Disease::factory()->create([
+        Project::factory()->create([
             'name' => 'Ebola',
             'description' => 'A deadly disease that people will develop moderate illness',
         ]);
@@ -110,7 +111,7 @@ class SampleTrackingTest extends TestCase
             'id_type' => 'National ID',
         ]);
 
-        Disease::factory()->create([
+        Project::factory()->create([
             'name' => 'YELLOW FEVER',
             'description' => 'A deadly disease that people will develop moderate illness',
         ]);
@@ -129,24 +130,24 @@ class SampleTrackingTest extends TestCase
             'id_type' => 'National ID',
         ]);
 
-        Test::factory()->create([
-            'disease_id' => 1,
+        Questionnaire::factory()->create([
+            'project_id' => 1,
             'subject_id' => 1,
             'test_date' => '2020-08-12',
             'status_id' => 2,
             'status_update_date' => '2020-08-16'
         ]);
 
-        Test::factory()->create([
-            'disease_id' => 2,
+        Questionnaire::factory()->create([
+            'project_id' => 2,
             'subject_id' => 2,
             'test_date' => '2020-07-18',
             'status_id' => 1,
             'status_update_date' => '2020-07-23'
         ]);
 
-        Test::factory()->create([
-            'disease_id' => 3,
+        Questionnaire::factory()->create([
+            'project_id' => 3,
             'subject_id' => 3,
             'test_date' => '2021-03-18',
             'status_id' => 3,
@@ -182,17 +183,17 @@ class SampleTrackingTest extends TestCase
 
         SampleTestTracking::factory()->create([
             'sample_tracking_id' => 1,
-            'test_id' => 1
+            'questionnaire_id' => 1
         ]);
 
         SampleTestTracking::factory()->create([
             'sample_tracking_id' => 2,
-            'test_id' => 2
+            'questionnaire_id' => 2
         ]);
 
         SampleTestTracking::factory()->create([
             'sample_tracking_id' => 3,
-            'test_id' => 3
+            'questionnaire_id' => 3
         ]);
 
         $this->json('GET', 'api/tracking/sample', ['Accept' => 'application/json'])
