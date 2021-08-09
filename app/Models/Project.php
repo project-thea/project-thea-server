@@ -16,10 +16,10 @@ class Project extends Model
     ];
 
     /**
-     * A disease consists of many tests.
+     * A project consists of many questionnaires.
      */
-    public function tests()
+    public function questionnaires()
     {
-        return $this->hasMany(Test::class);
+        return $this->hasMany(Questionnaire::class);
     }
 }
