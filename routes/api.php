@@ -35,12 +35,12 @@ Route::get('/questionnaires/subject/{unique_id}/anon', [QuestionnaireController:
 //Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [UserController::class, 'logout']);
-    Route::apiResource('/questionnaires', QuestionnaireController::class);
+    Route::apiResource('/questionnaires', QuestionnaireController::class, ['as' => 'api']);
     Route::get('/tracking/subject', [SubjectTrackingController::class, 'index']);
     Route::post('/tracking/subject', [SubjectTrackingController::class, 'store']);
     Route::get('/tracking/sample', [SampleTrackingController::class ,'index']);
     Route::post('/tracking/sample', [SampleTrackingController::class ,'store']);
 	
 	//Subjects
-	Route::apiResource('/subjects', SubjectController::class);
+	Route::apiResource('/subjects', SubjectController::class, ['as' => 'api']);
 });
