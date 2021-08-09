@@ -8,7 +8,7 @@ use App\Http\Controllers\Web\TrackingController;
 use App\Http\Controllers\Web\AnalysisController;
 use App\Http\Controllers\Web\ProjectController;
 use App\Http\Controllers\Web\SubjectController;
-use App\Http\Controllers\Web\TestController;
+use App\Http\Controllers\Web\QuestionnaireController;
 use App\Http\Controllers\Web\UserController;
 
 /*
@@ -60,14 +60,14 @@ Route::group(['middleware' => ['auth:sanctum', 'verified', 'throttle:web']], fun
 	Route::delete('/projects/{project}/trash', [ProjectController::class, 'destroy'])->name('projects.destroy');
 	Route::put('/projects/{project}/restore', [ProjectController::class, 'restore'])->name('projects.restore');
 
-	// Tests
-	Route::get('/tests', [TestController::class, 'index'])->name('tests.index');
-	Route::get('/tests/{subject}/create', [TestController::class, 'create'])->name('tests.create');
-	Route::post('/tests', [TestController::class, 'store'])->name('tests.store');
-	Route::get('/tests/{test}/edit', [TestController::class, 'edit'])->name('tests.edit');
-	Route::patch('/tests/{test}', [TestController::class, 'update'])->name('tests.update');
-	Route::delete('/tests/{test}/trash', [TestController::class, 'destroy'])->name('tests.destroy');
-	Route::put('/tests/{test}/restore', [TestController::class, 'restore'])->name('tests.restore');
+	// Questionnaires
+	Route::get('/questionnaires', [QuestionnaireController::class, 'index'])->name('questionnaires.index');
+	Route::get('/questionnaires/{subject}/create', [QuestionnaireController::class, 'create'])->name('questionnaires.create');
+	Route::post('/questionnaires', [QuestionnaireController::class, 'store'])->name('questionnaires.store');
+	Route::get('/questionnaires/{questionnaire}/edit', [QuestionnaireController::class, 'edit'])->name('questionnaires.edit');
+	Route::patch('/questionnaires/{questionnaire}', [QuestionnaireController::class, 'update'])->name('questionnaires.update');
+	Route::delete('/questionnaires/{questionnaire}/trash', [QuestionnaireController::class, 'destroy'])->name('questionnaires.destroy');
+	Route::put('/questionnaires/{questionnaire}/restore', [QuestionnaireController::class, 'restore'])->name('questionnaires.restore');
 
 	//Manage users
 	Route::get('/users', [UserController::class, 'index'])->name('users.index');
