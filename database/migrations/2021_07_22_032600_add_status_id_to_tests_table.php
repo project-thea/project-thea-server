@@ -13,7 +13,7 @@ class AddStatusIdToTestsTable extends Migration
      */
     public function up()
     {
-        Schema::table('tests', function (Blueprint $table) {
+        Schema::table('questionnaires', function (Blueprint $table) {
             $table->foreignId('status_id')->nullable()->constrained('statuses')->onDelete('cascade');
         });
     }
@@ -25,7 +25,7 @@ class AddStatusIdToTestsTable extends Migration
      */
     public function down()
     {
-        Schema::table('tests', function (Blueprint $table) {
+        Schema::table('questionnaires', function (Blueprint $table) {
             $table->dropColumn('status_id');
         });
     }
