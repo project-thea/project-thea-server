@@ -69,7 +69,7 @@ export default {
 		JetSectionTitle
 	},
 	props: {
-		projects: {
+		project: {
 			type: Object,
 			required: true,
 		},
@@ -77,8 +77,8 @@ export default {
 	data() {
 		return {
 			form: this.$inertia.form({
-				name:  this.projects.name,
-				description: this.projects.description
+				name:  this.project.name,
+				description: this.project.description
 			}),
 		}
 	},
