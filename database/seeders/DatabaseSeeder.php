@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             SubjectsTableSeeder::class,
             ProjectsTableSeeder::class,
             StatusesTableSeeder::class,
-            TestsTableSeeder::class,
+            QuestionnairesTableSeeder::class,
             SubjectTrackingTableSeeder::class,
             SampleTrackingTableSeeder::class,
             SampleTestTrackingTableSeeder::class
