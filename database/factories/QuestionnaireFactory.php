@@ -1,0 +1,43 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Questionnaire;
+use App\Models\Project;
+use App\Models\Status;
+use App\Models\Subject;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class QuestionnaireFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Questionnaire::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'project_id' => function () {
+                return Project::factory()->create()->id;
+            },
+            'subject_id' => function () {
+                return Subject::factory()->create()->id;
+            },
+            'status_id' => function () {
+                return Status::factory()->create()->id;
+            },
+            'test_date' => $this->faker->date(),
+            'status_update_date' => $this->faker->date(),
+            'created_with' => 'user',
+            'updated_with' => 'app'
+        ];
+    }
+}
