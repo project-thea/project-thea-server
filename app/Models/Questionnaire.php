@@ -10,7 +10,10 @@ class Questionnaire extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'name',
+        'description'
+    ];
 
     /**
      * Get a questionnaire that belongs to a project.
