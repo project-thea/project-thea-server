@@ -15,20 +15,13 @@ class CreateQuestionnairesTable extends Migration
     {
         Schema::create('questionnaires', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');
-            $table->foreignId('subject_id')->constrained('subjects')->onDelete('cascade');
-            $table->date('test_date');
-            $table->date('status_update_date')->nullable(); //At the start of making the test
-            $table->string('created_with')->nullable(); // user, app
-            $table->string('updated_with')->nullable(); //user. app
+            $table->string('name');
+            $table->longText('description');
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();
 
-            $table->index('project_id');
-            $table->index('subject_id');
-            $table->index('test_date');
-            $table->index('status_update_date');
+            $table->index('name');
         });
     }
 
