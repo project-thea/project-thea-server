@@ -3,9 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Questionnaire;
-use App\Models\Project;
-use App\Models\Status;
-use App\Models\Subject;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class QuestionnaireFactory extends Factory
@@ -25,19 +22,8 @@ class QuestionnaireFactory extends Factory
     public function definition()
     {
         return [
-            'project_id' => function () {
-                return Project::factory()->create()->id;
-            },
-            'subject_id' => function () {
-                return Subject::factory()->create()->id;
-            },
-            'status_id' => function () {
-                return Status::factory()->create()->id;
-            },
-            'test_date' => $this->faker->date(),
-            'status_update_date' => $this->faker->date(),
-            'created_with' => 'user',
-            'updated_with' => 'app'
+            'name' => $this->faker->name,
+            'description' => $this->faker->text()
         ];
     }
 }
