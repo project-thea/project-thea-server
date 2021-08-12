@@ -10,4 +10,12 @@ class DataType extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+     /**
+     * A datatype consists of many questions.
+     */
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
+    }
 }
