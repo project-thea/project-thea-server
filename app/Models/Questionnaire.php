@@ -22,36 +22,4 @@ class Questionnaire extends Model
     {
         return $this->hasMany(Question::class);
     }
-
-    // /**
-    //  * Get a questionnaire that belongs to a project.
-    //  */
-    // public function project()
-    // {
-    //     return $this->belongsTo(Project::class, 'project_id');
-    // }
-
-    // /**
-    //  * Get a questionnaire that belongs to a subject.
-    //  */
-    // public function subject()
-    // {
-    //     return $this->belongsTo(Subject::class, 'subject_id');
-    // }
-
-    // /**
-    //  * A questionnaire consists of many sample test trackers.
-    //  */
-    // public function sample_test_trackings()
-    // {
-    //     return $this->hasMany(SampleTestTracking::class);
-    // }
-
-    // /**
-    //  * Get a questionnaire that belongs to a status.
-    //  */
-    // public function status()
-    // {
-    //     return $this->belongsTo(Status::class, 'status_id');
-    // }
 }
