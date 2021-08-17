@@ -131,27 +131,18 @@ class SampleTrackingTest extends TestCase
         ]);
 
         Questionnaire::factory()->create([
-            'project_id' => 1,
-            'subject_id' => 1,
-            'test_date' => '2020-08-12',
-            'status_id' => 2,
-            'status_update_date' => '2020-08-16'
+            'name' => 'Open questionnaire',
+            'description' => 'Needs to be understood thoroughly'
         ]);
 
         Questionnaire::factory()->create([
-            'project_id' => 2,
-            'subject_id' => 2,
-            'test_date' => '2020-07-18',
-            'status_id' => 1,
-            'status_update_date' => '2020-07-23'
+            'name' => 'Static questionnaire',
+            'description' => 'This needs to be unique'
         ]);
 
         Questionnaire::factory()->create([
-            'project_id' => 3,
-            'subject_id' => 3,
-            'test_date' => '2021-03-18',
-            'status_id' => 3,
-            'status_update_date' => '2021-03-24'
+            'name' => 'Closed questionnaire',
+            'description' => 'This needs to be precise and concise'
         ]);
 
         SampleTracking::factory()->create([
