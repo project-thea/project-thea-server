@@ -7,7 +7,6 @@ use App\Models\User;
 use App\Models\Project;
 use App\Models\Questionnaire;
 use App\Models\Subject;
-use App\Models\Test;
 use App\Models\SampleTestTracking;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
