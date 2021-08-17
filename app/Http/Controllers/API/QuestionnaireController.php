@@ -20,11 +20,7 @@ class QuestionnaireController extends Controller
      */
     public function index()
     {
-        $questionnaires = Questionnaire::select('questionnaires.*', 'subjects.first_name', 'subjects.last_name', 'projects.name')
-            ->leftJoin('subjects', 'questionnaires.subject_id', '=', 'subjects.id')
-            ->leftJoin('projects', 'questionnaires.project_id', '=', 'projects.id')
-            ->orderBy('questionnaires.test_date', 'ASC')
-            ->paginate(self::RECORDS_PER_PAGE);
+        $questionnaires = Questionnaire::select('questionnaires.*')->paginate(self::RECORDS_PER_PAGE);
 
         $questionnairesCollection = QuestionnaireResource::collection($questionnaires);
         $apiResponse = APIHelpers::formatAPIResponse(false, 'Questionnaires retrieved successfully', $questionnairesCollection);
@@ -41,17 +37,14 @@ class QuestionnaireController extends Controller
     {
         $data = $request->all();
 
-        $validateData = [
-            'project_id' => 'exists:App\Models\Project,id',
-            'subject_id' => 'exists:App\Models\Subject,id',
-            'status_id' => 'exists:App\Models\Status,id',
-            'test_date' => 'required|date',
-            'status_update_date' => 'date',
-            'created_with' => 'string|max:4',
-            'updated_with' => 'string|max:4',
+        $validationRules = [
+            'name' => 'required|string|max:55',
+            'description' => 'required|string|max:55',
+            'created_by' => 'integer|numeric',
+            'updated_by' => 'integer|numeric'
         ];
 
-        $validator = Validator::make($data, $validateData);
+        $validator = Validator::make($data, $validationRules);
 
         if ($validator->fails()) {
             return response(['error' => $validator->errors(), 'Validation Error']);
@@ -66,12 +59,12 @@ class QuestionnaireController extends Controller
     /**
      * Display a specified Questionnaire.
      *
-     * @param  \App\Models\Questionnaire  $question
+     * @param  \App\Models\Questionnaire $questionnaire
      * @return \Illuminate\Http\Response
      */
-    public function show(Questionnaire $question)
+    public function show(Questionnaire $questionnaire)
     {
-        $questionnaireResource = new QuestionnaireResource($question);
+        $questionnaireResource = new QuestionnaireResource($questionnaire);
         $apiResponse = APIHelpers::formatAPIResponse(false, 'Questionnaire retrieved successfully', $questionnaireResource);
         return response()->json($apiResponse, 200);
     }
@@ -80,13 +73,13 @@ class QuestionnaireController extends Controller
      * Update a specified Questionnaire in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Questionnaire  $question
+     * @param  \App\Models\Questionnaire  $questionnaire
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Questionnaire $question)
+    public function update(Request $request, Questionnaire $questionnaire)
     {
-        $question->update($request->all());
-        $updatedQuestionnaire = new QuestionnaireResource($question);
+        $questionnaire->update($request->all());
+        $updatedQuestionnaire = new QuestionnaireResource($questionnaire);
 
         if (!$updatedQuestionnaire) {
             $apiResponse = APIHelpers::formatAPIResponse(true, 'Questionnaire update failed', null);
