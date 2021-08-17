@@ -18,7 +18,7 @@ class CreateQuestionsTable extends Migration
             $table->foreignId('questionnaire_id')->constrained('questionnaires')->onDelete('cascade');
             $table->foreignId('datatype_id')->constrained('data_types')->onDelete('cascade');
             $table->string('title');
-            $table->json('attribute');
+            $table->json('attributes');
             $table->string('position');
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();

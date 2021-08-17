@@ -16,7 +16,7 @@ class CreateDataTypesTable extends Migration
         Schema::create('data_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->json('attribute');
+            $table->json('attributes');
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();
