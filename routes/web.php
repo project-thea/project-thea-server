@@ -62,7 +62,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified', 'throttle:web']], fun
 
 	// Questionnaires
 	Route::get('/questionnaires', [QuestionnaireController::class, 'index'])->name('questionnaires.index');
-	Route::get('/questionnaires/{subject}/create', [QuestionnaireController::class, 'create'])->name('questionnaires.create');
+	Route::get('/questionnaires/create', [QuestionnaireController::class, 'create'])->name('questionnaires.create');
 	Route::post('/questionnaires', [QuestionnaireController::class, 'store'])->name('questionnaires.store');
 	Route::get('/questionnaires/{questionnaire}/edit', [QuestionnaireController::class, 'edit'])->name('questionnaires.edit');
 	Route::patch('/questionnaires/{questionnaire}', [QuestionnaireController::class, 'update'])->name('questionnaires.update');
