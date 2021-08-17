@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             ProjectsTableSeeder::class,
             StatusesTableSeeder::class,
             QuestionnairesTableSeeder::class,
+            DatatypesTableSeeder::class,
             SubjectTrackingTableSeeder::class,
             SampleTrackingTableSeeder::class,
             SampleTestTrackingTableSeeder::class
