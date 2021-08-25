@@ -18,9 +18,12 @@ class DatatypesTableSeeder extends Seeder
         $dataTypes = [
             [
                 'id' => 1,
-                'name' => 'radio button',
+                'name' => 'date',
                 'attributes' => '{
-                    "gender" : "true"
+                    "format": ["d-m-y", "y-m-d", "d/m/y", "y/m/d"],
+                    "required": ["true", "false"],
+                    "appearance": ["calendar", "text"],
+                    "default": "2021-08-25"
                 }',
                 'created_by' => '1',
                 'updated_by' => '2',
@@ -30,9 +33,11 @@ class DatatypesTableSeeder extends Seeder
 
             [
                 'id' => 2,
-                'name' => 'text field',
+                'name' => 'time',
                 'attributes' => '{
-                    "text": "true"
+                    "format": ["12hrs", "24hrs"],
+                    "required": ["true", "false"],
+                    "default": "14:46:51"
                 }',
                 'created_by' => '1',
                 'updated_by' => '3',
@@ -42,9 +47,13 @@ class DatatypesTableSeeder extends Seeder
 
             [
                 'id' => 3,
-                'name' => 'checkbox',
+                'name' => 'datetime',
                 'attributes' => '{
-                    "select" : "false"
+                    "format": ["12hrs", "24hrs"],
+                    "required": ["true", "false"],
+                    "default": "2021-08-25 14:54:21",
+                    "timezone": "Kampala",
+                    "appearance": ["calendar", "text"]
                 }',
                 'created_by' => '1',
                 'updated_by' => '2',
@@ -54,9 +63,10 @@ class DatatypesTableSeeder extends Seeder
 
             [
                 'id' => 4,
-                'name' => 'date picker',
+                'name' => 'checkbox',
                 'attributes' => '{
-                    "date": "valid"
+                    "required": ["true", "false"],
+                    "options": []
                 }',
                 'created_by' => '1',
                 'updated_by' => '4',
@@ -66,9 +76,24 @@ class DatatypesTableSeeder extends Seeder
 
             [
                 'id' => 5,
-                'name' => 'time',
+                'name' => 'radio button',
                 'attributes' => '{
-                    "time": "timestamp"
+                    "required": ["true", "false"],
+                    "options": []
+                }',
+                'created_by' => '1',
+                'updated_by' => '3',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+
+            [
+                'id' => 6,
+                'name' => 'text',
+                'attributes' => '{
+                    "format": ["textfield", "textarea"],
+                    "required": ["true", "false"],
+                    "appearance": ["singleline","multiline"]
                 }',
                 'created_by' => '1',
                 'updated_by' => '3',
