@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\QuestionController;
 use App\Http\Controllers\API\SampleTrackingController;
 use App\Http\Controllers\API\SubjectTrackingController;
 use App\Http\Controllers\API\QuestionnaireController;
@@ -43,4 +44,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 	
 	//Subjects
 	Route::apiResource('/subjects', SubjectController::class, ['as' => 'api']);
+
+    //Questions
+    Route::apiResource('/questions', QuestionController::class, ['as' => 'api']);
 });
