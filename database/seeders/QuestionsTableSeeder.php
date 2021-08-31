@@ -58,6 +58,21 @@ class QuestionsTableSeeder extends Seeder
                 'updated_by' => '2',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+
+            [
+                'questionnaire_id' => '4',
+                'datatype_id' => '3',
+                'title' => 'When was tracking done and at what time was it recorded',
+                'attributes' => '{
+                    "format": "2021-08-25 15:54:21",
+                    "required": "true"
+                }',
+                'position' => '4',
+                'created_by' => '2',
+                'updated_by' => '3',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ]
         ];
 
