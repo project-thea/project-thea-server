@@ -46,5 +46,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 	Route::apiResource('/subjects', SubjectController::class, ['as' => 'api']);
 
     //Questions
-    Route::apiResource('/questions', QuestionController::class, ['as' => 'api']);
+    Route::apiResource('/questionnaires/{questionnaire}/questions', QuestionController::class, ['as' => 'api']);
 });
