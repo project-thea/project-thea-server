@@ -24,7 +24,6 @@ class QuestionsTableSeeder extends Seeder
                     "format": "14:54:21",
                     "required": "true"
                 }',
-                'position' => '2',
                 'created_by' => '2',
                 'updated_by' => '1',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -39,7 +38,6 @@ class QuestionsTableSeeder extends Seeder
                     "format": "2021-08-25",
                     "required": "true"
                 }',
-                'position' => '1',
                 'created_by' => '1',
                 'updated_by' => '2',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -53,7 +51,6 @@ class QuestionsTableSeeder extends Seeder
                 'attributes' => '{
                     "required": "true"
                 }',
-                'position' => '3',
                 'created_by' => '1',
                 'updated_by' => '2',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -68,7 +65,6 @@ class QuestionsTableSeeder extends Seeder
                     "format": "2021-08-25 15:54:21",
                     "required": "true"
                 }',
-                'position' => '4',
                 'created_by' => '2',
                 'updated_by' => '3',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),

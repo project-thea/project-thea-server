@@ -19,13 +19,11 @@ class CreateQuestionsTable extends Migration
             $table->foreignId('datatype_id')->constrained('data_types')->onDelete('cascade');
             $table->string('title');
             $table->json('attributes');
-            $table->string('position');
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();
 
             $table->index('title');
-            $table->index('position');
         });
     }
 
