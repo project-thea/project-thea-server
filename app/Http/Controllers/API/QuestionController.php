@@ -19,9 +19,23 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, Questionnaire $questionnaire)
     {
+        $validationRule = [
+            'questionnaire_id' => 'exists:App\Models\Questionnaire,id',
+        ];
+
+        $validateData = $request->validate($validationRule);
+
+        $validateData['questionnaire_id'] = $questionnaire->id;
+
         $questions = Question::paginate(self::RECORDS_PER_PAGE);
+
+        $questions = Question::select('questions.*', 'questionnaires.name', 'questionnaires.description')
+            ->leftJoin('questionnaires', 'questions.questionnaire_id', '=', 'questionnaires.id')
+            ->orderBy('questions.id', 'ASC')
+            ->paginate(self::RECORDS_PER_PAGE);
+
         $questionsCollection = QuestionResource::collection($questions);
         $apiResponse = APIHelpers::formatAPIResponse(false, 'Questions retrieved successfully', $questionsCollection);
         return response()->json($apiResponse, 200);
@@ -33,14 +47,13 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Questionnaire $questionnaire)
     {
         $validationRules = [
             'questionnaire_id' => 'exists:App\Models\Questionnaire,id',
             'datatype_id' => 'exists:App\Models\DataType,id',
             'title' => 'required|string|max:55',
             'attributes' => 'json',
-            'position' => 'integer',
             'created_by' => 'integer',
             'updated_by' => 'integer'
         ];
@@ -49,6 +62,7 @@ class QuestionController extends Controller
 
         $validateData['created_by'] = Auth::id();
         $validateData['updated_by'] = Auth::id();
+        $validateData['questionnaire_id'] = $questionnaire->id;
 
         $question = Question::create($validateData);
         $questionResource = new QuestionResource($question);
@@ -62,8 +76,16 @@ class QuestionController extends Controller
      * @param  \App\Models\Question $question
      * @return \Illuminate\Http\Response
      */
-    public function show(Questionnaire $questionnaire, Question $question)
+    public function show(Request $request, Questionnaire $questionnaire, Question $question)
     {
+        $validationRules = [
+            'questionnaire_id' => 'exists:App\Models\Questionnaire,id',
+        ];
+
+        $validateData = $request->validate($validationRules);
+
+        $validateData['questionnaire_id'] = $questionnaire->id;
+
         $questionResource = new QuestionResource($question);
         $apiResponse = APIHelpers::formatAPIResponse(false, 'Question retrieved successfully', $questionResource);
         return response()->json($apiResponse, 200);
@@ -77,17 +99,19 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function update(Questionnaire $questionnaire, Question $question, Request $request)
+    public function update(Request $request, Questionnaire $questionnaire, Question $question)
     {
         $validationRules = [
+            'questionnaire_id' => 'exists:App\Models\Questionnaire,id',
             'title' => 'required|string|max:55',
+            'datatype_id' => 'exists:App\Models\DataType,id',
             'attributes' => 'json',
-            'position' => 'integer',
             'updated_by' => 'integer'
         ];
 
         $validateData = $request->validate($validationRules);
 
+        $validateData['questionnaire_id'] = $questionnaire->id;
         $validateData['updated_by'] = Auth::id();
 
         $question->update($validateData);
@@ -108,8 +132,16 @@ class QuestionController extends Controller
      * @param  \App\Models\Question $question
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Questionnaire $questionnaire, Question $question)
+    public function destroy(Request $request, Questionnaire $questionnaire, Question $question)
     {
+        $validationRule = [
+            'questionnaire_id' => 'exists:App\Models\Questionnaire,id',
+        ];
+
+        $validateData = $request->validate($validationRule);
+
+        $validateData['questionnaire_id'] = $questionnaire->id;
+
         $question->delete();
         $apiResponse = APIHelpers::formatAPIResponse(false, 'Question deleted successfully', null);
         return response()->json($apiResponse, 200);
