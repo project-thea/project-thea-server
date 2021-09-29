@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\DataType;
+use App\Models\Question;
 use App\Models\Questionnaire;
 use Inertia\Inertia;
 use \Illuminate\Http\Request;
@@ -81,12 +83,24 @@ class QuestionnaireController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Questionnaire $questionnaire)
     {
-        $questionnaire = Questionnaire::find($id);
+        $questions = Question::select('questions.*', 'data_types.name')
+            ->leftJoin('data_types', 'questions.datatype_id', '=', 'data_types.id')
+            ->orderBy('questions.id', 'desc')
+            ->paginate(self::NUMBER_OF_RECORDS);
+
+        $trashedQuestions = Question::select('questions.*', 'data_types.name')
+            ->leftJoin('data_types', 'questions.datatype_id', '=', 'data_types.id')
+            ->orderBy('questions.id', 'desc')
+            ->onlyTrashed()
+            ->paginate(self::NUMBER_OF_RECORDS);
 
         return Inertia::render('Questionnaires/Edit', [
-            'questionnaire' => $questionnaire
+            'questionnaire' => $questionnaire,
+            'questions' => $questions,
+            'datatypes' => DataType::all(),
+            'trashedQuestions' => $trashedQuestions
         ]);
     }
 
