@@ -68,6 +68,7 @@ class QuestionController extends Controller
     public function update(Questionnaire $questionnaire, Question $question, Request $request)
     {
         $validationRules = [
+            'questionnaire_id' => 'exists:App\Models\Questionnaire,id',
             'title' => 'required|string|max:55',
             'datatype_id' => 'exists:App\Models\DataType,id',
             'attributes' => 'json',

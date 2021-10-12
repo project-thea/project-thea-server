@@ -8,6 +8,7 @@ use App\Models\Question;
 use App\Models\Questionnaire;
 use Inertia\Inertia;
 use \Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -87,12 +88,14 @@ class QuestionnaireController extends Controller
     {
         $questions = Question::select('questions.*', 'data_types.name')
             ->leftJoin('data_types', 'questions.datatype_id', '=', 'data_types.id')
+            ->where('questionnaire_id', $questionnaire->id)
             ->orderBy('questions.id', 'desc')
             ->paginate(self::NUMBER_OF_RECORDS);
 
         $trashedQuestions = Question::select('questions.*', 'data_types.name')
             ->leftJoin('data_types', 'questions.datatype_id', '=', 'data_types.id')
             ->orderBy('questions.id', 'desc')
+            ->where('questionnaire_id', $questionnaire->id)
             ->onlyTrashed()
             ->paginate(self::NUMBER_OF_RECORDS);
 
