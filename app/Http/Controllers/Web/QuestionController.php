@@ -51,6 +51,10 @@ class QuestionController extends Controller
     {
         $dataTypes = DataType::all();
 
+        if (!($questionnaire->id == $question->questionnaire_id)) {
+            return Redirect::route('questionnaires.index')->with('error', 'Question does not belong to questionnaire.');
+        }
+
         return Inertia::render('Questions/Edit', [
             'question' => $question,
             'questionnaire' => $questionnaire,
