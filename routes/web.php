@@ -69,6 +69,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified', 'throttle:web']], fun
     Route::patch('/questionnaires/{questionnaire}', [QuestionnaireController::class, 'update'])->name('questionnaires.update');
     Route::delete('/questionnaires/{questionnaire}/trash', [QuestionnaireController::class, 'destroy'])->name('questionnaires.destroy');
     Route::put('/questionnaires/{questionnaire}/restore', [QuestionnaireController::class, 'restore'])->name('questionnaires.restore');
+    Route::get('/questionnaires/{questionnaire}/preview', [QuestionnaireController::class, 'preview'])->name('questionnaires.preview');
 
     // Questions
     Route::post('/questionnaires/{questionnaire}/questions', [QuestionController::class, 'store'])->name('questions.store');
@@ -76,6 +77,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified', 'throttle:web']], fun
     Route::patch('/questionnaires/{questionnaire}/questions/{question}', [QuestionController::class, 'update'])->name('questions.update');
     Route::delete('/questionnaires/{questionnaire}/questions/{question}/trash', [QuestionController::class, 'destroy'])->name('questions.destroy');
     Route::put('/questionnaires/{questionnaire}/questions/{question}/restore', [QuestionController::class, 'restore'])->name('questions.restore');
+    Route::get('/questionnaires/{questionnaire}/questions/{question}/preview', [QuestionController::class, 'preview'])->name('questions.preview');
 
     //Manage users
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
