@@ -107,7 +107,7 @@
 											Edit
 										</inertia-link>
 
-										<inertia-link @click="previewQuestion(question.id)" class="text-green-600 hover:text-green-900">
+										<inertia-link @click="previewQuestion(question.id)" :href="'/questionnaires/' + questionnaire.id + '/questions/' + question.id + '/preview'" class="text-green-600 hover:text-green-900">
 											Preview
 										</inertia-link>
 									</td>
@@ -392,8 +392,8 @@ export default {
 			this.editMode = false;
 		},
 
-        previewQuestion() {
-
+        previewQuestion(question) {
+            Inertia.get('/questionnaires/' + this.questionnaire.id + '/questions/' + question + '/preview');
         },
 
         editQuestion(question) {
