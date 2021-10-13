@@ -112,6 +112,11 @@
 										</inertia-link>
 									</td>
 								</tr>
+                                <tr v-if="questions.data.length === 0">
+									<td class="border-t px-6 py-4" colspan="4">
+										No questions found.
+									</td>
+								</tr>
 							</tbody>
 						</table>
 
@@ -237,6 +242,11 @@
 										<inertia-link @click="restoreQuestion(question.id)" :href="'/questionnaires/' + questionnaire.id + '/questions/' + question.id + '/restore'" class="mr-6 text-green-600 hover:text-green-900">
 											Restore
 										</inertia-link>
+									</td>
+								</tr>
+                                <tr v-if="trashedQuestions.data.length === 0">
+									<td class="border-t px-6 py-4" colspan="4">
+										No question trash found.
 									</td>
 								</tr>
 							</tbody>
