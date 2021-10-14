@@ -17,8 +17,8 @@
 
 					<form @submit.prevent="updateQuestionnaire">
 						<div class="mt-3">
-							<jet-label for="name" value="Name" />
-							<jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus autocomplete="name" />
+							<jet-label for="label" value="Name" />
+							<jet-input id="label" type="text" class="mt-1 block w-full" v-model="form.label" required autofocus autocomplete="label" />
 						</div>
 
 						<div class="mt-3">
@@ -325,7 +325,7 @@ export default {
 	data() {
 		return {
 			form: this.$inertia.form({
-				name:  this.questionnaire.name,
+				label:  this.questionnaire.label,
 				description: this.questionnaire.description,
 				datatype_id: this.questions.datatype_id,
 			}),
@@ -347,9 +347,9 @@ export default {
 				errorBag: 'updateQuestionnaire',
 				preserveScroll: true,
 				onError: () => {
-					if (this.form.errors.name) {
-						this.form.reset('name', this.questionnaire.name)
-						this.$refs.name.focus()
+					if (this.form.errors.label) {
+						this.form.reset('label', this.questionnaire.label)
+						this.$refs.label.focus()
 					}
 
 					if (this.form.errors.description) {
