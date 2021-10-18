@@ -17,7 +17,7 @@ class QuestionnairesTableSeeder extends Seeder
     {
         $questionnaires = [
             [
-                'name' => 'Open-ended',
+                'label' => 'Open-ended',
                 'description' => 'Needs to ensure that respondents fully understand the questions and are not likely to refuse to answer.',
                 'created_by' => '1',
                 'updated_by' => '2',
@@ -26,7 +26,7 @@ class QuestionnairesTableSeeder extends Seeder
             ],
 
             [
-                'name' => 'Static closed-ended',
+                'label' => 'Static closed-ended',
                 'description' => 'Needs to ensure that respondents fully understand the questions and are not likely to refuse to answer.',
                 'created_by' => '1',
                 'updated_by' => '3',
@@ -35,16 +35,16 @@ class QuestionnairesTableSeeder extends Seeder
             ],
 
             [
-                'name' => 'Dynamic closed-ended',
+                'label' => 'Dynamic closed-ended',
                 'description' => 'Needs to ensure that respondents fully understand the questions and are not likely to refuse to answer.',
                 'created_by' => '1',
                 'updated_by' => '2',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            ], 
+            ],
 
             [
-                'name' => 'Task-based',
+                'label' => 'Task-based',
                 'description' => 'Needs to ensure that respondents fully understand the questions and are not likely to refuse to answer.',
                 'created_by' => '1',
                 'updated_by' => '4',
