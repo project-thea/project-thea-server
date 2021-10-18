@@ -45,13 +45,13 @@ class QuestionnaireTest extends TestCase
         ]);
 
         Questionnaire::factory()->create([
-            'name' => 'open-ended',
-            'description' => 'Very vital questionnaire'
+            'label' => 'link-ended',
+            'description' => 'Almost vital questionnaire'
         ]);
 
         $questionnaireData = [
-            'name' => 'open-ended',
-            'description' => 'Very vital questionnaire'
+            'label' => 'link-ended',
+            'description' => 'Almost vital questionnaire'
         ];
 
         $this->json('POST', 'api/questionnaires', $questionnaireData, ['Accept' => 'application/json'])
@@ -60,7 +60,7 @@ class QuestionnaireTest extends TestCase
                 'status',
                 'data' => [
                     'id',
-                    'name',
+                    'label',
                     'description',
                     'created_at',
                     'updated_at',
@@ -139,17 +139,17 @@ class QuestionnaireTest extends TestCase
         ]);
 
         Questionnaire::factory()->create([
-            'name' => 'Questionnaire One',
+            'label' => 'Questionnaire One',
             'description' => 'Explains questionnaire one'
         ]);
 
         Questionnaire::factory()->create([
-            'name' => 'Questionnaire Two',
+            'label' => 'Questionnaire Two',
             'description' => 'Explains questionnaire two'
         ]);
 
         Questionnaire::factory()->create([
-            'name' => 'Questionnaire Three',
+            'label' => 'Questionnaire Three',
             'description' => 'Explains questionnaire three'
         ]);
 
@@ -160,7 +160,7 @@ class QuestionnaireTest extends TestCase
                 'data' => [
                     [
                         'id',
-                        'name',
+                        'label',
                         'description',
                         'created_by',
                         'updated_by',
@@ -170,7 +170,7 @@ class QuestionnaireTest extends TestCase
 
                     [
                         'id',
-                        'name',
+                        'label',
                         'description',
                         'created_by',
                         'updated_by',
@@ -180,7 +180,7 @@ class QuestionnaireTest extends TestCase
 
                     [
                         'id',
-                        'name',
+                        'label',
                         'description',
                         'created_by',
                         'updated_by',
@@ -224,7 +224,7 @@ class QuestionnaireTest extends TestCase
         ]);
 
         $questionnaire = Questionnaire::factory()->create([
-            'name' => 'Static-ended',
+            'label' => 'Static-ended',
             'description' => 'Needs to ensure that respondents fully understand',
         ]);
 
@@ -234,7 +234,7 @@ class QuestionnaireTest extends TestCase
                 'status',
                 'data' => [
                     'id',
-                    'name',
+                    'label',
                     'description',
                     'created_by',
                     'updated_by',
@@ -259,12 +259,12 @@ class QuestionnaireTest extends TestCase
         $user = User::factory()->create();
         $this->actingAs($user);
 
-        $project = Project::factory()->create([
+        Project::factory()->create([
             'name' => 'COVID',
             'description' => 'A deadly disease that people will develop moderate illness',
         ]);
 
-        $subject = Subject::factory()->create([
+        Subject::factory()->create([
             'first_name' => 'James',
             'last_name' => 'Jakuma',
             'email' => 'james@gmail.com',
@@ -279,12 +279,12 @@ class QuestionnaireTest extends TestCase
         ]);
 
         $questionnaire = Questionnaire::factory()->create([
-            'name' => 'Static-ended',
+            'label' => 'Static-ended',
             'description' => 'Needs to ensure that respondents fully understand',
         ]);
 
         $payload = [
-            'name' => 'Static-ended',
+            'label' => 'Static-ended',
             'description' => 'Needs to ensure that respondents fully understand',
         ];
 
@@ -294,7 +294,7 @@ class QuestionnaireTest extends TestCase
                 'status',
                 'data' => [
                     'id',
-                    'name',
+                    'label',
                     'description',
                     'created_by',
                     'updated_by',
@@ -338,7 +338,7 @@ class QuestionnaireTest extends TestCase
         ]);
 
         $questionnaire = Questionnaire::factory()->create([
-            'name' => 'Static-ended',
+            'label' => 'Static-ended',
             'description' => 'Needs to ensure that respondents fully understand',
         ]);
 

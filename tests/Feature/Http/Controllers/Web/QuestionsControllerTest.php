@@ -24,7 +24,7 @@ class QuestionsControllerTest extends TestCase
         ]));
 
         $expected = [
-            'name' => 'open-ended',
+            'label' => 'open-ended',
             'description' => 'Needs to ensure that respondents fully understand the questions.'
         ];
 

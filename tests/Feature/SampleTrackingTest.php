@@ -130,17 +130,17 @@ class SampleTrackingTest extends TestCase
         ]);
 
         Questionnaire::factory()->create([
-            'name' => 'Open questionnaire',
+            'label' => 'Open questionnaire',
             'description' => 'Needs to be understood thoroughly'
         ]);
 
         Questionnaire::factory()->create([
-            'name' => 'Static questionnaire',
+            'label' => 'Static questionnaire',
             'description' => 'This needs to be unique'
         ]);
 
         Questionnaire::factory()->create([
-            'name' => 'Closed questionnaire',
+            'label' => 'Closed questionnaire',
             'description' => 'This needs to be precise and concise'
         ]);
 

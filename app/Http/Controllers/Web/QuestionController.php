@@ -111,4 +111,25 @@ class QuestionController extends Controller
         $question->restore();
         return Redirect::route('questionnaires.edit', ['questionnaire' => $questionnaire])->with('success', 'Question successfully restored.');
     }
+
+    /**
+     * Preview the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function preview(Questionnaire $questionnaire, Question $question)
+    {
+        $dataTypes = DataType::all();
+
+        if (!($questionnaire->id == $question->questionnaire_id)) {
+            return Redirect::route('questionnaires.index')->with('error', 'Question does not belong to questionnaire.');
+        }
+
+        return Inertia::render('Questions/Preview', [
+            'question' => $question,
+            'questionnaire' => $questionnaire,
+            'dataTypes' => $dataTypes,
+        ]);
+    }
 }

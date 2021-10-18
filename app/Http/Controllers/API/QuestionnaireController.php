@@ -38,7 +38,7 @@ class QuestionnaireController extends Controller
         $data = $request->all();
 
         $validationRules = [
-            'name' => 'required|string|max:55',
+            'label' => 'required|string|max:55',
             'description' => 'required|string|max:55',
             'created_by' => 'integer|numeric',
             'updated_by' => 'integer|numeric'
