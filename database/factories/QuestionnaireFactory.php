@@ -22,7 +22,7 @@ class QuestionnaireFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
+            'label' => $this->faker->name,
             'description' => $this->faker->text()
         ];
     }

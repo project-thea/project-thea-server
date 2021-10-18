@@ -38,13 +38,13 @@ class QuestionnaireControllerTest extends TestCase
         $this->actingAs($user);
 
         $questionnairesData = [
-            'name' => '',
+            'label' => '',
             'description' => 'Needs to ensure that respondents fully understand the questions',
         ];
 
         $response = $this->post('/questionnaires', $questionnairesData);
 
-        $response->assertSessionHasErrors('name');
+        $response->assertSessionHasErrors('label');
     }
 
     public function test_a_questionnaire_description_is_required()
@@ -58,7 +58,7 @@ class QuestionnaireControllerTest extends TestCase
         $this->actingAs($user);
 
         $questionnairesData = [
-            'name' => 'COVID-19',
+            'label' => 'COVID-19',
             'description' => '',
         ];
 
@@ -76,8 +76,8 @@ class QuestionnaireControllerTest extends TestCase
         ]));
 
         $expected = [
-            'name' => 'open-ended',
-            'description' => 'Needs to ensure that respondents fully understand the questions.'
+            'label' => 'close-ended',
+            'description' => 'Needs to ensure that respondents at least fully understand the questions.'
         ];
 
         $this->actingAs($user)
@@ -107,7 +107,7 @@ class QuestionnaireControllerTest extends TestCase
         $questionnaire = Questionnaire::factory()->create();
 
         $questionnaireData = [
-            'name' => 'Covid testing',
+            'label' => 'Covid testing',
             'description' => 'Needs to understands the questions',
         ];
 
