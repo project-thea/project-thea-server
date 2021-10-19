@@ -28,7 +28,7 @@ class QuestionnaireController extends Controller
 
         if (isset($query_params['search'])) {
             $questionnaires = Questionnaire::query()
-                ->where('name', 'LIKE', '%' . $query_params['search'] . '%')
+                ->where('label', 'LIKE', '%' . $query_params['search'] . '%')
                 ->paginate(self::NUMBER_OF_RECORDS);
         } else {
             $questionnaires = Questionnaire::orderBy('id', 'desc')->paginate(self::NUMBER_OF_RECORDS);
@@ -64,7 +64,7 @@ class QuestionnaireController extends Controller
         $data = $request->all();
 
         $validationRules = [
-            'name' => 'required|string|max:55',
+            'label' => 'required|string|max:55',
             'description' => 'required|string|max:250',
         ];
 
@@ -119,7 +119,7 @@ class QuestionnaireController extends Controller
         $data = $request->all();
 
         $validationRules = [
-            'name' => 'required|string|max:55',
+            'label' => 'required|string|max:55',
             'description' => 'required|string|max:250'
         ];
 
@@ -159,5 +159,26 @@ class QuestionnaireController extends Controller
         $questionnaire = Questionnaire::withTrashed()->find($id);
         $questionnaire->restore();
         return Redirect::route('questionnaires.index')->with('success', 'Questionnaire successfully restored.');
+    }
+
+    /**
+     * Preview a specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function preview(Questionnaire $questionnaire)
+    {
+        $questionnaireDetails = DB::table('questionnaires')
+            ->select('questionnaires.id', 'questionnaires.label', 'questions.title', 'questions.datatype_id', 'questions.attributes', 'data_types.name')
+            ->leftJoin('questions', 'questionnaires.id', '=',  'questions.questionnaire_id')
+            ->leftJoin('data_types', 'questions.datatype_id', '=', 'data_types.id')
+            ->where('questionnaires.id', '=', $questionnaire->id)
+            ->orderByDesc('questions.id')
+            ->get();
+
+        return Inertia::render('Questionnaires/Preview', [
+            'questionnaireDetails' =>  $questionnaireDetails
+        ]);
     }
 }
