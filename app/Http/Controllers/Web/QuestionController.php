@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class QuestionController extends Controller
 {
@@ -120,16 +121,16 @@ class QuestionController extends Controller
      */
     public function preview(Questionnaire $questionnaire, Question $question)
     {
-        $dataTypes = DataType::all();
-
-        if (!($questionnaire->id == $question->questionnaire_id)) {
-            return Redirect::route('questionnaires.index')->with('error', 'Question does not belong to questionnaire.');
-        }
+        $questionDetails = DB::table('questions')
+            ->select('questions.id', 'questions.title', 'questions.questionnaire_id', 'questions.datatype_id', 'questions.attributes', 'data_types.name')
+            ->leftJoin('data_types', 'questions.datatype_id', '=', 'data_types.id')
+            ->where('questions.id', '=', $question->id)
+            ->orderByDesc('questions.id')
+            ->get();
 
         return Inertia::render('Questions/Preview', [
-            'question' => $question,
-            'questionnaire' => $questionnaire,
-            'dataTypes' => $dataTypes,
+            'questionDetails' =>  $questionDetails,
+            'questionnaire' => $questionnaire
         ]);
     }
 }
