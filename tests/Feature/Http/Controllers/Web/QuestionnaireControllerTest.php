@@ -180,7 +180,7 @@ class QuestionnaireControllerTest extends TestCase
         $response->assertSuccessful();
     }
 
-    public function test_a_questionnaire_with_all_details_can_be_previewed()
+    public function test_can_preview_a_questionnaire_and_its_attributes()
     {
         $this->withoutExceptionHandling();
 
