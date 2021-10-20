@@ -1,6 +1,5 @@
 <template>
     <app-layout>
-        <label for="checkbox">(Type = checkbox)</label>
         <div>
             <input type="checkbox" id="checkbox" class="mr-2" v-model="checked" />
         </div>

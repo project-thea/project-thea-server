@@ -1,6 +1,5 @@
 <template>
     <app-layout>
-        <label for="checkbox">(Type = datetime)</label>
         <jet-input id="label" type="datetime-local" class="mt-1 block w-full" autofocus autocomplete="label" />
     </app-layout>
 </template>

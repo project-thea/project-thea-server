@@ -1,6 +1,5 @@
 <template>
     <app-layout>
-        <label for="checkbox">(Type = time)</label>
         <div class="mt-3">
             <jet-input id="label" type="time" class="mt-1 block w-full" autofocus autocomplete="label" />
         </div>

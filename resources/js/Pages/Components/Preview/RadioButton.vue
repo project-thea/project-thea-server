@@ -1,6 +1,5 @@
 <template>
     <app-layout>
-        <label for="checkbox">(Type = radiobutton)</label>
         <div id="v-model-radiobutton">
             <input type="radio" id="one" value="One" v-model="picked" />
             <label class="mb-2 mt-6 ml-2" for="one">One</label>
