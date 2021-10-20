@@ -387,4 +387,23 @@ class QuestionsControllerTest extends TestCase
                 $page->component('Questionnaires/Index');
             });
     }
+
+    public function test_can_preview_a_question_and_its_attributes()
+    {
+        $this->withoutExceptionHandling();
+
+        $user = Sanctum::actingAs(User::factory()->create([
+            'role_id' => '2'
+        ]));
+
+        $questionnaire = Questionnaire::factory()->create();
+        $question = Question::factory()->create();
+
+        $this->actingAs($user)
+            ->get('/questionnaires/' . $questionnaire->id . '/questions/' . $question->id . '/preview')
+            ->assertStatus(200)
+            ->assertInertia(function (Assert $page) {
+                $page->component('Questions/Preview');
+            });
+    }
 }
