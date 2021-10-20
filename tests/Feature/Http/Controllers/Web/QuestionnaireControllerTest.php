@@ -179,4 +179,22 @@ class QuestionnaireControllerTest extends TestCase
 
         $response->assertSuccessful();
     }
+
+    public function test_a_questionnaire_with_all_details_can_be_previewed()
+    {
+        $this->withoutExceptionHandling();
+
+        $user = Sanctum::actingAs(User::factory()->create([
+            'role_id' => '2'
+        ]));
+
+        $questionnaire = Questionnaire::factory()->create();
+
+        $this->actingAs($user)
+            ->get('/questionnaires/' . $questionnaire->id . '/preview')
+            ->assertStatus(200)
+            ->assertInertia(function (Assert $page) {
+                $page->component('Questionnaires/Preview');
+            });
+    }
 }
