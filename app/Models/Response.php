@@ -9,11 +9,13 @@ class Response extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     /**
      * A response belongs to a question.
      */
-    public function question()
+    public function questionnaire()
     {
-        return $this->belongsTo(Question::class, 'question_id');
+        return $this->belongsTo(Questionnaire::class, 'questionnaire_id');
     }
 }

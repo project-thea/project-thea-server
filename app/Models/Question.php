@@ -27,12 +27,4 @@ class Question extends Model
     {
         return $this->belongsTo(DataType::class, 'datatype_id');
     }
-
-    /**
-     * A question consists of many responses.
-     */
-    public function responses()
-    {
-        return $this->hasMany(Response::class);
-    }
 }

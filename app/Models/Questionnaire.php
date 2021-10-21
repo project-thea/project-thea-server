@@ -22,4 +22,12 @@ class Questionnaire extends Model
     {
         return $this->hasMany(Question::class);
     }
+
+    /**
+     * A questionnaire consists of many responses.
+     */
+    public function responses()
+    {
+        return $this->hasMany(Response::class);
+    }
 }
