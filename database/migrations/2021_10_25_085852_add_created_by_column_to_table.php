@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterQuestionnairesLabel extends Migration
+class AddCreatedByColumnToTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class AlterQuestionnairesLabel extends Migration
      */
     public function up()
     {
-        Schema::table('questionnaires', function (Blueprint $table) {
-            $table->renameColumn('name', 'label');
-
-            $table->index('label');
+        Schema::table('responses', function (Blueprint $table) {
+            $table->integer('created_by')->nullable();
         });
     }
 
@@ -27,8 +25,8 @@ class AlterQuestionnairesLabel extends Migration
      */
     public function down()
     {
-        Schema::table('questionnaires', function (Blueprint $table) {
-            $table->renameColumn('label', 'name');
+        Schema::table('responses', function (Blueprint $table) {
+            $table->dropColumn('created_by');
         });
     }
 }
