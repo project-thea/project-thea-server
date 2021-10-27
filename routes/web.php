@@ -10,6 +10,7 @@ use App\Http\Controllers\Web\ProjectController;
 use App\Http\Controllers\Web\QuestionController;
 use App\Http\Controllers\Web\SubjectController;
 use App\Http\Controllers\Web\QuestionnaireController;
+use App\Http\Controllers\Web\ResponseController;
 use App\Http\Controllers\Web\UserController;
 
 /*
@@ -70,6 +71,9 @@ Route::group(['middleware' => ['auth:sanctum', 'verified', 'throttle:web']], fun
     Route::delete('/questionnaires/{questionnaire}/trash', [QuestionnaireController::class, 'destroy'])->name('questionnaires.destroy');
     Route::put('/questionnaires/{questionnaire}/restore', [QuestionnaireController::class, 'restore'])->name('questionnaires.restore');
     Route::get('/questionnaires/{questionnaire}/preview', [QuestionnaireController::class, 'preview'])->name('questionnaires.preview');
+
+    //Question Responses
+    Route::post('/questionnaires/{questionnaire}', [ResponseController::class, 'store'])->name('responses.store');
 
     // Questions
     Route::post('/questionnaires/{questionnaire}/questions', [QuestionController::class, 'store'])->name('questions.store');
