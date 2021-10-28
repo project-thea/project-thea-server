@@ -169,8 +169,8 @@ class QuestionnaireController extends Controller
      */
     public function preview(Questionnaire $questionnaire)
     {
-        $questionnaireDetails = DB::table('questionnaires')
-            ->select('questionnaires.id', 'questionnaires.label', 'questions.title', 'questions.datatype_id', 'questions.attributes', 'data_types.name')
+        $questionnaireData = DB::table('questionnaires')
+            ->select('questionnaires.id', 'questions.id as questionId', 'questionnaires.label', 'questions.title', 'questions.datatype_id', 'questions.attributes', 'data_types.name')
             ->leftJoin('questions', 'questionnaires.id', '=',  'questions.questionnaire_id')
             ->leftJoin('data_types', 'questions.datatype_id', '=', 'data_types.id')
             ->where('questionnaires.id', '=', $questionnaire->id)
@@ -178,7 +178,7 @@ class QuestionnaireController extends Controller
             ->get();
 
         return Inertia::render('Questionnaires/Preview', [
-            'questionnaireDetails' =>  $questionnaireDetails
+            'questionnaireData' =>  $questionnaireData
         ]);
     }
 }
