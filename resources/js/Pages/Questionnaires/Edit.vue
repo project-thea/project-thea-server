@@ -135,7 +135,7 @@
 											<div class="">
 												<div class="mb-4">
 													<label for="title" class="block text-gray-700 text-sm font-bold mb-2">Title:</label>
-													<input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="title" placeholder="Enter Question Title" v-model="questionTitle">
+													<jet-input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="title" placeholder="Enter Question Title" v-model="questionTitle"/>
 												</div>
 												<div class="mb-4">
 													<label for="datatype_id" class="block text-gray-700 text-sm font-bold mb-2">Type:</label>

@@ -54,12 +54,12 @@
 										</inertia-link>
 									</td>
 									<td class="border-t w-px">
-										<inertia-link :href="'/questionnaires/' + questionnaire.id + '/edit'" tabindex="-1" aria-label="Edit" class="px-4 flex items-center">
+										<inertia-link :href="'/questionnaires/' + questionnaire.id + '/edit'" tabindex="-1" aria-label="Edit" title="Edit" class="px-4 flex items-center">
 											<icon name="cheveron-right" class="block w-6 h-6 fill-gray-500"/>
 										</inertia-link>
 									</td>
                                     <td class="border-t w-px">
-										<inertia-link :href="'/questionnaires/' + questionnaire.id + '/preview'" tabindex="-1" aria-label="Edit" class="px-4 flex items-center">
+										<inertia-link @click="previewQuestionnaire(questionnaire.id)" :href="'/questionnaires/' + questionnaire.id + '/preview'" tabindex="-1" aria-label="Preview" title="Preview" class="px-4 flex items-center">
 											<icon name="preview" class="block w-6 h-6 fill-gray-500"/>
 										</inertia-link>
 									</td>
@@ -182,20 +182,28 @@ export default {
 
 	methods: {
 		handleSearchChange: function (value) {
-			Inertia.get('/questionnaires?search=' + value)
+			Inertia.get('/questionnaires?search=' + value);
 		},
+
 		formatDate(dateTime) {
 			return DateTime.fromISO(dateTime).toFormat('yyyy-LL-dd HH:mm');
 		},
+
 		deleteQuestionnaire(id) {
 			Inertia.delete('/questionnaires/' + id + '/trash');
 		},
+
 		restoreQuestionnaire(id) {
 			Inertia.put('/questionnaires/' + id + '/restore');
 		},
-		createQuestionnaire(){
-			Inertia.get('/questionnaires/create')
-		}
+
+		createQuestionnaire() {
+			Inertia.get('/questionnaires/create');
+		},
+
+        previewQuestionnaire(questionnaire) {
+            Inertia.get('/questionnaires/' + questionnaire + '/preview');
+        }
 	},
 }
 </script>
