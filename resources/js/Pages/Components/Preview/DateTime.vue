@@ -1,6 +1,6 @@
 <template>
     <app-layout>
-        <jet-input id="label" type="datetime-local" class="mt-1 block w-full" autofocus autocomplete="label" />
+        <jet-input @change="getDateTimeResponse" id="label" type="datetime-local" class="mt-1 block w-full" autofocus autocomplete="label" aria-required="true" />
     </app-layout>
 </template>
 
@@ -16,7 +16,12 @@ export default {
     },
 
     props: {
+        changeCallback: Function,
 
+        question: {
+            type: Object,
+            required: true
+        }
     },
 
     data() {
@@ -26,7 +31,9 @@ export default {
     },
 
     methods: {
-
+        getDateTimeResponse(event) {
+           this.changeCallback(this.question.questionId, this.question.name, event.target.value);
+        }
     }
 }
 </script>

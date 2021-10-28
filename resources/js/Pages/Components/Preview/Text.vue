@@ -1,7 +1,7 @@
 <template>
     <app-layout>
         <div class="mt-3">
-            <jet-input id="label" type="text" class="mt-1 block w-full" autofocus autocomplete="label" />
+            <jet-input @change="getTextResponse" placeholder="Enter text" id="label" type="text" class="mt-1 block w-full" autofocus autocomplete="label" required />
         </div>
     </app-layout>
 </template>
@@ -17,7 +17,12 @@ export default {
     },
 
     props: {
+        changeCallback: Function,
 
+        question: {
+            type: Object,
+            required: true
+        }
     },
 
     data() {
@@ -27,7 +32,9 @@ export default {
     },
 
     methods: {
-
+        getTextResponse(event) {
+            this.changeCallback(this.question.questionId, this.question.name, event.target.value);
+        }
     }
 }
 </script>
