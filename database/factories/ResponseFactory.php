@@ -33,21 +33,9 @@ class ResponseFactory extends Factory
     private function generateDataAttributes()
     {
         $data = [
-            'response' => '{
-                "1": {
-                    "value": "One",
-                    "dataType": "checkbox"
-                },
-
-                "4": {
-                    "value": "2021-10-27",
-                    "dataType": "date"
-                },
-
-                "5": {
-                    "value": "Any text",
-                    "dataType": "text"
-                }
+            'questionId' => '{
+                "value": "Datatype value",
+                "dataType": "Any data type"
             }'
         ];
 
