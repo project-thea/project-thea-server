@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Questionnaire;
+use App\Models\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class ResponseController extends Controller
 {
@@ -33,9 +37,25 @@ class ResponseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Questionnaire $questionnaire, Request $request)
     {
-        //
+        $validationRules = [
+            'questionnaire_id' => 'exists:App\Models\Questionnaire,id',
+            'data' => 'json'
+        ];
+
+        $validateData = $request->validate($validationRules);
+
+        if (!$validateData) {
+            return Redirect::route('questionnaires.preview', ['questionnaire' => $questionnaire])->with('fail', 'There was a validation error.');
+        }
+
+        $validateData['created_by'] = Auth::id();
+        $validateData['updated_by'] = Auth::id();
+        $validateData['questionnaire_id'] = $questionnaire->id;
+
+        Response::create($validateData);
+        return Redirect::route('questionnaires.index')->with('success', 'Questions preview response data is successfully created.');
     }
 
     /**
