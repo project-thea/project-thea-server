@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
             QuestionsTableSeeder::class,
             SubjectTrackingTableSeeder::class,
             SampleTrackingTableSeeder::class,
-            SampleTestTrackingTableSeeder::class
+            SampleTestTrackingTableSeeder::class,
+            ResponsesTableSeeder::class
         ]);
     }
 }
