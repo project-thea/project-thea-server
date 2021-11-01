@@ -75,14 +75,14 @@ class QuestionnaireControllerTest extends TestCase
             'role_id' => '2'
         ]));
 
-        $expected = [
-            'label' => 'close-ended',
+        $questionnaireData = [
+            'label' => 'close-fixed',
             'description' => 'Needs to ensure that respondents at least fully understand the questions.'
         ];
 
         $this->actingAs($user)
             ->followingRedirects()
-            ->post('/questionnaires', $expected)
+            ->post('/questionnaires', $questionnaireData)
             ->assertStatus(200)
             ->assertInertia(function (Assert $page) {
                 $page->component('Questionnaires/Index')
@@ -93,7 +93,7 @@ class QuestionnaireControllerTest extends TestCase
                     });
             });
 
-        $this->assertDatabaseHas('questionnaires', $expected);
+        $this->assertDatabaseHas('questionnaires', $questionnaireData);
     }
 
     public function test_a_questionnaire_can_be_updated()

@@ -23,25 +23,29 @@ class QuestionsControllerTest extends TestCase
             'role_id' => '2'
         ]));
 
-        $expected = [
-            'label' => 'open-ended',
-            'description' => 'Needs to ensure that respondents fully understand the questions.'
+        $questionnaire = Questionnaire::factory()->create();
+
+        $questionsData = [
+            'title' => 'What are we up to',
+            'datatype_id' => 6,
+            'attributes' => json_encode([
+                'default' => 'text',
+                'format' => 'singleline',
+                'required' => 'true'
+            ])
         ];
 
         $this->actingAs($user)
             ->followingRedirects()
-            ->post('/questionnaires', $expected)
+            ->post('/questionnaires/' . $questionnaire->id . '/questions', $questionsData)
             ->assertStatus(200)
             ->assertInertia(function (Assert $page) {
-                $page->component('Questionnaires/Index')
-                    ->has('questionnaires')
-                    ->has('trashedQuestionnaires')
-                    ->has('filters', function (Assert $page) {
-                        $page->has('search');
-                    });
+                $page->component('Questionnaires/Edit')
+                    ->has('questions')
+                    ->has('trashedQuestions');
             });
 
-        $this->assertDatabaseHas('questionnaires', $expected);
+        $this->assertDatabaseHas('questions', $questionsData);
     }
 
     public function test_a_question_can_be_updated()
