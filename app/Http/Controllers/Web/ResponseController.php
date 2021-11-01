@@ -55,7 +55,7 @@ class ResponseController extends Controller
         $validateData['questionnaire_id'] = $questionnaire->id;
 
         Response::create($validateData);
-        return Redirect::route('questionnaires.index')->with('success', 'Questions preview response data is successfully created.');
+        return Redirect::route('questionnaires.index')->with('success', 'Questions preview responses have been successfully created.');
     }
 
     /**
