@@ -17,12 +17,15 @@ class DatabaseSeeder extends Seeder
             RolesTableSeeder::class,
             UsersTableSeeder::class,
             SubjectsTableSeeder::class,
-            DiseasesTableSeeder::class,
+            ProjectsTableSeeder::class,
             StatusesTableSeeder::class,
-            TestsTableSeeder::class,
+            QuestionnairesTableSeeder::class,
+            DatatypesTableSeeder::class,
+            QuestionsTableSeeder::class,
             SubjectTrackingTableSeeder::class,
             SampleTrackingTableSeeder::class,
-            SampleTestTrackingTableSeeder::class
+            SampleTestTrackingTableSeeder::class,
+            ResponsesTableSeeder::class
         ]);
     }
 }

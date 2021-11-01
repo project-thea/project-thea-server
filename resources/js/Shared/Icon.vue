@@ -18,12 +18,12 @@
     stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
     </circle><path d="M32.998 49.998v-35M44 28L33 15 22 28" stroke="#202020" stroke-miterlimit="10"
       stroke-width="2" stroke-linejoin="round"
-      stroke-linecap="round" />  
+      stroke-linecap="round" />
   </svg>
   <svg v-else-if="name === 'add-test'"
-    xmlns="http://www.w3.org/2000/svg" 
-    width="24" height="24" viewBox="0 0 24 24" 
-    fill="none" stroke="#000000" stroke-width="2" 
+    xmlns="http://www.w3.org/2000/svg"
+    width="24" height="24" viewBox="0 0 24 24"
+    fill="none" stroke="#000000" stroke-width="2"
     stroke-linecap="round" stroke-linejoin="round">
     <circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line>
     <line x1="8" y1="12" x2="16" y2="12"></line>
@@ -33,6 +33,21 @@
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 20 20"
   ><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
+
+  <svg v-else-if="name === 'preview'"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 64 64">
+    <path
+    d="M32 14.5C14.8 14.5 2.5 32 2.5 32S14.8 49.5 32 49.5 61.5 32 61.5 32 49.2 14.5 32 14.5z"
+    fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" stroke-linejoin="round"
+    stroke-linecap="round"></path>
+    <circle data-name="layer1" cx="32" cy="31.5" r="10" fill="none"
+    stroke="#202020" stroke-miterlimit="10" stroke-width="2" stroke-linejoin="round"
+    stroke-linecap="round"></circle>
+    <path data-name="layer1" d="M28.5 29.5a4 4 0 0 0 3.5 6" fill="none"
+    stroke="#202020" stroke-miterlimit="10" stroke-width="2" stroke-linejoin="round"
+    stroke-linecap="round"></path></svg>
+
   <svg
     v-else-if="name === 'cheveron-right'"
     xmlns="http://www.w3.org/2000/svg"
@@ -83,7 +98,7 @@
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 20 20"
   ><path d="M7 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0 1c2.15 0 4.2.4 6.1 1.09L12 16h-1.25L10 20H4l-.75-4H2L.9 10.09A17.93 17.93 0 0 1 7 9zm8.31.17c1.32.18 2.59.48 3.8.92L18 16h-1.25L16 20h-3.96l.37-2h1.25l1.65-8.83zM13 0a4 4 0 1 1-1.33 7.76 5.96 5.96 0 0 0 0-7.52C12.1.1 12.53 0 13 0z" /></svg>
-	<svg 
+	<svg
 	v-else-if="name === 'gps-route'"
 	version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 496.84 496.84" style="enable-background:new 0 0 496.84 496.84;" xml:space="preserve">
@@ -105,8 +120,8 @@
 		c0-15.365,12.444-27.809,27.804-27.809c15.354,0,27.799,12.443,27.799,27.809C426.047,80.145,413.602,92.598,398.248,92.598z"/>
 </g>
 </svg>
-  
-  
+
+
 </template>
 
 <script>
