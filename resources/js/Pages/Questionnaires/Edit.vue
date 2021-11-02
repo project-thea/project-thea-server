@@ -106,10 +106,6 @@
 										<inertia-link @click="editQuestion(question.id)" :href="'/questionnaires/' + questionnaire.id + '/questions/' + question.id + '/edit'" class="mr-2 text-blue-600 hover:text-blue-900">
 											Edit
 										</inertia-link>
-
-										<inertia-link @click="previewQuestion(question.id)" :href="'/questionnaires/' + questionnaire.id + '/questions/' + question.id + '/preview'" class="text-green-600 hover:text-green-900">
-											Preview
-										</inertia-link>
 									</td>
 								</tr>
                                 <tr v-if="questions.data.length === 0">
@@ -391,10 +387,6 @@ export default {
 			this.closeModal();
 			this.editMode = false;
 		},
-
-        previewQuestion(question) {
-            Inertia.get('/questionnaires/' + this.questionnaire.id + '/questions/' + question + '/preview');
-        },
 
         editQuestion(question) {
             Inertia.get('/questionnaires/' + this.questionnaire.id + '/questions/' + question + '/edit');
