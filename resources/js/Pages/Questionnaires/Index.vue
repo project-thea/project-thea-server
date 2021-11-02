@@ -63,6 +63,11 @@
 											<icon name="preview" class="block w-6 h-6 fill-gray-500"/>
 										</inertia-link>
 									</td>
+                                    <td class="border-t w-px">
+										<inertia-link @click="questionnaireResponses(questionnaire.id)" :href="'/questionnaires/' + questionnaire.id + '/responses'" tabindex="-1" aria-label="Responses" title="Responses" class="px-4 flex items-center">
+											<icon name="response" class="block w-6 h-6 fill-gray-500"/>
+										</inertia-link>
+									</td>
 								</tr>
 								<tr v-if="questionnaires.data.length === 0">
 									<td class="border-t px-6 py-4" colspan="4">
