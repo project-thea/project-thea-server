@@ -71,6 +71,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified', 'throttle:web']], fun
     Route::delete('/questionnaires/{questionnaire}/trash', [QuestionnaireController::class, 'destroy'])->name('questionnaires.destroy');
     Route::put('/questionnaires/{questionnaire}/restore', [QuestionnaireController::class, 'restore'])->name('questionnaires.restore');
     Route::get('/questionnaires/{questionnaire}/preview', [QuestionnaireController::class, 'preview'])->name('questionnaires.preview');
+    Route::get('/questionnaires/{questionnaire}/responses', [QuestionnaireController::class, 'responses'])->name('questionnaires.responses');
 
     //Question Responses
     Route::post('/questionnaires/{questionnaire}', [ResponseController::class, 'store'])->name('responses.store');
