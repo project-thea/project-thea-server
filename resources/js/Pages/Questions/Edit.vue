@@ -23,6 +23,11 @@
 						</div>
 
                         <div class="mt-3">
+							<jet-label for="position" value="Position" />
+							<jet-input id="position" type="number" class="mt-1 block w-full" v-model="form.position" required autofocus autocomplete="position" />
+						</div>
+
+                        <div class="mt-3">
                             <jet-label for="datatype_id" value="Data type" />
                             <select name="datatype_id" v-model="form.datatype_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow sm">
                                 <option v-for="dataType in dataTypes" :key="dataType.id" :value="dataType.id">{{ dataType.name }}</option>
@@ -119,6 +124,7 @@ export default {
 		return {
 			form: this.$inertia.form({
 				title:  this.question.title,
+				position:  this.question.position,
 				datatype_id: this.question.datatype_id,
                 attributes: attributes,
 			}),
@@ -134,6 +140,7 @@ export default {
                 errorBag: 'updateQuestion',
 				preserveScroll: true,
                 title: this.form.title,
+                position: this.form.position,
                 datatype_id: this.form.datatype_id,
                 attributes: JSON.stringify(this.form.attributes),
 
@@ -141,6 +148,11 @@ export default {
 					if (this.form.errors.title) {
 						this.form.reset('title', this.question.title)
 						this.$refs.title.focus()
+					}
+
+                    if (this.form.errors.position) {
+						this.form.reset('position', this.question.position)
+						this.$refs.position.focus()
 					}
 
                     if (this.form.errors.datatype_id) {
