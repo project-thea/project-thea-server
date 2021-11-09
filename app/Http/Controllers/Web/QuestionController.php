@@ -26,7 +26,7 @@ class QuestionController extends Controller
             'datatype_id' => 'exists:App\Models\DataType,id',
             'title' => 'required|string|max:55',
             'attributes' => 'json',
-            'position' => 'required|integer|numeric'
+            'position' => 'integer|numeric'
         ];
 
         $validateData = $request->validate($validationRules);
@@ -78,7 +78,7 @@ class QuestionController extends Controller
             'title' => 'required|string|max:55',
             'datatype_id' => 'exists:App\Models\DataType,id',
             'attributes' => 'json',
-            'position' => 'required|integer|numeric'
+            'position' => 'integer|numeric'
         ];
 
         $validateData = $request->validate($validationRules);
