@@ -14,7 +14,7 @@ class AddSelectQueryToQuestionnaires extends Migration
     public function up()
     {
         Schema::table('questionnaires', function (Blueprint $table) {
-            $table->longText('query')->after('description')->nullable();
+            $table->text('query')->after('description')->nullable();
         });
     }
 
