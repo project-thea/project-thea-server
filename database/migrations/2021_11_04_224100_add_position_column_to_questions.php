@@ -14,7 +14,7 @@ class AddPositionColumnToQuestions extends Migration
     public function up()
     {
         Schema::table('questions', function (Blueprint $table) {
-            $table->integer('position')->after('attributes');
+            $table->integer('position')->after('attributes')->nullable();
         });
     }
 
