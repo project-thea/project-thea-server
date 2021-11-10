@@ -32,7 +32,8 @@ class QuestionsControllerTest extends TestCase
                 'default' => 'text',
                 'format' => 'singleline',
                 'required' => 'true'
-            ])
+            ]),
+            'position' => '1'
         ];
 
         $this->actingAs($user)
@@ -66,7 +67,8 @@ class QuestionsControllerTest extends TestCase
                 'default' => 'yyyy-mm-dd',
                 'format' => 'yyyy-mm-dd',
                 'required' => 'true'
-            ])
+            ]),
+            'position' => '1'
         ];
 
         $this->actingAs($user)
@@ -153,7 +155,8 @@ class QuestionsControllerTest extends TestCase
                 'default' => 'yyyy-mm-dd',
                 'format' => 'yyyy-mm-dd',
                 'required' => 'true'
-            ])
+            ]),
+            'position' => '1'
         ];
 
         $this->actingAs($user)
@@ -188,7 +191,8 @@ class QuestionsControllerTest extends TestCase
                 'format' => '24hrs',
                 'default' => '23:59',
                 'required' => 'true'
-            ])
+            ]),
+            'position' => '2'
         ];
 
         $this->actingAs($user)
@@ -223,7 +227,8 @@ class QuestionsControllerTest extends TestCase
                 'format' => 'yyyy-mm-dd H:i:s',
                 'default' => 'yyyy-mm-dd H:i:s',
                 'required' => 'true'
-            ])
+            ]),
+            'position' => '3'
         ];
 
         $this->actingAs($user)
@@ -258,7 +263,8 @@ class QuestionsControllerTest extends TestCase
                 'options' => "['year', 'month', 'day', 'hour']",
                 'default' => 'month',
                 'required' => 'true'
-            ])
+            ]),
+            'position' => '4'
         ];
 
         $this->actingAs($user)
@@ -293,7 +299,8 @@ class QuestionsControllerTest extends TestCase
                 'options' => "['Yes', 'No']",
                 'default' => 'Yes',
                 'required' => 'true'
-            ])
+            ]),
+            'position' => '5'
         ];
 
         $this->actingAs($user)
@@ -328,7 +335,8 @@ class QuestionsControllerTest extends TestCase
                 'format' => "['Singleline', 'Multiline']",
                 'default' => 'Singleline',
                 'required' => 'true'
-            ])
+            ]),
+            'position' => '6'
         ];
 
         $this->actingAs($user)
