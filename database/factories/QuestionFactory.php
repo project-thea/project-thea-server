@@ -31,7 +31,8 @@ class QuestionFactory extends Factory
                 return DataType::factory()->create()->id;
             },
             'title' => $this->faker->title,
-            'attributes' => $this->generateAttributes()
+            'attributes' => $this->generateAttributes(),
+            'position' => $this->faker->numberBetween(1, 1000)
         ];
     }
 
