@@ -21,7 +21,8 @@ class QuestionsTableSeeder extends Seeder
                 'datatype_id' => '2',
                 'title' => 'How much time does it take from the border to Elegu town',
                 'attributes' => '{
-                    "format": "14:54:21",
+                    "format": "12hrs",
+                    "default": "3pm",
                     "required": "true"
                 }',
                 'position' => '1',
@@ -36,10 +37,11 @@ class QuestionsTableSeeder extends Seeder
                 'datatype_id' => '1',
                 'title' => 'Which date was recorded for the tracking from the border to Elegu town',
                 'attributes' => '{
-                    "format": "2021-08-25",
+                    "format": "yyyy-mm-dd",
+                    "default": "yyyy-mm-dd",
                     "required": "true"
                 }',
-                'position' => '3',
+                'position' => '1',
                 'created_by' => '1',
                 'updated_by' => '2',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -53,7 +55,7 @@ class QuestionsTableSeeder extends Seeder
                 'attributes' => '{
                     "required": "true"
                 }',
-                'position' => '2',
+                'position' => '1',
                 'created_by' => '1',
                 'updated_by' => '2',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -65,10 +67,11 @@ class QuestionsTableSeeder extends Seeder
                 'datatype_id' => '3',
                 'title' => 'When was tracking done and at what time was it recorded',
                 'attributes' => '{
-                    "format": "2021-08-25 15:54:21",
+                    "format": "yyyy-mm-dd H:i:s",
+                    "default": "2021-08-25 15:54:21",
                     "required": "true"
                 }',
-                'position' => '4',
+                'position' => '1',
                 'created_by' => '2',
                 'updated_by' => '3',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
