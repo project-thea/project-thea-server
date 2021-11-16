@@ -40,6 +40,32 @@ class QuestionController extends Controller
         $validateData['questionnaire_id'] = $questionnaire->id;
 
         Question::create($validateData);
+
+        $questions = DB::table('questions')
+            ->where('questionnaire_id', $questionnaire->id)
+            ->orderBy('position', 'asc')
+            ->get();
+
+        $selectQuery = "SELECT ";
+        $totalCount = count($questions);
+        $counter = 0;
+
+        foreach ($questions as $q) {
+            $counter += 1;
+            $questionId = sprintf('"%s"', $q->id);
+
+            $selectQuery .= "responses.data->>'$." . $questionId . ".value' AS Question" . $q->position;
+
+            if ($counter < $totalCount) {
+                $selectQuery .= ", ";
+            }
+        }
+
+        $selectQuery .= " FROM responses WHERE questionnaire_id = {$questionnaire->id}";
+
+        $questionnaire->query = $selectQuery;
+        $questionnaire->save();
+
         return Redirect::route('questionnaires.edit', ['questionnaire' => $questionnaire])->with('success', 'Question successfully created.');
     }
 
