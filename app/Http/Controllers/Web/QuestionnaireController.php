@@ -89,12 +89,12 @@ class QuestionnaireController extends Controller
         $questions = Question::select('questions.*', 'data_types.name')
             ->leftJoin('data_types', 'questions.datatype_id', '=', 'data_types.id')
             ->where('questionnaire_id', $questionnaire->id)
-            ->orderBy('questions.id', 'desc')
+            ->orderBy('questions.position', 'asc')
             ->paginate(self::NUMBER_OF_RECORDS);
 
         $trashedQuestions = Question::select('questions.*', 'data_types.name')
             ->leftJoin('data_types', 'questions.datatype_id', '=', 'data_types.id')
-            ->orderBy('questions.id', 'desc')
+            ->orderBy('questions.position', 'desc')
             ->where('questionnaire_id', $questionnaire->id)
             ->onlyTrashed()
             ->paginate(self::NUMBER_OF_RECORDS);
@@ -179,6 +179,22 @@ class QuestionnaireController extends Controller
 
         return Inertia::render('Questionnaires/Preview', [
             'questionnaireData' =>  $questionnaireData
+        ]);
+    }
+
+    /**
+     * View responses for a specified questionnaire from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function responses(Questionnaire $questionnaire)
+    {
+        $selectQuery = strval($questionnaire->query);
+        $responses = DB::select($selectQuery);
+
+        return Inertia::render('Questionnaires/Responses', [
+            'responses' => $responses
         ]);
     }
 }
