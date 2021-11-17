@@ -197,4 +197,20 @@ class QuestionnaireControllerTest extends TestCase
                 $page->component('Questionnaires/Preview');
             });
     }
+
+    public function test_questionnaire_responses_page_can_be_rendered()
+    {
+        $this->withoutExceptionHandling();
+
+        $user = Sanctum::actingAs(User::factory()->create());
+
+        $questionnaire = Questionnaire::factory()->create();
+
+        $this->actingAs($user)
+            ->get('/questionnaires/' . $questionnaire->id . '/responses')
+            ->assertStatus(200)
+            ->assertInertia(function (Assert $page) {
+                $page->component('Questionnaires/Responses');
+            });
+    }
 }
