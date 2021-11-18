@@ -50,6 +50,7 @@ class QuestionnaireController extends Controller
      */
     public function create()
     {
+        $this->authorize('isAdmin');
         return Inertia::render('Questionnaires/Create');
     }
 
@@ -61,6 +62,8 @@ class QuestionnaireController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('isAdmin');
+
         $data = $request->all();
 
         $validationRules = [
@@ -116,6 +119,8 @@ class QuestionnaireController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('isAdmin');
+
         $data = $request->all();
 
         $validationRules = [
@@ -143,6 +148,7 @@ class QuestionnaireController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('isAdmin');
         $questionnaire = Questionnaire::find($id);
         $questionnaire->delete();
         return Redirect::route('questionnaires.index')->with('success', 'Questionnaire successfully deleted.');
@@ -156,6 +162,7 @@ class QuestionnaireController extends Controller
      */
     public function restore($id)
     {
+        $this->authorize('isAdmin');
         $questionnaire = Questionnaire::withTrashed()->find($id);
         $questionnaire->restore();
         return Redirect::route('questionnaires.index')->with('success', 'Questionnaire successfully restored.');
