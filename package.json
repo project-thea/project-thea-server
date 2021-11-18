@@ -38,6 +38,7 @@
         "sortablejs": "^1.14.0",
         "vue-chartjs": "^3.5.1",
         "vue-tailwind-picker": "^2.0.0",
-        "vue3-datepicker": "^0.2.5"
+        "vue3-datepicker": "^0.2.5",
+        "vuedraggable": "^4.1.0"
     }
 }

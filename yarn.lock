@@ -6326,7 +6326,7 @@
     "uuid" "^3.4.0"
     "websocket-driver" "^0.7.4"
 
-"sortablejs@^1.14.0":
+"sortablejs@^1.14.0", "sortablejs@1.14.0":
   "integrity" "sha512-pBXvQCs5/33fdN1/39pPL0NZF20LeRbLQ5jtnheIPN9JQAaufGjKdWduZn4U7wCtVuzKhmRkI0DFYHYRbB2H1w=="
   "resolved" "https://registry.npmjs.org/sortablejs/-/sortablejs-1.14.0.tgz"
   "version" "1.14.0"
@@ -6948,7 +6948,7 @@
   "resolved" "https://registry.npmjs.org/vue-tailwind-picker/-/vue-tailwind-picker-2.0.0.tgz"
   "version" "2.0.0"
 
-"vue@^3.0.0", "vue@^3.1.1":
+"vue@^3.0.0", "vue@^3.0.1", "vue@^3.1.1":
   "integrity" "sha512-j9fj3PNPMxo2eqOKYjMuss9XBS8ZtmczLY3kPvjcp9d3DbhyNqLYbaMQH18+1pDIzzVvQCQBvIf774LsjjqSKA=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-3.1.1.tgz"
   "version" "3.1.1"
@@ -6963,6 +6963,13 @@
   "version" "0.2.5"
   dependencies:
     "date-fns" "^2.22.1"
+
+"vuedraggable@^4.1.0":
+  "integrity" "sha512-FU5HCWBmsf20GpP3eudURW3WdWTKIbEIQxh9/8GE806hydR9qZqRRxRE3RjqX7PkuLuMQG/A7n3cfj9rCEchww=="
+  "resolved" "https://registry.npmjs.org/vuedraggable/-/vuedraggable-4.1.0.tgz"
+  "version" "4.1.0"
+  dependencies:
+    "sortablejs" "1.14.0"
 
 "watchpack@^2.2.0":
   "integrity" "sha512-up4YAn/XHgZHIxFBVCdlMiWDj6WaLKpwVeGQk2I5thdYxF/KmF0aaz6TfJZ/hfl1h/XlcDr7k1KH7ThDagpFaA=="
