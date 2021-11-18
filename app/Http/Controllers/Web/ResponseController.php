@@ -39,6 +39,8 @@ class ResponseController extends Controller
      */
     public function store(Questionnaire $questionnaire, Request $request)
     {
+        $this->authorize('isAdmin');
+        
         $validationRules = [
             'questionnaire_id' => 'exists:App\Models\Questionnaire,id',
             'data' => 'json'
