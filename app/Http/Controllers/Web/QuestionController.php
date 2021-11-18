@@ -22,6 +22,8 @@ class QuestionController extends Controller
      */
     public function store(Questionnaire $questionnaire, Request $request)
     {
+        $this->authorize('isAdmin');
+
         $validationRules = [
             'datatype_id' => 'exists:App\Models\DataType,id',
             'title' => 'required|string|max:55',
@@ -77,6 +79,8 @@ class QuestionController extends Controller
      */
     public function edit(Questionnaire $questionnaire, Question $question)
     {
+        $this->authorize('isAdmin');
+
         $dataTypes = DataType::all();
 
         if (!($questionnaire->id == $question->questionnaire_id)) {
@@ -99,6 +103,8 @@ class QuestionController extends Controller
      */
     public function update(Questionnaire $questionnaire, Question $question, Request $request)
     {
+        $this->authorize('isAdmin');
+
         $validationRules = [
             'questionnaire_id' => 'exists:App\Models\Questionnaire,id',
             'title' => 'required|string|max:55',
@@ -124,6 +130,7 @@ class QuestionController extends Controller
      */
     public function destroy(Questionnaire $questionnaire, Question $question)
     {
+        $this->authorize('isAdmin');
         $question->delete();
         return Redirect::route('questionnaires.edit', ['questionnaire' => $questionnaire])->with('success', 'Question successfully archived.');
     }
@@ -136,6 +143,7 @@ class QuestionController extends Controller
      */
     public function restore(Questionnaire $questionnaire, $id)
     {
+        $this->authorize('isAdmin');
         $question = Question::withTrashed()->find($id);
         $question->restore();
         return Redirect::route('questionnaires.edit', ['questionnaire' => $questionnaire])->with('success', 'Question successfully restored.');
