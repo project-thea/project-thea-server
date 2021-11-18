@@ -35,6 +35,7 @@
         "litepie-datepicker": "^1.0.14",
         "luxon": "^1.27.0",
         "moment": "^2.29.1",
+        "sortablejs": "^1.14.0",
         "vue-chartjs": "^3.5.1",
         "vue-tailwind-picker": "^2.0.0",
         "vue3-datepicker": "^0.2.5"
