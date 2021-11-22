@@ -60,7 +60,7 @@
 						<table class="min-w-full divide-y divide-gray-200">
 							<thead class="bg-gray-50">
 								<tr>
-									<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 										No.
 									</th>
 									<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -74,46 +74,42 @@
 									</th>
 								</tr>
 							</thead>
-							<tbody class="bg-white divide-y divide-gray-200">
-								<tr v-for="question in questions.data" :key="question.id">
-									<td class="px-6 py-4 whitespace-nowrap">
-										<div class="flex items-center">
-											<div>
-												<div class="text-sm font-medium text-gray-900">
-													{{ question.id }}
-												</div>
-											</div>
-										</div>
-									</td>
-									<td class="px-6 py-4 whitespace-nowrap">
-										<div class="flex items-center">
-											<div>
-												<div class="text-sm font-medium text-gray-900">
-													{{ question.title }}
-												</div>
-											</div>
-										</div>
-									</td>
-									<td class="px-6 py-4 whitespace-nowrap">
-										<div class="text-sm text-gray-900">{{ question.name }}</div>
-									</td>
+                            <draggable v-model="questions.data" tag="tbody" item-key="name">
+                                <template #item="{ element }">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div>
+                                                    <div class="text-sm font-medium text-gray-900">
+                                                        {{ element.position }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div>
+                                                    <div class="text-sm font-medium text-gray-900">
+                                                        {{ element.title }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">{{ element.name }}</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <inertia-link @click="archiveQuestion(element.id)" :href="'/questionnaires/' + questionnaire.id + '/questions/' + element.id + '/trash'" class="mr-2 text-red-600 hover:text-red-900">
+                                                Archive
+                                            </inertia-link>
 
-									<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-										<inertia-link @click="archiveQuestion(question.id)" :href="'/questionnaires/' + questionnaire.id + '/questions/' + question.id + '/trash'" class="mr-2 text-red-600 hover:text-red-900">
-											Archive
-										</inertia-link>
-
-										<inertia-link @click="editQuestion(question.id)" :href="'/questionnaires/' + questionnaire.id + '/questions/' + question.id + '/edit'" class="mr-2 text-blue-600 hover:text-blue-900">
-											Edit
-										</inertia-link>
-									</td>
-								</tr>
-                                <tr v-if="questions.data.length === 0">
-									<td class="border-t px-6 py-4" colspan="4">
-										No questions found.
-									</td>
-								</tr>
-							</tbody>
+                                            <inertia-link @click="editQuestion(element.id)" :href="'/questionnaires/' + questionnaire.id + '/questions/' + element.id + '/edit'" class="mr-2 text-blue-600 hover:text-blue-900">
+                                                Edit
+                                            </inertia-link>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </draggable>
 						</table>
 
 						<!-- Modal -->
@@ -132,6 +128,10 @@
 												<div class="mb-4">
 													<label for="title" class="block text-gray-700 text-sm font-bold mb-2">Title:</label>
 													<jet-input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="title" placeholder="Enter Question Title" v-model="questionTitle"/>
+												</div>
+                                                <div class="mb-4">
+													<label for="position" class="block text-gray-700 text-sm font-bold mb-2">Position:</label>
+													<jet-input type="number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="position" placeholder="Enter Question Position" v-model="questionPosition"/>
 												</div>
 												<div class="mb-4">
 													<label for="datatype_id" class="block text-gray-700 text-sm font-bold mb-2">Type:</label>
@@ -176,6 +176,7 @@
 							</div>
 						</div>
 					</div>
+                    <!-- <rawDisplayer class="col-3" :value="list" title="List" /> -->
                     <pagination class="mt-2" :links="questions.links" />
                 </div>
             </div>
@@ -216,7 +217,7 @@
 										<div class="flex items-center">
 											<div>
 												<div class="text-sm font-medium text-gray-900">
-													{{ question.id }}
+													{{ question.position }}
 												</div>
 											</div>
 										</div>
@@ -273,6 +274,7 @@ import TextTypeAttribute from '@/Pages/Components/TextAttributes'
 import CheckboxTypeAttribute from '@/Pages/Components/CheckboxAttributes'
 import RadiobuttonTypeAttribute from '@/Pages/Components/RadiobuttonAttributes'
 import DatetimeTypeAttribute from '@/Pages/Components/DatetimeAttributes'
+import draggable from 'vuedraggable'
 
 export default {
 	metaInfo: { title: 'Questionnaires' },
@@ -293,7 +295,8 @@ export default {
 		TextTypeAttribute,
 		CheckboxTypeAttribute,
 		RadiobuttonTypeAttribute,
-		DatetimeTypeAttribute
+		DatetimeTypeAttribute,
+        draggable
 	},
 
 	props: {
@@ -303,7 +306,7 @@ export default {
 		},
 
 		questions: {
-			type: Object,
+			type: Array,
 			required: true
 		},
 
@@ -329,8 +332,11 @@ export default {
 			isOpen: false,
 			datatype: "",
 			questionTitle: "",
+            questionPosition: "",
 			questionType: "",
-			questionAttributes: {}
+			questionAttributes: {},
+
+            dragging: false
 		}
 	},
 
@@ -379,6 +385,7 @@ export default {
 		saveQuestion() {
 			Inertia.post('/questionnaires/' + this.questionnaire.id + '/questions', {
 				title: this.questionTitle,
+				position: this.questionPosition,
 				datatype_id: this.questionType,
 				attributes: JSON.stringify(this.questionAttributes)
 			});
@@ -407,7 +414,12 @@ export default {
 
 		updateAttributes(name, value) {
 			this.questionAttributes[name] = value;
-		}
+		},
+
+        updateOrder() {
+            //Loop through each question and update the position of the question
+
+        }
 	},
 }
 </script>
