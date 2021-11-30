@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Events\UserCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -22,6 +24,15 @@ class UserController extends Controller
     public function index()
     {
         $this->authorize('isAdmin');
+
+        Event::dispatch(new UserCreated());
+
+        // $cachedUsers = cache('users', function() {
+        //     return User::select('users.*', 'roles.name')
+        //         ->leftJoin('roles', 'users.role_id', '=', 'roles.id')
+        //         ->orderBy('users.id', 'asc')
+        //         ->paginate(self::NUMBER_OF_RECORDS);
+        // });
 
         $users = User::select('users.*', 'roles.name')
             ->leftJoin('roles', 'users.role_id', '=', 'roles.id')
@@ -65,7 +76,7 @@ class UserController extends Controller
 
         $validatedData = $request->validated();
         $validatedData['password'] = bcrypt($request->password);
-        
+
         User::create($validatedData);
         return Redirect::route('users.index')->with('success', 'User successfully created.');
     }
