@@ -27,4 +27,14 @@ class Question extends Model
     {
         return $this->belongsTo(DataType::class, 'datatype_id');
     }
+
+    /**
+     * Update the position of each question whenever it is sorted.
+     */
+    public static function updateQuestionOrder($list)
+    {
+        foreach ($list as $question) {
+            Question::find($question['id'])->update(['position' => $question['order']]);
+        }
+    }
 }

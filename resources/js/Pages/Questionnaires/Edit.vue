@@ -74,7 +74,7 @@
 									</th>
 								</tr>
 							</thead>
-                            <draggable v-model="questions.data" tag="tbody" item-key="name">
+                            <draggable @sort="onSort" @end="onEnd" v-model="questions.data" tag="tbody" item-key="name">
                                 <template #item="{ element }">
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
@@ -176,7 +176,6 @@
 							</div>
 						</div>
 					</div>
-                    <!-- <rawDisplayer class="col-3" :value="list" title="List" /> -->
                     <pagination class="mt-2" :links="questions.links" />
                 </div>
             </div>
@@ -416,9 +415,55 @@ export default {
 			this.questionAttributes[name] = value;
 		},
 
-        updateOrder() {
-            //Loop through each question and update the position of the question
+        onSort(event) {
+            console.log("Sort elements=>", event);
+            console.log("New Index=>", event.newIndex);
+            console.log("Old Index=>", event.oldIndex);
+			let questions = this.questions.data;
+            console.log("questions=>", questions);
 
+			let newQuestions = [];
+			let upperLimit = event.newIndex;
+			let lowerLimit = event.oldIndex;
+
+			let diff = upperLimit - lowerLimit;
+			console.log("Diff=>", diff);
+			console.log("Position=>", );
+
+			if (upperLimit < lowerLimit) {
+				upperLimit = event.oldIndex;
+				lowerLimit = event.newIndex;
+
+				for (let index = 0; index < questions.length; index++) {
+					console.log("IteratedQuestions=>", questions);
+					if (index === upperLimit) {
+						newQuestions[index] = questions[index - diff];
+					} else if (lowerLimit < index <= upperLimit) {
+						let change = (index - lowerLimit) / Math.abs(index - lowerLimit);
+						newQuestions[index] = questions[index + change];
+					} else {
+						newQuestions[index] = questions[index];
+					}
+				}
+
+				console.log("NewQuestions=>", newQuestions);
+
+				// for (let index = 0; index < questions.length; index++) {
+				// 	console.log("BetterQuestions=>", questions);
+				// 	if (index === lowerLimit) {
+				// 		this.questionPosition[questions[index - diff].id] = index + 1;
+				// 	} else if (lowerLimit < index <= upperLimit) {
+				// 		change = (index - lowerLimit) / Math.abs(index - lowerLimit);
+				// 		newQuestions[index] = questions[index + change];
+				// 		this.questionPosition[questions[index + change].id] = index + 1;
+				// 	} else {
+				// 		newQuestions[index] = questions[index];
+				// 		this.questionPosition[questions[index].id] = index + 1;
+				// 	}
+				// }
+
+				// console.log("BetterQuestions=>", newQuestions);
+			}
         }
 	},
 }
