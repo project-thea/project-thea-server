@@ -1,6 +1,6 @@
 # Project THEA Server
 
-A tracking haulage application in East Africa to control COVID-19.
+Project-THEA aims to deliver an open-access digital contact tracing system tailored to the haulage industry. The tool is designed to combine anonymized time-stamped geo-location information relative to the road infrastructure with COVID-19 test results to support public health efforts to limit transmission and the safe reopening of economies. Critically the efficiency in contact tracing enhances the flow of the regional supply chain and strategic allocation of public health surveillance resources.
 
 REQUIREMENTS
 ------------
