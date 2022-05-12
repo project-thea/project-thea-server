@@ -84,14 +84,20 @@ php artisan migrate
 php artisan db:seed
 ```
 
+### Start instance of Valhalla
+
+Start an instance of the Valhalla service and update the  VALHALLA_HOST environment variable in the 
+.env file
+
 ### Run development server:
 
 ```sh
 php artisan serve
 ```
+## Documentation
+Find the THEA-C19 documentation in the docs folder
 
-CONTRIBUTION
-------------
+## CONTRIBUTION
 
 The [Contributor Guide](https://github.com/project-thea/project-thea-server/tree/master/contribution/guide) provides detailed instructions on how to get your ideas and bug fixes seen and accepted, including:
 

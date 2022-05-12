@@ -8,3 +8,9 @@ that take into consideration the distance, location, and time spent in the diffe
 The generated hotspots are displayed on the analysis tab of the web portal. They are displayed as
 yellow or red circles around the hotspots. The yellow hotspots are for potential hotspots where as 
 the red circles are areas where a positively tested driver has been.
+
+```
+artisan risk-assessment:compute
+artisan risk-assessment:tests
+artisan hotspots:process
+```
