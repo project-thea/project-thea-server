@@ -1,5 +1,7 @@
 # THEA Server Architecture
 
+![Architecture](images/THEA-Architeture.png?raw=true "THEA Architecture")
+
 The tool is composed of two key components: THEA Mobile Application and THEA Server.
 The THEA mobile application is installed on the subject/driver’s mobile phone. During 
 installation the driver is assigned a unique id.  The mobile application tracks the driver’s 
