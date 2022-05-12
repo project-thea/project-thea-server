@@ -19,8 +19,6 @@ class CreateDailyMovementsTable extends Migration
 			$table->string('unique_id');
             $table->text('shape');
 			$table->date('day');
-			$table->integer('subject_id');
-			$table->string('unique_id');
             $table->timestamps();
         });
     }
