@@ -33,7 +33,7 @@
         "dayjs": "^1.10.5",
         "leaflet": "^1.7.1",
         "litepie-datepicker": "^1.0.14",
-        "luxon": "^1.27.0",
+        "luxon": "^1.28.1",
         "vue-chartjs": "^3.5.1",
         "vue-tailwind-picker": "^2.0.0"
     }
