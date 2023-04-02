@@ -3,7 +3,7 @@
         <template #logo>
             <jet-authentication-card-logo />
         </template>
-
+        
         <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded mb-5" role="alert">
             <p class="font-bold">Notice</p>
             <p><strong>THEA-GS server</strong> is running in DEMO mode.</p>
