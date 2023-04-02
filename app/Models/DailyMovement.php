@@ -9,5 +9,7 @@ class DailyMovement extends Model
 {
     use HasFactory;
 
-    protected $table = 'daily_movements';
+    protected $guarded = [];
+	
+	protected $table = 'daily_movements';
 }

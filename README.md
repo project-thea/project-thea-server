@@ -1,6 +1,6 @@
 # Project THEA Server
 
-A tracking haulage application in East Africa to control COVID-19.
+Project-THEA aims to deliver an open-access digital contact tracing system tailored to the haulage industry. The tool is designed to combine anonymized time-stamped geo-location information relative to the road infrastructure with COVID-19 test results to support public health efforts to limit transmission and the safe reopening of economies. Critically the efficiency in contact tracing enhances the flow of the regional supply chain and strategic allocation of public health surveillance resources.
 
 REQUIREMENTS
 ------------
@@ -84,18 +84,25 @@ php artisan migrate
 php artisan db:seed
 ```
 
+### Start instance of Valhalla
+
+Start an instance of the Valhalla service and update the  VALHALLA_HOST environment variable in the 
+.env file
+
 ### Run development server:
 
 ```sh
 php artisan serve
 ```
+## Documentation
+Find the THEA-C19 documentation in the docs folder
 
-# Notes on demo mode 
+
+## Notes on demo mode 
 
 Add DEMO_MODE = true in .env files run run the application in demo mode.
 
-CONTRIBUTION
-------------
+## CONTRIBUTION
 
 The [Contributor Guide](https://github.com/project-thea/project-thea-server/tree/master/contribution/guide) provides detailed instructions on how to get your ideas and bug fixes seen and accepted, including:
 
