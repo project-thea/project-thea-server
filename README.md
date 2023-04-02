@@ -90,6 +90,10 @@ php artisan db:seed
 php artisan serve
 ```
 
+# Notes on demo mode 
+
+Add DEMO_MODE = true in .env files run run the application in demo mode.
+
 CONTRIBUTION
 ------------
 

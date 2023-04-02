@@ -18,6 +18,7 @@ class CreateTestsTable extends Migration
             $table->foreignId('disease_id')->constrained('diseases')->onDelete('cascade');
             $table->foreignId('subject_id')->constrained('subjects')->onDelete('cascade');
             $table->date('test_date');
+            $table->string('unique_id')->nullable(); //unique id for the subject
             $table->date('status_update_date')->nullable(); //At the start of making the test
             $table->string('created_with')->nullable(); // user, app
             $table->string('updated_with')->nullable(); //user. app

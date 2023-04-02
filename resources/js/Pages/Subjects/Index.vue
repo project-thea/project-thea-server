@@ -26,13 +26,7 @@
 							<thead>
 								<tr class="text-left font-bold">
 									<th class="px-6 pt-6 pb-4">
-										Name
-									</th>
-									<th class="px-6 pt-6 pb-4">
 										Unique ID
-									</th>
-									<th class="px-6 pt-6 pb-4">
-										Phone Number
 									</th>
 									<th class="px-6 pt-6 pb-4">
 										Registration Date
@@ -51,33 +45,7 @@
 											class="px-6 py-4 flex items-center focus:text-indigo-500"
 											:href="'/subjects/' + subject.id + '/edit'"
 										>
-											{{ subject.first_name }} {{ subject.last_name }}
-											<icon
-											v-if="subject.deleted_at"
-											name="trash"
-											class="flex-shrink-0 w-3 h-3 fill-gray-500 ml-2"
-											/>
-										</inertia-link>
-									</td>
-									<td class="border-t">
-										<inertia-link
-											class="px-6 py-4 flex items-center focus:text-indigo-500"
-											:href="'/subjects/' + subject.id + '/edit'"
-										>
 											{{ subject.unique_id }}
-											<icon
-											v-if="subject.deleted_at"
-											name="trash"
-											class="flex-shrink-0 w-3 h-3 fill-gray-500 ml-2"
-											/>
-										</inertia-link>
-									</td>
-									<td class="border-t">
-										<inertia-link
-											class="px-6 py-4 flex items-center focus:text-indigo-500"
-											:href="'/subjects/' + subject.id + '/edit'"
-										>
-											{{ subject.phone }}
 											<icon
 											v-if="subject.deleted_at"
 											name="trash"

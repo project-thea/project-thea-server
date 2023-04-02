@@ -4,6 +4,12 @@
             <jet-authentication-card-logo />
         </template>
 
+        <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded mb-5" role="alert">
+            <p class="font-bold">Notice</p>
+            <p><strong>THEA-GS server</strong> is running in DEMO mode.</p>
+        </div>
+
+
         <jet-validation-errors class="mb-4" />
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
@@ -63,13 +69,22 @@
 
         props: {
             canResetPassword: Boolean,
-            status: String
+            status: String,
+            demo_mode: Boolean
+        },
+
+        created() {
+            if (this.demo_mode) {
+                this.form.email = 'someone@gmail.com';
+                this.form.password = 'pa12345678';
+            }
         },
 
         data() {
+            console.log(this.demo_mode);
             return {
                 form: this.$inertia.form({
-                    email: '',
+                    email: this.demo_mode ? 'someone@gmail.com' : '',
                     password: '',
                     remember: false
                 })

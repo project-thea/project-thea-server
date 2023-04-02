@@ -22,7 +22,10 @@ class DatabaseSeeder extends Seeder
             TestsTableSeeder::class,
             SubjectTrackingTableSeeder::class,
             SampleTrackingTableSeeder::class,
-            SampleTestTrackingTableSeeder::class
+            SampleTestTrackingTableSeeder::class,
+            HotspotSeeder::class,
+            RiskAssessmentSeeder::class,
+            DailyMovementSeeder::class,
         ]);
     }
 }

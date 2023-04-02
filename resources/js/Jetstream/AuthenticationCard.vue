@@ -1,7 +1,6 @@
 <template>
     <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
        <div class="text-4xl font-bold text-gray-800">THEA-GS</div>
-       <hr class="border-t-2 border-gray-400 my-8">
         <div>
             <slot name="logo" />
         </div>

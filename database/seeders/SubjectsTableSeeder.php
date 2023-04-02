@@ -245,7 +245,7 @@ class SubjectsTableSeeder extends Seeder
                 'phone' => '0773255882',
                 'next_of_kin' => 'Bryan Onyango',
                 'next_of_kin_phone' => '0753578639',
-                'unique_id' => '7eH5d933-2b97-He7b-Q98f-5387367791cd',
+                'unique_id' => 'dbca4739-b3ee-4d40-8597-a1162b66efc5',
                 'id_number' => 'CF9PJ18G53K78W2',
                 'id_type' => 'National ID',
                 'created_with' => 'app',
