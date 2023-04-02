@@ -28,12 +28,16 @@
     "dependencies": {
         "@headlessui/vue": "^1.2.0",
         "@heroicons/vue": "^1.0.1",
+        "@mapbox/polyline": "^1.1.1",
         "@popperjs/core": "^2.9.2",
         "chart.js": "2.9.4",
+        "d3": "^7.3.0",
         "dayjs": "^1.10.5",
         "leaflet": "^1.7.1",
+        "leaflet-fullscreen": "^1.0.2",
         "litepie-datepicker": "^1.0.14",
         "luxon": "^1.27.0",
+        "shpjs": "^4.0.2",
         "vue-chartjs": "^3.5.1",
         "vue-tailwind-picker": "^2.0.0"
     }

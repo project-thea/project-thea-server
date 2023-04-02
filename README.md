@@ -97,6 +97,11 @@ php artisan serve
 ## Documentation
 Find the THEA-C19 documentation in the docs folder
 
+
+## Notes on demo mode 
+
+Add DEMO_MODE = true in .env files run run the application in demo mode.
+
 ## CONTRIBUTION
 
 The [Contributor Guide](https://github.com/project-thea/project-thea-server/tree/master/contribution/guide) provides detailed instructions on how to get your ideas and bug fixes seen and accepted, including:

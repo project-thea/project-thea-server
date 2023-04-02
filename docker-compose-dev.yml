@@ -1,0 +1,38 @@
+version: '3.5'
+
+services:
+  thea_phpfpm:
+    container_name: "thea_phpfpm"
+    image: 'bitnami/php-fpm:latest'
+    command: sh -c "cd /thea-api/ && composer update && php artisan storage:link && php artisan migrate && php ./artisan serve --host=0.0.0.0"
+    volumes:
+      - ./data:/data
+      - ./:/thea-api
+    depends_on:
+      - thea_mysql_db
+    ports:
+      - "9000:9000"
+      - "8000:8000"
+    networks:
+      - thea-ntwk
+
+  thea_mysql_db:
+    image: 'mysql:latest'
+    container_name: "thea_mysql_db"
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: thea
+      SERVICE_NAME: mysql
+    networks:
+      - thea-ntwk
+    volumes:
+      - thea_db_vol:/var/lib/mysql
+
+volumes:
+  thea_db_vol:
+
+networks:
+  thea-ntwk:
+
